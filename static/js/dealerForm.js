@@ -66,6 +66,17 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
     
     if(trueCaptcha && trueTin){
         console.log("all Good");
+        var data={
+            tinNumber : tinNumberForm
+        }
+
+        fetch('/tinForm',{
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
     }
     
 })
@@ -97,6 +108,19 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
     
     if(trueCaptcha && trueCst && trueStateNameCst ){
         console.log("all Good");
+        var data={
+            stateNumber : stateNameCst,
+            cstNumber : cstNumberForm
+        }
+
+        fetch('/cstForm',{
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
+
     }
     
 })
@@ -117,7 +141,7 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
 
     var formType=document.getElementById('formType').value;
     var stateNameForm=document.getElementById('stateNameForm').value;
-    // var seriesNumber = document.getElementById('seriesNumber').value;
+    var seriesNumber = document.getElementById('seriesNumber').value;
     var serialNumber = document.getElementById('serialNumber').value;
     var captchaFormValid = document.getElementById('captchaFormValid').value;
     
@@ -151,6 +175,20 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
     
     if(trueCaptcha && trueSerial && trueStateName && trueFormType){
         console.log("all Good");
+        var data={
+            formType: formType,
+            seriesNumber : seriesNumber,
+            serialNumber : serialNumber,
+            stateNumber : stateNameForm
+        }
+
+        fetch('/formNumber',{
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
     }
     
 })

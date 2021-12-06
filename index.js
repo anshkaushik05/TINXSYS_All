@@ -64,6 +64,20 @@ app.get('/detailsTin',(req,res)=>{
 
 })
 
+app.post('/tinForm',(req,res)=>{
+
+  console.log(req.body.tinNumber);
+})
+
+app.post('/cstForm',(req,res)=>{
+
+  console.log(req.body);
+})
+app.post('/formNumber',(req,res)=>{
+
+  console.log(req.body);
+})
+
 
 
 // host
