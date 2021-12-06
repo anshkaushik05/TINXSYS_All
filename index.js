@@ -32,11 +32,6 @@ con.connect(function(err) {
 // random generated captcha 
 
 
-let captcha = new Captcha();
-// console.log(captcha.value);
-// captcha.PNGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" + `${captcha.value}.png`));
-// captcha.JPEGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" + `${captcha.value}.jpeg`));
-
 
 
 
@@ -46,9 +41,22 @@ app.get('/', (req, res) => {
     // res.send('TINSYS')
     res.render('index');
 })
-app.get('/dealerForm', (req, res) => {
+app.get('/dealerForm', async (req, res) => {
+var valueCaptcha='original Value';
+const captchaCreation=()=>{
+
+
+let captcha = new Captcha();
+// console.log(captcha.value);
+// captcha.PNGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" + `${captcha.value}.png`));
+captcha.JPEGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" + `${captcha.value}.jpeg`));
+  return captcha.value;
+
+}
+  valueCaptcha=await captchaCreation();
+  
     // res.send('TINSYS')
-    res.render('dealerForm');
+    res.render('dealerForm', {captchaValue: valueCaptcha});
 })
 app.get('/detailsTin',(req,res)=>{
 
@@ -61,7 +69,7 @@ app.get('/detailsTin',(req,res)=>{
 // host
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`listening at http://localhost:${port}`)
 })
 
 
