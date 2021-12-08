@@ -44,7 +44,7 @@ document.getElementsByClassName('uiDisable')[2].addEventListener('click',()=>{
 
 // form validation and submition 
 
-console.log(getCaptcha);
+// console.log(getCaptcha);
 getCaptcha= getCaptcha.substr(0,getCaptcha.indexOf(' '));
 //Tin form submit
 document.getElementById('tinSubmit').addEventListener('click',(e)=>{
@@ -67,7 +67,8 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
     if(trueCaptcha && trueTin){
         console.log("all Good");
         var data={
-            tinNumber : tinNumberForm
+            tinNumber : tinNumberForm,
+            captcha : captcha
         }
 
         fetch('/tinForm',{
@@ -76,7 +77,7 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
+        }).then(res=>res.json()).then(data=>console.log(data)).catch(e=>console.log("Error:"+e));
     }
     
 })
@@ -110,7 +111,8 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
         console.log("all Good");
         var data={
             stateNumber : stateNameCst,
-            cstNumber : cstNumberForm
+            cstNumber : cstNumberForm,
+            captcha : captcha
         }
 
         fetch('/cstForm',{
@@ -119,7 +121,7 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
+        }).then(res=>res.json()).then(data=>console.log(data)).catch(e=>console.log("Error:"+e));
 
     }
     
@@ -179,7 +181,8 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
             formType: formType,
             seriesNumber : seriesNumber,
             serialNumber : serialNumber,
-            stateNumber : stateNameForm
+            stateNumber : stateNameForm,
+            captcha : captchaFormValid
         }
 
         fetch('/formNumber',{
