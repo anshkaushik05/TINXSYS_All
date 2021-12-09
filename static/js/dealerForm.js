@@ -1,3 +1,4 @@
+var kaushik =11;
 // display forms
 document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     // document.getElementsByClassName('uiDisable')[1].classList.add('border-transparent');
@@ -36,7 +37,6 @@ document.getElementsByClassName('uiDisable')[2].addEventListener('click',()=>{
         // document.getElementsByClassName('uiDisable')[2].childNodes[1].classList.toggle('border-yellow-700');
 
 })
-
 
 
 

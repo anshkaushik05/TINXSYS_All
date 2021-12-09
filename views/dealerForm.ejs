@@ -57,38 +57,40 @@
   
   <div class="flex flex-row justify-center">
     <!-- Main Options -->
-    <div class="flex flex-row justify-center mt-24 w-72">
+    <div class="flex flex-row justify-center mt-24 w-44 md:w-80">
         <section class=" mt-5 px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-4 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4 align-self-start">
             <header class="flex  items-center justify-between">
             <h2 class="md:text-xl text-sm leading-6 font-medium text-yellow-100 pl-5">Dealer Search Criteria</h2>
             </header>
             <ul class="flex flex-col">
-                <li class="hover:shadow-lg m-2 flex rounded-lg uiDisable ">
-                    <a href="#tinForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 text-1xl font-medium p-2 text-white no-underline">
+                <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable ">
+                    <a href="#tinForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
                         Search By TIN
                     </a>
                 </li>
-                <li class="hover:shadow-lg m-2 flex rounded-lg uiDisable">
-                    <a href="#cstForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 text-1xl font-medium p-2 text-white no-underline">
+                <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
+                    <a href="#cstForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
                         Search By CST Number
                     </a>
                 </li>
-                <li class=" cursor-pointer hover:shadow-lg m-2 flex rounded-lg uiDisable">
-                    <a href="#formVerification" class="hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 text-1xl font-medium p-2 text-white no-underline">
+                <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
+                    <a href="#formVerification" class="hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
                         Form Verification
                     </a>
                 </li>
             </ul>
         </section>
     </div>
+
+
     
     <!-- Search by Tin Form -->
     
-    <form id="tinForm" class="w-96 align-self-center mx-auto my-36 pt-28 " data-aos="fade-right" >
+    <form id="tinForm" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 " data-aos="fade-right" >
       <div class="form-group">
         <h2 class="text-white">TIN Search</h2>
         <label for="tinNumberForm" class="text-white my-3">Tin Number</label>
-        <input type="number" class="form-control" id="tinNumberForm" aria-describedby="emailHelp" placeholder="Enter Tin Number Here" required minlength="11" maxlength="11">
+        <input type="number" class="form-control" id="tinNumberForm" aria-describedby="emailHelp" placeholder="Enter Tin Number" required minlength="11" maxlength="11">
         <!-- <small id="emailHelp" class="form-text text-muted text-white">We'll never share your email with anyone else.</small> -->
       </div>
       <div class="form-group">
@@ -105,7 +107,7 @@
     <!-- Search by CST Number -->
     
     
-    <form id="cstForm" class="w-96 align-self-center mx-auto my-36 pt-28 hidden" data-aos="fade-left">
+    <form id="cstForm" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 hidden" data-aos="fade-left">
       <div class="form-group">
         <h2 class="text-white">CST Search</h2>
         <label for="stateNameCst" class="text-white my-3">State Name</label>
@@ -240,7 +242,7 @@
     <!-- Search by Form Number -->
     
     
-    <form id="formVerification" class="w-96 align-self-center mx-auto my-16 pt-28 hidden  " data-aos="fade-right">
+    <form id="formVerification" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 hidden  " data-aos="fade-right">
       <div class="form-group">
         <h2 class="text-white">Search by Form Number</h2>
             
