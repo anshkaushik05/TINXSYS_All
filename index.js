@@ -67,33 +67,23 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });
+
 app.post('/tinForm',(req,res)=>{
 
-  // console.log(req.body.tinNumber);
   var captchaValue= req.body.captcha;
   con.query(`select * from dealer_details where DM_MB_CST= ${req.body.tinNumber} `,(err,result,fields)=>{
   if(err) throw err;
-  // console.log(result[0].DM_MB_DEALERNAME);
-  // DM_MB_CST
-  // DM_MB_CST
-  // DM_MB_DEALERNAME
-  // DM_MB_ADDRESS1
-  // DM_MB_ADDRESS2
-  // DM_MB_ADDRESS3
-  // DM_MB_ADDRESS4   State
-  // DM_MB_PAN
-  // DM_MB_REGISTERDATE
-  // DM_MB_VALIDATIONSTATUS
-  // CREATED_DATE
 
   var tableData= {
-    TIN:result[0].DM_MB_CST,
+    STATECODE: result[0].DM_MB_STATECODE,
+    TIN:result[0].DM_MB_TIN,
     CST:result[0].DM_MB_CST,
     DEALERNAME:result[0].DM_MB_DEALERNAME,
     ADDRESS1:result[0].DM_MB_ADDRESS1,
     ADDRESS2:result[0].DM_MB_ADDRESS2,
     ADDRESS3:result[0].DM_MB_ADDRESS3,
-    ADDRESS4:result[0].DM_MB_ADDRESS4, //  State
+    ADDRESS4:result[0].DM_MB_ADDRESS4,
+    ADDRESS5:result[0].DM_MB_ADDRESS5, //  State
     PAN:result[0].DM_MB_PAN,
     REGISTERDATE:result[0].DM_MB_REGISTERDATE,
     VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
@@ -106,7 +96,6 @@ app.post('/tinForm',(req,res)=>{
   // console.log(captchaValue)
   if(fs.existsSync(__dirname +"/static/captchaImgs/" + `${captchaValue}.jpeg`)){
 
-  
   fs.unlink(__dirname +"/static/captchaImgs/" + `${captchaValue}.jpeg`, (err) => {
     if (err) {
         throw err;
@@ -120,30 +109,19 @@ app.post('/tinForm',(req,res)=>{
 app.post('/cstForm',(req,res)=>{
 
   console.log(req.body);
-  con.query(`select     DM_MB_CST,DM_MB_CST,DM_MB_DEALERNAME,DM_MB_ADDRESS1,DM_MB_ADDRESS2,DM_MB_ADDRESS3,DM_MB_ADDRESS4,DM_MB_PAN,DM_MB_REGISTERDATE,DM_MB_VALIDATIONSTATUS,CREATED_DATE
-  from dealer_details where DM_MB_STATECODE= ${req.body.stateNumber} AND DM_MB_CST= ${req.body.cstNumber}`,(err,result,fields)=>{
+  con.query(`select * from dealer_details where DM_MB_STATECODE= ${req.body.stateNumber} AND DM_MB_CST= ${req.body.cstNumber}`,(err,result,fields)=>{
     if(err) throw err;
-    // console.log(result[0]);
-    // DM_MB_CST
-    // DM_MB_CST
-    // DM_MB_DEALERNAME
-    // DM_MB_ADDRESS1
-    // DM_MB_ADDRESS2
-    // DM_MB_ADDRESS3
-    // DM_MB_ADDRESS4   State
-    // DM_MB_PAN
-    // DM_MB_REGISTERDATE
-    // DM_MB_VALIDATIONSTATUS
-    // CREATED_DATE
   
     var tableData= {
-      TIN:result[0].DM_MB_CST,
+      STATECODE: result[0].DM_MB_STATECODE,
+      TIN:result[0].DM_MB_TIN,
       CST:result[0].DM_MB_CST,
       DEALERNAME:result[0].DM_MB_DEALERNAME,
       ADDRESS1:result[0].DM_MB_ADDRESS1,
       ADDRESS2:result[0].DM_MB_ADDRESS2,
       ADDRESS3:result[0].DM_MB_ADDRESS3,
-      ADDRESS4:result[0].DM_MB_ADDRESS4, //  State
+      ADDRESS4:result[0].DM_MB_ADDRESS4,
+      ADDRESS5:result[0].DM_MB_ADDRESS5, 
       PAN:result[0].DM_MB_PAN,
       REGISTERDATE:result[0].DM_MB_REGISTERDATE,
       VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
@@ -155,7 +133,6 @@ app.post('/cstForm',(req,res)=>{
   })
   var captchaValue= req.body.captcha;
   if(fs.existsSync(__dirname +"/static/captchaImgs/" + `${captchaValue}.jpeg`)){
-
   
     fs.unlink(__dirname +"/static/captchaImgs/" + `${captchaValue}.jpeg`, (err) => {
       if (err) {

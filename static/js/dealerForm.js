@@ -17,6 +17,14 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     {
         document.getElementById("formVerification").classList.toggle('hidden');
     }
+    if(!document.getElementById("detailsTable").classList.contains('hidden'))
+    {
+        document.getElementById("detailsTable").classList.toggle('hidden');
+    }
+    if(!document.getElementById("printButton").classList.contains('hidden'))
+    {
+        document.getElementById("printButton").classList.toggle('hidden');
+    }
     
 })
 document.getElementsByClassName('uiDisable')[1].addEventListener('click',()=>{
@@ -77,7 +85,28 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>console.log(data)).catch(e=>console.log("Error:"+e));
+        }).then(res=>res.json()).then(data=>{
+            console.log(data);
+            document.getElementById("tinForm").classList.toggle('hidden');
+            
+            document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
+            document.getElementById('tinTin').innerHTML=` ${data.TIN} `;
+            document.getElementById('cstTin').innerHTML=` ${data.CST} `;
+            document.getElementById('dealerNameTin').innerHTML=` ${data.DEALERNAME} `;
+            document.getElementById('stateNameTin').innerHTML=` ${data.STATECODE} `;
+            document.getElementById('panTin').innerHTML=` ${data.PAN} `;
+            document.getElementById('regDateTin').innerHTML=` ${data.REGISTERDATE} `;
+            document.getElementById('validStatusTin').innerHTML=` ${data.VALIDATIONSTATUS} `;
+            document.getElementById('dateTin').innerHTML=` ${data.DATE} `;
+            document.getElementById('addressTin1').innerHTML=` ${data.ADDRESS1} `;
+            document.getElementById('addressTin2').innerHTML=` ${data.ADDRESS2} `;
+            document.getElementById('addressTin3').innerHTML=` ${data.ADDRESS3} `;
+            document.getElementById('addressTin4').innerHTML=` ${data.ADDRESS4} `;
+            document.getElementById('addressTin5').innerHTML=` ${data.ADDRESS5} `;
+
+            document.getElementById("detailsTable").classList.toggle('hidden');
+            document.getElementById("printButton").classList.toggle('hidden');
+        }).catch(e=>console.log("Error:"+e));
     }
     
 })
@@ -121,7 +150,29 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>console.log(data)).catch(e=>console.log("Error:"+e));
+        }).then(res=>res.json()).then(data=>{
+            // console.log(data);
+
+            document.getElementById("cstForm").classList.toggle('hidden');
+            
+            document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
+            document.getElementById('tinTin').innerHTML=` ${data.TIN} `;
+            document.getElementById('cstTin').innerHTML=` ${data.CST} `;
+            document.getElementById('dealerNameTin').innerHTML=` ${data.DEALERNAME} `;
+            document.getElementById('stateNameTin').innerHTML=` ${data.STATECODE} `;
+            document.getElementById('panTin').innerHTML=` ${data.PAN} `;
+            document.getElementById('regDateTin').innerHTML=` ${data.REGISTERDATE} `;
+            document.getElementById('validStatusTin').innerHTML=` ${data.VALIDATIONSTATUS} `;
+            document.getElementById('dateTin').innerHTML=` ${data.DATE} `;
+            document.getElementById('addressTin1').innerHTML=` ${data.ADDRESS1} `;
+            document.getElementById('addressTin2').innerHTML=` ${data.ADDRESS2} `;
+            document.getElementById('addressTin3').innerHTML=` ${data.ADDRESS3} `;
+            document.getElementById('addressTin4').innerHTML=` ${data.ADDRESS4} `;
+            document.getElementById('addressTin5').innerHTML=` ${data.ADDRESS5} `;
+            
+            document.getElementById("detailsTable").classList.toggle('hidden');
+            document.getElementById("printButton").classList.toggle('hidden');
+        }).catch(e=>console.log("Error:"+e));
 
     }
     
@@ -195,6 +246,25 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
     }
     
 })
+
+
+
+document.getElementById('printButton').addEventListener('click',()=>{
+    // var printContents = document.getElementById('detailsTable').innerHTML;
+    var originalContents = document.body.innerHTML;
+    document.getElementById('tnc').classList.add('hidden');
+    document.getElementById('footer').classList.add('hidden');
+    document.getElementById('mainOptions').classList.add('hidden');
+    document.getElementById('printButton').classList.add('hidden');
+    document.getElementById('navbar').style.display='none';
+
+    // document.body.innerHTML =  printContents  ;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+    document.getElementById('dealerFormNav').click();
+});
 
 
 
