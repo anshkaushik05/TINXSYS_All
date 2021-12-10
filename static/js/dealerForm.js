@@ -21,6 +21,10 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     {
         document.getElementById("detailsTable").classList.toggle('hidden');
     }
+    if(!document.getElementById("validTable").classList.contains('hidden'))
+    {
+        document.getElementById("validTable").classList.toggle('hidden');
+    }
     if(!document.getElementById("printButton").classList.contains('hidden'))
     {
         document.getElementById("printButton").classList.toggle('hidden');
@@ -236,13 +240,26 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
             captcha : captchaFormValid
         }
 
-        fetch('/formNumber',{
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>console.log('success: '+data)).catch(e=>console.log("Error:"+e));
+        document.getElementById("formVerification").classList.toggle('hidden');
+
+            
+            document.getElementById("validTable").classList.toggle('hidden');
+
+        // fetch('/formNumber',{
+        //     method: 'POST', 
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        // }).then(res=>res.json()).then(data=>{
+        //     console.log('success: '+data)
+        //     document.getElementById("formVerification").classList.toggle('hidden');
+
+            
+        //     document.getElementById("validTable").classList.toggle('hidden');
+
+        
+        // }).catch(e=>console.log("Error:"+e));
     }
     
 })
