@@ -146,8 +146,16 @@ app.post('/cstForm',(req,res)=>{
 app.post('/formNumber',(req,res)=>{
 
   console.log(req.body);
-  con.query(`select     DM_MB_CST,DM_MB_CST,DM_MB_DEALERNAME,DM_MB_ADDRESS1,DM_MB_ADDRESS2,DM_MB_ADDRESS3,DM_MB_ADDRESS4,DM_MB_PAN,DM_MB_REGISTERDATE,DM_MB_VALIDATIONSTATUS,CREATED_DATE
-  from dealer_details where DM_MB_STATECODE= ${req.body.stateNumber} AND DM_MB_CST= ${req.body.cstNumber}`,(err,result,fields)=>{
+  con.query(`select CI_CI_SERIESNUMBER,DM_MB_OFFICECODE,CREATED_DATE,CI_CI_PURCHASERNAME,DM_MB_ADDRESS1,DM_MB_ADDRESS2,DM_MB_ADDRESS3,DM_MB_ADDRESS4,DM_MB_ADDRESS5,CI_CI_ISSUEDATE,CI_CI_PURCHASERTIN,CI_CI_PURCHASERCST,CI_CU_SELLERNAME,CI_CU_SELLERADDRESS1,CI_CU_SELLERADDRESS2,CI_CU_SELLERADDRESS3,CI_CU_SELLERADDRESS4,CI_CU_SELLERADDRESS5,CI_CU_SELLERADDRESS6,CI_CU_SELLERSTATECODE,CI_CU_SELLERTIN,CI_CU_SELLERCST,CI_ID_INVOICENUMBER,CI_ID_INVOICEVALUE,CI_ID_VALIDATIONSTATUS from c_issue  I 
+  inner join c_utilize U 
+  on (I.CI_CI_PURCHASERTIN=U.CI_CU_PURCHASERTIN 
+  and I.CI_CI_SERIALNUMBER=U.CI_CU_SERIALNUMBER 
+  and I.CI_CI_SERIESNUMBER=U.CI_CU_SERIESNUMBER)
+  inner join  c_invoicedetails V 
+  on ( U.CI_CU_SELLERTIN=V.CI_ID_PURCHASERTIN 
+  and U.CI_CU_SERIESNUMBER=V.CI_ID_SERIESNUMBER 
+  and U.CI_CU_SERIALNUMBER=V.CI_ID_SERIALNUMBER )
+  inner join dealer_details D`,(err,result,fields)=>{
     if(err) throw err;
     // console.log(result[0]);
     // DM_MB_CST
@@ -162,21 +170,25 @@ app.post('/formNumber',(req,res)=>{
     // DM_MB_VALIDATIONSTATUS
     // CREATED_DATE
   
-    var tableData= {
-      TIN:result[0].DM_MB_CST,
-      CST:result[0].DM_MB_CST,
-      DEALERNAME:result[0].DM_MB_DEALERNAME,
-      ADDRESS1:result[0].DM_MB_ADDRESS1,
-      ADDRESS2:result[0].DM_MB_ADDRESS2,
-      ADDRESS3:result[0].DM_MB_ADDRESS3,
-      ADDRESS4:result[0].DM_MB_ADDRESS4, //  State
-      PAN:result[0].DM_MB_PAN,
-      REGISTERDATE:result[0].DM_MB_REGISTERDATE,
-      VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
-      DATE:result[0].CREATED_DATE
+    // var tableData= {
+    //   TIN:result[0].DM_MB_CST,
+    //   CST:result[0].DM_MB_CST,
+    //   DEALERNAME:result[0].DM_MB_DEALERNAME,
+    //   ADDRESS1:result[0].DM_MB_ADDRESS1,
+    //   ADDRESS2:result[0].DM_MB_ADDRESS2,
+    //   ADDRESS3:result[0].DM_MB_ADDRESS3,
+    //   ADDRESS4:result[0].DM_MB_ADDRESS4, //  State
+    //   PAN:result[0].DM_MB_PAN,
+    //   REGISTERDATE:result[0].DM_MB_REGISTERDATE,
+    //   VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
+    //   DATE:result[0].CREATED_DATE
+    // }
+
+    var sampleData={
+
     }
-    console.log(tableData);
-    res.send(JSON.stringify(tableData));
+    console.log(result);
+    res.send(JSON.stringify(result));
   
   })
 

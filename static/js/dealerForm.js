@@ -4,6 +4,7 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     // document.getElementsByClassName('uiDisable')[1].classList.add('border-transparent');
     // document.getElementsByClassName('uiDisable')[2].classList.add('border-transparent');
     
+
     if( document.getElementById("tinForm").classList.contains('hidden'))
         {
             // document.getElementsByClassName('uiDisable')[0].childNodes[1].classList.toggle('border-yellow-700');
@@ -30,6 +31,18 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
         document.getElementById("printButton").classList.toggle('hidden');
     }
     
+    document.getElementById('tinValidTin').innerHTML="";
+    document.getElementById('captchaValidTin').innerHTML="";
+
+    document.getElementById('stateValidCst').innerHTML="";
+    document.getElementById('cstValidCst').innerHTML="";
+    document.getElementById('captchaValidCst').innerHTML="";
+
+    document.getElementById('formTypeValidForm').innerHTML="";
+    document.getElementById('stateValidForm').innerHTML="";
+    document.getElementById('serialValidForm').innerHTML="";
+    document.getElementById('captchaValidForm').innerHTML="";
+
 })
 document.getElementsByClassName('uiDisable')[1].addEventListener('click',()=>{
         document.getElementsByClassName('uiDisable')[0].click();
@@ -62,22 +75,25 @@ getCaptcha= getCaptcha.substr(0,getCaptcha.indexOf(' '));
 document.getElementById('tinSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementById('tinValidTin').innerHTML="";
+    document.getElementById('captchaValidTin').innerHTML="";
+
 
     var tinNumberForm=document.getElementById('tinNumberForm').value;
     var captcha = document.getElementById('tinNumberFormCaptcha').value;
     
     var trueTin=0, trueCaptcha = 0;
     if(tinNumberForm.toString().length!=11)
-        console.log('not 11 digit');
+        document.getElementById('tinValidTin').innerHTML="Entered Tin is not 11 digits";
     else
         trueTin=1;
     if(captcha != getCaptcha)
-        console.log('captcha not correct');
+        document.getElementById('captchaValidTin').innerHTML="Incorrect Captcha (case sensitive)";
     else
         trueCaptcha=1;
     
     if(trueCaptcha && trueTin){
-        console.log("all Good");
+        // console.log("all Good");
         var data={
             tinNumber : tinNumberForm,
             captcha : captcha
@@ -90,9 +106,13 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
             },
             body: JSON.stringify(data),
         }).then(res=>res.json()).then(data=>{
-            console.log(data);
+            // console.log(data);
             document.getElementById("tinForm").classList.toggle('hidden');
-            
+            document.getElementById('tinValidTin').innerHTML="";
+            document.getElementById('captchaValidTin').innerHTML="";
+
+
+
             document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
             document.getElementById('tinTin').innerHTML=` ${data.TIN} `;
             document.getElementById('cstTin').innerHTML=` ${data.CST} `;
@@ -120,6 +140,9 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
 document.getElementById('cstSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementById('stateValidCst').innerHTML="";
+    document.getElementById('cstValidCst').innerHTML="";
+    document.getElementById('captchaValidCst').innerHTML="";
 
     var stateNameCst=document.getElementById('stateNameCst').value;
     var cstNumberForm = document.getElementById('cstNumberForm').value;
@@ -128,25 +151,27 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
     var trueCst=0, trueCaptcha = 0; 
     var trueStateNameCst=0;
     if(cstNumberForm.toString().length!=11)
-        console.log('not 11 digit');
+        document.getElementById('cstValidCst').innerHTML="Entered CST is not 11 digits";
     else
         trueCst=1;
     if(stateNameCst=='')
-        console.log('Please Input a State Value');
+        document.getElementById('stateValidCst').innerHTML="Please Input a State Value";
     else
         trueStateNameCst=1;
     if(captcha != getCaptcha)
-        console.log('captcha not correct');
+        document.getElementById('captchaValidCst').innerHTML="Incorrect Captcha (case sensitive)";
     else
         trueCaptcha=1;
     
     if(trueCaptcha && trueCst && trueStateNameCst ){
-        console.log("all Good");
+        // console.log("all Good");
         var data={
             stateNumber : stateNameCst,
             cstNumber : cstNumberForm,
             captcha : captcha
         }
+
+
 
         fetch('/cstForm',{
             method: 'POST', 
@@ -156,6 +181,11 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
             body: JSON.stringify(data),
         }).then(res=>res.json()).then(data=>{
             // console.log(data);
+
+
+            document.getElementById('stateValidCst').innerHTML="";
+            document.getElementById('cstValidCst').innerHTML="";
+            document.getElementById('captchaValidCst').innerHTML="";
 
             document.getElementById("cstForm").classList.toggle('hidden');
             
@@ -195,6 +225,10 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
 document.getElementById('validSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementById('formTypeValidForm').innerHTML="";
+    document.getElementById('stateValidForm').innerHTML="";
+    document.getElementById('serialValidForm').innerHTML="";
+    document.getElementById('captchaValidForm').innerHTML="";
 
     var formType=document.getElementById('formType').value;
     var stateNameForm=document.getElementById('stateNameForm').value;
@@ -211,22 +245,22 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
     //     trueCst=1;
 
     if(serialNumber.toString().length!=11)
-        console.log('not 11 digit');
+        document.getElementById('serialValidForm').innerHTML="Entered Serial is not 11 digits";
     else
         trueSerial=1;
 
     if(formType=='')
-        console.log('Please Input a form type Value');
+        document.getElementById('formTypeValidForm').innerHTML="Please Input a Form Type";
     else
         trueFormType=1;
 
     if(stateNameForm=='')
-        console.log('Please Input a State Value');
+        document.getElementById('stateValidForm').innerHTML="Please Input a State Value";
     else
         trueStateName=1;
 
     if(captchaFormValid != getCaptcha)
-        console.log('captcha not correct');
+        document.getElementById('captchaValidForm').innerHTML="Incorrect Captcha (case sensitive)";
     else
         trueCaptcha=1;
     
@@ -240,26 +274,26 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
             captcha : captchaFormValid
         }
 
-        document.getElementById("formVerification").classList.toggle('hidden');
-
-            
-            document.getElementById("validTable").classList.toggle('hidden');
-
-        // fetch('/formNumber',{
-        //     method: 'POST', 
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        // }).then(res=>res.json()).then(data=>{
-        //     console.log('success: '+data)
-        //     document.getElementById("formVerification").classList.toggle('hidden');
+        // document.getElementById("formVerification").classList.toggle('hidden');
 
             
         //     document.getElementById("validTable").classList.toggle('hidden');
 
+        fetch('/formNumber',{
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(res=>res.json()).then(data=>{
+            console.log('success: '+data)
+            document.getElementById("formVerification").classList.toggle('hidden');
+
+            
+            document.getElementById("validTable").classList.toggle('hidden');
+
         
-        // }).catch(e=>console.log("Error:"+e));
+        }).catch(e=>console.log("Error:"+e));
     }
     
 })
