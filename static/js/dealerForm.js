@@ -69,7 +69,7 @@ document.getElementsByClassName('uiDisable')[2].addEventListener('click',()=>{
 
 // form validation and submition 
 
-// console.log(getCaptcha);
+console.log(getCaptcha);
 getCaptcha= getCaptcha.substr(0,getCaptcha.indexOf(' '));
 //Tin form submit
 document.getElementById('tinSubmit').addEventListener('click',(e)=>{
@@ -285,12 +285,96 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        }).then(res=>res.json()).then(data=>{
-            console.log('success: '+data)
+        }).then(res=>res.json()).then(result=>{
+            console.log(result);
             document.getElementById("formVerification").classList.toggle('hidden');
+            document.getElementById('validTableHead').innerHTML=`FORM '${result.formType}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
+            document.getElementById('formType').innerHTML=`FORM '${result.formType}' `;
+            document.getElementById('seriesNo').innerHTML=`${result.form.seriesNo} `;
+            document.getElementById('serialNo').innerHTML=`${result.form.serialNo} `;
+            document.getElementById('state').innerHTML=`${result.issuingState.state} `;
+            document.getElementById('officeIssue').innerHTML=`${result.issuingState.officeIssue} `;
+            document.getElementById('dateIssue').innerHTML=`${result.issuingState.dateIssue} `;
+
+            document.getElementById('purchaserName').innerHTML=`${result.purchasingInfo.name} `;
+            document.getElementById('purchaserAddress1').innerHTML=`${result.purchasingInfo.address.address1} `;
+            document.getElementById('purchaserAddress2').innerHTML=`${result.purchasingInfo.address.address2} `;
+            document.getElementById('purchaserAddress3').innerHTML=`${result.purchasingInfo.address.address3} `;
+            document.getElementById('purchaserAddress4').innerHTML=`${result.purchasingInfo.address.address4} `;
+            document.getElementById('purchaserAddress5').innerHTML=`${result.purchasingInfo.address.address5} `;
+            document.getElementById('purchaserValidAsOn').innerHTML=`${result.purchasingInfo.validAsOn} `;
+            document.getElementById('purchaserTin').innerHTML=`${result.purchasingInfo.tin} `;
+            document.getElementById('purchaserCst').innerHTML=`${result.purchasingInfo.cst} `;
+
+            document.getElementById('sellerName').innerHTML=`${result.sellerInfo.name} `;
+            document.getElementById('sellerAddress1').innerHTML=`${result.sellerInfo.address.address1} `;
+            document.getElementById('sellerAddress2').innerHTML=`${result.sellerInfo.address.address2} `;
+            document.getElementById('sellerAddress3').innerHTML=`${result.sellerInfo.address.address3} `;
+            document.getElementById('sellerAddress4').innerHTML=`${result.sellerInfo.address.address4} `;
+            document.getElementById('sellerAddress5').innerHTML=`${result.sellerInfo.address.address5} `;
+            document.getElementById('sellerAddress6').innerHTML=`${result.sellerInfo.address.address6} `;
+            document.getElementById('sellerStateCode').innerHTML=`${result.sellerInfo.address.stateCode} `;
+            document.getElementById('sellerValidAsOn').innerHTML=`${result.sellerInfo.validAsOn} `;
+            document.getElementById('sellerTin').innerHTML=`${result.sellerInfo.tin} `;
+            document.getElementById('sellerCst').innerHTML=`${result.sellerInfo.cst} `;
+
+            document.getElementById('invoiceNumber').innerHTML=`${result.invoiceDetails.invoiceNumber} `;
+            document.getElementById('invoiceValue').innerHTML=`${result.invoiceDetails.invoiceValue} `;
+            document.getElementById('validStatus').innerHTML=`${result.validStatus} `;
+
+
+        //     {
+        //     formType: data.formType,
+        //     form :{
+        //       serialNo: data.serialNumber,
+        //       serieslNo: result[0].CI_CI_SERIESNUMBER,
+        //     },
+        //     issuingState:{
+        //       state:data.stateNumber,
+        //       offileIssue:result[0].DM_MB_OFFICECODE,
+        //       dateIssue:result[0].CREATED_DATE
+     
+        //     },
+        //     purchasingInfo:{
+        //        name:result[0].CI_CI_PURCHASERNAME,
+        //        address:{
+        //          address1:result[0].DM_MB_ADDRESS1,
+        //          address2:result[0].DM_MB_ADDRESS2,
+        //          address3:result[0].DM_MB_ADDRESS3,
+        //          address4:result[0].DM_MB_ADDRESS4,
+        //          address5:result[0].DM_MB_ADDRESS5
+        //        },
+        //        validAsOn:result[0].CI_CI_ISSUEDATE,
+        //        tin:result[0].CI_CI_PURCHASERTIN,
+        //        cst:result[0].CI_CI_PURCHASERCST
+        //     },
+        //     sellerInfo:{
+        //       name:result[0].CI_CU_SELLERNAME,
+        //       address:{
+        //         address1:result[0].CI_CU_SELLERADDRESS1,
+        //         address2:result[0].CI_CU_SELLERADDRESS2,
+        //         address3:result[0].CI_CU_SELLERADDRESS3,
+        //         address4:result[0].CI_CU_SELLERADDRESS4,
+        //         address5:result[0].CI_CU_SELLERADDRESS5,
+        //         address6:result[0].CI_CU_SELLERADDRESS6,
+        //         stateCode:result[0].CI_CU_SELLERSTATECODE
+        //       },
+        //       validAsOn:result[0].CI_CI_ISSUEDATE,
+        //       tin:result[0].CI_CU_SELLERTIN,
+        //       cst:result[0].CI_CU_SELLERCST
+     
+        //     },
+        //     invoiceDetails:{
+        //       invoiceNumber:result[0].CI_ID_INVOICENUMBER,
+        //       invoiceValue:result[0].CI_ID_INVOICEVALUE
+        //     },
+        //     validStatus:result[0].CI_ID_VALIDATIONSTATUS
+     
+        //  }
 
             
             document.getElementById("validTable").classList.toggle('hidden');
+            document.getElementById("printButton").classList.toggle('hidden');
 
         
         }).catch(e=>console.log("Error:"+e));

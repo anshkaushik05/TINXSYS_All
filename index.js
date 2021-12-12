@@ -151,44 +151,66 @@ app.post('/formNumber',(req,res)=>{
   on (I.CI_CI_PURCHASERTIN=U.CI_CU_PURCHASERTIN 
   and I.CI_CI_SERIALNUMBER=U.CI_CU_SERIALNUMBER 
   and I.CI_CI_SERIESNUMBER=U.CI_CU_SERIESNUMBER)
-  inner join  c_invoicedetails V 
-  on ( U.CI_CU_SELLERTIN=V.CI_ID_PURCHASERTIN 
-  and U.CI_CU_SERIESNUMBER=V.CI_ID_SERIESNUMBER 
-  and U.CI_CU_SERIALNUMBER=V.CI_ID_SERIALNUMBER )
-  inner join dealer_details D`,(err,result,fields)=>{
+    inner join  c_invoicedetails V 
+    on ( U.CI_CU_SELLERTIN=V.CI_ID_PURCHASERTIN 
+    and U.CI_CU_SERIESNUMBER=V.CI_ID_SERIESNUMBER 
+    and U.CI_CU_SERIALNUMBER=V.CI_ID_SERIALNUMBER )
+    inner join dealer_details D on (I.CI_CI_PURCHASERTIN = D.DM_MB_TIN);
+  `,(err,result,fields)=>{
     if(err) throw err;
-    // console.log(result[0]);
-    // DM_MB_CST
-    // DM_MB_CST
-    // DM_MB_DEALERNAME
-    // DM_MB_ADDRESS1
-    // DM_MB_ADDRESS2
-    // DM_MB_ADDRESS3
-    // DM_MB_ADDRESS4   State
-    // DM_MB_PAN
-    // DM_MB_REGISTERDATE
-    // DM_MB_VALIDATIONSTATUS
-    // CREATED_DATE
-  
-    // var tableData= {
-    //   TIN:result[0].DM_MB_CST,
-    //   CST:result[0].DM_MB_CST,
-    //   DEALERNAME:result[0].DM_MB_DEALERNAME,
-    //   ADDRESS1:result[0].DM_MB_ADDRESS1,
-    //   ADDRESS2:result[0].DM_MB_ADDRESS2,
-    //   ADDRESS3:result[0].DM_MB_ADDRESS3,
-    //   ADDRESS4:result[0].DM_MB_ADDRESS4, //  State
-    //   PAN:result[0].DM_MB_PAN,
-    //   REGISTERDATE:result[0].DM_MB_REGISTERDATE,
-    //   VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
-    //   DATE:result[0].CREATED_DATE
-    // }
+    
+    data=req.body;
+    var tableData={
+       formType: data.formType,
+       form :{
+         serialNo: data.serialNumber,
+         seriesNo: result[0].CI_CI_SERIESNUMBER,
+       },
+       issuingState:{
+         state:data.stateNumber,
+         officeIssue:result[0].DM_MB_OFFICECODE,
+         dateIssue:result[0].CREATED_DATE
 
-    var sampleData={
+       },
+       purchasingInfo:{
+          name:result[0].CI_CI_PURCHASERNAME,
+          address:{
+            address1:result[0].DM_MB_ADDRESS1,
+            address2:result[0].DM_MB_ADDRESS2,
+            address3:result[0].DM_MB_ADDRESS3,
+            address4:result[0].DM_MB_ADDRESS4,
+            address5:result[0].DM_MB_ADDRESS5
+          },
+          validAsOn:result[0].CI_CI_ISSUEDATE,
+          tin:result[0].CI_CI_PURCHASERTIN,
+          cst:result[0].CI_CI_PURCHASERCST
+       },
+       sellerInfo:{
+         name:result[0].CI_CU_SELLERNAME,
+         address:{
+           address1:result[0].CI_CU_SELLERADDRESS1,
+           address2:result[0].CI_CU_SELLERADDRESS2,
+           address3:result[0].CI_CU_SELLERADDRESS3,
+           address4:result[0].CI_CU_SELLERADDRESS4,
+           address5:result[0].CI_CU_SELLERADDRESS5,
+           address6:result[0].CI_CU_SELLERADDRESS6,
+           stateCode:result[0].CI_CU_SELLERSTATECODE
+         },
+         validAsOn:result[0].CI_CI_ISSUEDATE,
+         tin:result[0].CI_CU_SELLERTIN,
+         cst:result[0].CI_CU_SELLERCST
+
+       },
+       invoiceDetails:{
+         invoiceNumber:result[0].CI_ID_INVOICENUMBER,
+         invoiceValue:result[0].CI_ID_INVOICEVALUE
+       },
+       validStatus:result[0].CI_ID_VALIDATIONSTATUS
 
     }
-    console.log(result);
-    res.send(JSON.stringify(result));
+    console.log(tableData);
+    res.send(JSON.stringify(tableData));
+    // res.send(JSON.stringify(result));
   
   })
 

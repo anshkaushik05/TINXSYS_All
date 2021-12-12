@@ -474,7 +474,7 @@ This record is valid as on
   <input type="hidden" name="backPage" value="fFormSearch.jsp">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody><tr>
-      <td width="100%" colspan="9" class="headerBlue"><div class="headerBlue" style="background-color: #2C3034;" align="center">
+      <td width="100%" colspan="9" class="headerBlue"><div class="headerBlue" style="background-color: #2C3034;" align="center" id="validTableHead">
         <!-- THE CENTRAL SALES TAX<br>
             (REGISTRATION AND TURNOVER) RULES,1957<br> -->
         FORM 'C' <br> Search Time : 10/12/2021 4:16 AM
@@ -486,15 +486,15 @@ This record is valid as on
             <td style="width:30%"> 
             <table width="100%" border="0" cellpadding="0" cellspacing="0">          
             <tbody><tr valign="top">
-              <td width="100%" colspan="2" class="bg-gray-800" align="center" valign="top">FORM 'C'</td>
+              <td width="100%" colspan="2" class="bg-gray-800" align="center" valign="top" id="formType">FORM 'C'</td>
             </tr>
             <tr>
               <td width="50%" align="center" class="bg-primaryTable">Series No.</td>
               <td width="50%" align="center" class="bg-primaryTable">Serial No.</td>
             </tr>          
             <tr>
-              <td class="bg-secondaryTable" width="50%" align="center">27</td>
-              <td class="bg-secondaryTable" width="50%" align="center">270320C0800344</td>
+              <td class="bg-secondaryTable" width="50%" align="center" id="seriesNo">27</td>
+              <td class="bg-secondaryTable" width="50%" align="center" id="serialNo">270320C0800344</td>
             </tr>
            <tr>
               <td class="tdWhite" width="50%" align="center">&nbsp;</td>
@@ -514,19 +514,19 @@ This record is valid as on
               <td width="30%" colspan="2" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Name of Issuing State </td>
   <!-- Modified by Raghu Start -->
               
-              <td width="30%" colspan="1" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;Maharashtra</td>
+              <td width="30%" colspan="1" class="bg-secondaryTable" nowrap="" id="state">&nbsp;&nbsp;Maharashtra</td>
   <!-- Modified by Raghu End -->
               
               <td width="20%" colspan="3" class="bg-primaryTable" nowrap="" align="center">Date of Issue<br>(DD/MM/YYYY)</td>
               
-              <td width="30%" colspan="2" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;16/03/2020</td>
+              <td width="30%" colspan="2" class="bg-secondaryTable" nowrap="" id="dateIssue">&nbsp;&nbsp;16/03/2020</td>
               
             </tr>
             
             <tr>
               <td width="20%" colspan="2" class="bg-primaryTable" nowrap="">&nbsp; Office of Issue </td>
               
-              <td width="80%" colspan="6" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;Not Available</td>
+              <td width="80%" colspan="6" class="bg-secondaryTable" nowrap="" id="officeIssue">&nbsp;&nbsp;Not Available</td>
               
             </tr>
             </tbody></table>
@@ -544,41 +544,29 @@ This record is valid as on
               <!-- Modified by siby end -->
             </tr>
             <tr>
-              <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Dealer Name</td>
+              <td width="20%" class="bg-primaryTable" nowrap="" >&nbsp;&nbsp;Dealer Name</td>
               
-              <td width="30%" class="bg-secondaryTable" nowrap="">"DURGASHAKTI FOODS PVT.LTD, JANUNA"</td>
+              <td width="30%" class="bg-secondaryTable" nowrap="" id="purchaserName">"DURGASHAKTI FOODS PVT.LTD, JANUNA"</td>
               
                <td width="20%" class="bg-primaryTable" align="left" nowrap="">&nbsp;&nbsp;Dealer TIN </td>
                
-              <td width="30%" class="bg-secondaryTable" align="left" nowrap="">&nbsp;&nbsp;27300655212</td>
+              <td width="30%" class="bg-secondaryTable" align="left" nowrap="" id="purchaserTin">&nbsp;&nbsp;27300655212</td>
               
             </tr>
             <tr>
               <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Dealer Address </td>
               <td width="40%" class="bg-secondaryTable" nowrap="">
               
-              
-              
-              NANANA, &nbsp;
-              
-              . &nbsp;
-              
-              BULDANA<br>
-              
-              KHAMGAON &nbsp;
-              
-              Pincode:-444303
-              
-              
-  
-              
-              
-              
+             <span id="purchaserAddress1"></span> , &nbsp;
+             <span id="purchaserAddress2"></span>  , &nbsp;
+             <span id="purchaserAddress3"></span> <br>
+             <span id="purchaserAddress4"></span>  &nbsp;
+             <span id="purchaserAddress5"></span> 
               
               </td>
               <td width="20%" class="bg-primaryTable" align="left" nowrap="">&nbsp;&nbsp;Dealer CST Number </td>
               
-              <td width="30%" class="bg-secondaryTable" align="left" nowrap="">&nbsp;&nbsp;27300655212</td>
+              <td width="30%" class="bg-secondaryTable" align="left" nowrap="" id="purchaserCst">&nbsp;&nbsp;27300655212</td>
               
             </tr>
             
@@ -586,7 +574,7 @@ This record is valid as on
              
              <tr>
               <td class="bg-primaryTable">&nbsp;&nbsp;This record is valid as on &nbsp;&nbsp;(DD/MM/YYYY)</td>
-              <td colspan="5" class="bg-secondaryTable">06/05/2020</td>
+              <td colspan="5" class="bg-secondaryTable" id="purchaserValidAsOn"></td>
             </tr>    
              
       </tbody></table>
@@ -605,11 +593,11 @@ This record is valid as on
             <tr>
               <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer Name </td>
               
-              <td width="30%" class="bg-secondaryTable">PARAS POLY FAB PVT LTD</td>
+              <td width="30%" class="bg-secondaryTable" id="sellerName"></td>
               
               <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer TIN  &nbsp;</td>
               
-              <td width="30%" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;23230802902</td>
+              <td width="30%" class="bg-secondaryTable" nowrap="" id="sellerTin">&nbsp;&nbsp;</td>
               
               
             </tr>
@@ -619,22 +607,25 @@ This record is valid as on
                   
                   
                   
-              MP &nbsp;
+              <span id="sellerAddress1"></span>, &nbsp;
               
-              <br>
+              <span id="sellerAddress2"></span>,
               
-               &nbsp;
+              <span id="sellerAddress3"></span>,  &nbsp;,<br>
               
-              <br>
+              <span id="sellerAddress4"></span>, 
               
-               &nbsp;
+              <span id="sellerAddress5"></span>,  &nbsp;
               
+              <span id="sellerAddress6"></span>, <br>
+              <span id="sellerStateCode"></span>
+
               
               
               </td>
               <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer CST Number</td>
               
-              <td width="30%" class="bg-secondaryTable">&nbsp;&nbsp;</td>
+              <td width="30%" class="bg-secondaryTable" id="sellerCst">&nbsp;&nbsp;</td>
               
               
             </tr>
@@ -642,7 +633,7 @@ This record is valid as on
              
              <tr>
               <td class="bg-primaryTable">&nbsp;&nbsp;This record is valid as on &nbsp;&nbsp;(DD/MM/YYYY)</td>
-              <td colspan="5" class="bg-secondaryTable">06/05/2020</td>
+              <td colspan="5" class="bg-secondaryTable" id="sellerValidAsOn"></td>
             </tr>    
            
        
@@ -661,12 +652,12 @@ This record is valid as on
             </tr>
             <tr width="100%">
               <td width="20%" colspan="1" class="bg-primaryTable" nowrap="">&nbsp;&nbsp; Number of Invoices </td>
-              <td width="80%" colspan="4" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;1</td>
+              <td width="80%" colspan="4" class="bg-secondaryTable" nowrap="" id="invoiceNumber">&nbsp;&nbsp;1</td>
             </tr>
             <tr>
               <td width="20%" class="bg-primaryTable">&nbsp;&nbsp;Value of Invoices<br>(in Rupees)</td>
               
-              <td width="80%" class="bg-secondaryTable">&nbsp;&nbsp;554116.00</td>
+              <td width="80%" class="bg-secondaryTable" id="invoiceValue">&nbsp;&nbsp;554116.00</td>
               
             </tr>
             
@@ -688,7 +679,7 @@ This record is valid as on
             <tr>
               <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Lost/Cancelled/Defaced/Obsolete details &nbsp;</td>
               
-              <td width="80%" class="bg-secondaryTable" nowrap="">&nbsp;</td>
+              <td width="80%" class="bg-secondaryTable" nowrap="" id="validStatus">&nbsp;</td>
        </tr>
      </tbody></table>
      
