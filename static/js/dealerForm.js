@@ -290,8 +290,8 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
         }).then(res=>res.json()).then(result=>{
             console.log(result);
             document.getElementById("formVerification").classList.toggle('hidden');
-            document.getElementById('validTableHead').innerHTML=`FORM '${checkNull(result.formType)}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
-            document.getElementById('formType').innerHTML=`FORM '${checkNull(result.formType)}' `;
+            document.getElementById('validTableHead').innerHTML=`FORM '${checkNull(formTypeCheck(result.formType))}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
+            document.getElementById('formTypeValid').innerHTML=`FORM '${checkNull((formTypeCheck(result.formType)))}' `;
             document.getElementById('seriesNo').innerHTML=`${checkNull(result.form.seriesNo)} `;
             document.getElementById('serialNo').innerHTML=`${checkNull(result.form.serialNo)} `;
             document.getElementById('state').innerHTML=`${stateCodeConvert(checkNull(result.issuingState.state))} `;
@@ -479,4 +479,12 @@ function checkNull (prop){
         return "Not Available";
     else 
         return prop;
+}
+
+function formTypeCheck (value){
+            if( value=="1")return "C-Form";
+            else if( value=="2")return "EI-Form";
+            else if( value=="3")return "EII-Form";
+            else if( value=="4")return "F-Form";
+            else if( value=="5")return "H-Form";
 }
