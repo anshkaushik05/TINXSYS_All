@@ -1,3 +1,5 @@
+// const { NULL } = require("mysql/lib/protocol/constants/types");
+
 var kaushik =11;
 // display forms
 document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
@@ -114,19 +116,19 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
 
 
             document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
-            document.getElementById('tinTin').innerHTML=` ${data.TIN} `;
-            document.getElementById('cstTin').innerHTML=` ${data.CST} `;
-            document.getElementById('dealerNameTin').innerHTML=` ${data.DEALERNAME} `;
-            document.getElementById('stateNameTin').innerHTML=` ${data.STATECODE} `;
-            document.getElementById('panTin').innerHTML=` ${data.PAN} `;
-            document.getElementById('regDateTin').innerHTML=` ${data.REGISTERDATE} `;
-            document.getElementById('validStatusTin').innerHTML=` ${data.VALIDATIONSTATUS} `;
-            document.getElementById('dateTin').innerHTML=` ${data.DATE} `;
-            document.getElementById('addressTin1').innerHTML=` ${data.ADDRESS1} `;
-            document.getElementById('addressTin2').innerHTML=` ${data.ADDRESS2} `;
-            document.getElementById('addressTin3').innerHTML=` ${data.ADDRESS3} `;
-            document.getElementById('addressTin4').innerHTML=` ${data.ADDRESS4} `;
-            document.getElementById('addressTin5').innerHTML=` ${data.ADDRESS5} `;
+            document.getElementById('tinTin').innerHTML=` ${checkNull(data.TIN)} `;
+            document.getElementById('cstTin').innerHTML=` ${checkNull(data.CST)} `;
+            document.getElementById('dealerNameTin').innerHTML=` ${checkNull(data.DEALERNAME)} `;
+            document.getElementById('stateNameTin').innerHTML=` ${checkNull(stateCodeConvert(data.STATECODE))} `;
+            document.getElementById('panTin').innerHTML=` ${checkNull(data.PAN)} `;
+            document.getElementById('regDateTin').innerHTML=` ${checkNull(data.REGISTERDATE)} `;
+            document.getElementById('validStatusTin').innerHTML=` ${checkNull(validStatus(data.VALIDATIONSTATUS))} `;
+            document.getElementById('dateTin').innerHTML=` ${checkNull(data.DATE)} `;
+            document.getElementById('addressTin1').innerHTML=` ${checkNull(data.ADDRESS1)} `;
+            document.getElementById('addressTin2').innerHTML=` ${checkNull(data.ADDRESS2)} `;
+            document.getElementById('addressTin3').innerHTML=` ${checkNull(data.ADDRESS3)} `;
+            document.getElementById('addressTin4').innerHTML=` ${checkNull(data.ADDRESS4)} `;
+            document.getElementById('addressTin5').innerHTML=` ${checkNull(data.ADDRESS5)} `;
 
             document.getElementById("detailsTable").classList.toggle('hidden');
             document.getElementById("printButton").classList.toggle('hidden');
@@ -190,19 +192,19 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
             document.getElementById("cstForm").classList.toggle('hidden');
             
             document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
-            document.getElementById('tinTin').innerHTML=` ${data.TIN} `;
-            document.getElementById('cstTin').innerHTML=` ${data.CST} `;
-            document.getElementById('dealerNameTin').innerHTML=` ${data.DEALERNAME} `;
-            document.getElementById('stateNameTin').innerHTML=` ${data.STATECODE} `;
-            document.getElementById('panTin').innerHTML=` ${data.PAN} `;
-            document.getElementById('regDateTin').innerHTML=` ${data.REGISTERDATE} `;
-            document.getElementById('validStatusTin').innerHTML=` ${data.VALIDATIONSTATUS} `;
-            document.getElementById('dateTin').innerHTML=` ${data.DATE} `;
-            document.getElementById('addressTin1').innerHTML=` ${data.ADDRESS1} `;
-            document.getElementById('addressTin2').innerHTML=` ${data.ADDRESS2} `;
-            document.getElementById('addressTin3').innerHTML=` ${data.ADDRESS3} `;
-            document.getElementById('addressTin4').innerHTML=` ${data.ADDRESS4} `;
-            document.getElementById('addressTin5').innerHTML=` ${data.ADDRESS5} `;
+            document.getElementById('tinTin').innerHTML=` ${checkNull(data.TIN)} `;
+            document.getElementById('cstTin').innerHTML=` ${checkNull(data.CST)} `;
+            document.getElementById('dealerNameTin').innerHTML=` ${checkNull(data.DEALERNAME)} `;
+            document.getElementById('stateNameTin').innerHTML=` ${checkNull(stateCodeConvert(data.STATECODE))} `;
+            document.getElementById('panTin').innerHTML=` ${checkNull(data.PAN)} `;
+            document.getElementById('regDateTin').innerHTML=` ${checkNull(data.REGISTERDATE)} `;
+            document.getElementById('validStatusTin').innerHTML=` ${checkNull(validStatus(data.VALIDATIONSTATUS))} `;
+            document.getElementById('dateTin').innerHTML=` ${checkNull(data.DATE)} `;
+            document.getElementById('addressTin1').innerHTML=` ${checkNull(data.ADDRESS1)} `;
+            document.getElementById('addressTin2').innerHTML=` ${checkNull(data.ADDRESS2)} `;
+            document.getElementById('addressTin3').innerHTML=` ${checkNull(data.ADDRESS3)} `;
+            document.getElementById('addressTin4').innerHTML=` ${checkNull(data.ADDRESS4)} `;
+            document.getElementById('addressTin5').innerHTML=` ${checkNull(data.ADDRESS5)} `;
             
             document.getElementById("detailsTable").classList.toggle('hidden');
             document.getElementById("printButton").classList.toggle('hidden');
@@ -288,89 +290,46 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
         }).then(res=>res.json()).then(result=>{
             console.log(result);
             document.getElementById("formVerification").classList.toggle('hidden');
-            document.getElementById('validTableHead').innerHTML=`FORM '${result.formType}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
-            document.getElementById('formType').innerHTML=`FORM '${result.formType}' `;
-            document.getElementById('seriesNo').innerHTML=`${result.form.seriesNo} `;
-            document.getElementById('serialNo').innerHTML=`${result.form.serialNo} `;
-            document.getElementById('state').innerHTML=`${result.issuingState.state} `;
-            document.getElementById('officeIssue').innerHTML=`${result.issuingState.officeIssue} `;
-            document.getElementById('dateIssue').innerHTML=`${result.issuingState.dateIssue} `;
-
-            document.getElementById('purchaserName').innerHTML=`${result.purchasingInfo.name} `;
-            document.getElementById('purchaserAddress1').innerHTML=`${result.purchasingInfo.address.address1} `;
-            document.getElementById('purchaserAddress2').innerHTML=`${result.purchasingInfo.address.address2} `;
-            document.getElementById('purchaserAddress3').innerHTML=`${result.purchasingInfo.address.address3} `;
-            document.getElementById('purchaserAddress4').innerHTML=`${result.purchasingInfo.address.address4} `;
-            document.getElementById('purchaserAddress5').innerHTML=`${result.purchasingInfo.address.address5} `;
-            document.getElementById('purchaserValidAsOn').innerHTML=`${result.purchasingInfo.validAsOn} `;
-            document.getElementById('purchaserTin').innerHTML=`${result.purchasingInfo.tin} `;
-            document.getElementById('purchaserCst').innerHTML=`${result.purchasingInfo.cst} `;
-
-            document.getElementById('sellerName').innerHTML=`${result.sellerInfo.name} `;
-            document.getElementById('sellerAddress1').innerHTML=`${result.sellerInfo.address.address1} `;
-            document.getElementById('sellerAddress2').innerHTML=`${result.sellerInfo.address.address2} `;
-            document.getElementById('sellerAddress3').innerHTML=`${result.sellerInfo.address.address3} `;
-            document.getElementById('sellerAddress4').innerHTML=`${result.sellerInfo.address.address4} `;
-            document.getElementById('sellerAddress5').innerHTML=`${result.sellerInfo.address.address5} `;
-            document.getElementById('sellerAddress6').innerHTML=`${result.sellerInfo.address.address6} `;
-            document.getElementById('sellerStateCode').innerHTML=`${result.sellerInfo.address.stateCode} `;
-            document.getElementById('sellerValidAsOn').innerHTML=`${result.sellerInfo.validAsOn} `;
-            document.getElementById('sellerTin').innerHTML=`${result.sellerInfo.tin} `;
-            document.getElementById('sellerCst').innerHTML=`${result.sellerInfo.cst} `;
-
-            document.getElementById('invoiceNumber').innerHTML=`${result.invoiceDetails.invoiceNumber} `;
-            document.getElementById('invoiceValue').innerHTML=`${result.invoiceDetails.invoiceValue} `;
-            document.getElementById('validStatus').innerHTML=`${result.validStatus} `;
+            document.getElementById('validTableHead').innerHTML=`FORM '${checkNull(result.formType)}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
+            document.getElementById('formType').innerHTML=`FORM '${checkNull(result.formType)}' `;
+            document.getElementById('seriesNo').innerHTML=`${checkNull(result.form.seriesNo)} `;
+            document.getElementById('serialNo').innerHTML=`${checkNull(result.form.serialNo)} `;
+            document.getElementById('state').innerHTML=`${stateCodeConvert(checkNull(result.issuingState.state))} `;
+            document.getElementById('officeIssue').innerHTML=`${checkNull(result.issuingState.officeIssue)} `;
+            document.getElementById('dateIssue').innerHTML=`${checkNull(result.issuingState.dateIssue)} `;
+            // document.getElementById('dateIssue').innerHTML=`${result.issuingState.dateIssue.substr(0,result.issuingState.dateIssue.indexOf(' '))} `;
 
 
-        //     {
-        //     formType: data.formType,
-        //     form :{
-        //       serialNo: data.serialNumber,
-        //       serieslNo: result[0].CI_CI_SERIESNUMBER,
-        //     },
-        //     issuingState:{
-        //       state:data.stateNumber,
-        //       offileIssue:result[0].DM_MB_OFFICECODE,
-        //       dateIssue:result[0].CREATED_DATE
-     
-        //     },
-        //     purchasingInfo:{
-        //        name:result[0].CI_CI_PURCHASERNAME,
-        //        address:{
-        //          address1:result[0].DM_MB_ADDRESS1,
-        //          address2:result[0].DM_MB_ADDRESS2,
-        //          address3:result[0].DM_MB_ADDRESS3,
-        //          address4:result[0].DM_MB_ADDRESS4,
-        //          address5:result[0].DM_MB_ADDRESS5
-        //        },
-        //        validAsOn:result[0].CI_CI_ISSUEDATE,
-        //        tin:result[0].CI_CI_PURCHASERTIN,
-        //        cst:result[0].CI_CI_PURCHASERCST
-        //     },
-        //     sellerInfo:{
-        //       name:result[0].CI_CU_SELLERNAME,
-        //       address:{
-        //         address1:result[0].CI_CU_SELLERADDRESS1,
-        //         address2:result[0].CI_CU_SELLERADDRESS2,
-        //         address3:result[0].CI_CU_SELLERADDRESS3,
-        //         address4:result[0].CI_CU_SELLERADDRESS4,
-        //         address5:result[0].CI_CU_SELLERADDRESS5,
-        //         address6:result[0].CI_CU_SELLERADDRESS6,
-        //         stateCode:result[0].CI_CU_SELLERSTATECODE
-        //       },
-        //       validAsOn:result[0].CI_CI_ISSUEDATE,
-        //       tin:result[0].CI_CU_SELLERTIN,
-        //       cst:result[0].CI_CU_SELLERCST
-     
-        //     },
-        //     invoiceDetails:{
-        //       invoiceNumber:result[0].CI_ID_INVOICENUMBER,
-        //       invoiceValue:result[0].CI_ID_INVOICEVALUE
-        //     },
-        //     validStatus:result[0].CI_ID_VALIDATIONSTATUS
-     
-        //  }
+
+            document.getElementById('purchaserName').innerHTML=`${checkNull(result.purchasingInfo.name)} `;
+            document.getElementById('purchaserAddress1').innerHTML=`${checkNull(result.purchasingInfo.address.address1)} `;
+            document.getElementById('purchaserAddress2').innerHTML=`${checkNull(result.purchasingInfo.address.address2)} `;
+            document.getElementById('purchaserAddress3').innerHTML=`${checkNull(result.purchasingInfo.address.address3)} `;
+            document.getElementById('purchaserAddress4').innerHTML=`${checkNull(result.purchasingInfo.address.address4)} `;
+            document.getElementById('purchaserAddress5').innerHTML=`${checkNull(result.purchasingInfo.address.address5)} `;
+            document.getElementById('purchaserValidAsOn').innerHTML=`${checkNull(result.purchasingInfo.validAsOn)} `;
+            document.getElementById('purchaserTin').innerHTML=`${checkNull(result.purchasingInfo.tin)} `;
+            document.getElementById('purchaserCst').innerHTML=`${checkNull(result.purchasingInfo.cst)} `;
+
+            document.getElementById('sellerName').innerHTML=`${checkNull(result.sellerInfo.name)} `;
+            document.getElementById('sellerAddress1').innerHTML=`${checkNull(result.sellerInfo.address.address1)} `;
+            document.getElementById('sellerAddress2').innerHTML=`${checkNull(result.sellerInfo.address.address2)} `;
+            document.getElementById('sellerAddress3').innerHTML=`${checkNull(result.sellerInfo.address.address3)} `;
+            document.getElementById('sellerAddress4').innerHTML=`${checkNull(result.sellerInfo.address.address4)} `;
+            document.getElementById('sellerAddress5').innerHTML=`${checkNull(result.sellerInfo.address.address5)} `;
+            document.getElementById('sellerAddress6').innerHTML=`${checkNull(result.sellerInfo.address.address6)} `;
+            document.getElementById('sellerStateCode').innerHTML=`${checkNull(stateCodeConvert(result.sellerInfo.address.stateCode))} `;
+            document.getElementById('sellerValidAsOn').innerHTML=`${checkNull(result.sellerInfo.validAsOn)} `;
+            document.getElementById('sellerTin').innerHTML=`${checkNull(result.sellerInfo.tin)} `;
+            document.getElementById('sellerCst').innerHTML=`${checkNull(result.sellerInfo.cst)} `;
+
+            document.getElementById('invoiceNumber').innerHTML=`${checkNull(result.invoiceDetails.invoiceNumber)} `;
+            document.getElementById('invoiceValue').innerHTML=`${checkNull(result.invoiceDetails.invoiceValue)} `;
+            document.getElementById('validStatus').innerHTML=`${checkNull(validStatus(result.validStatus))} `;
+
+           
+
+
 
             
             document.getElementById("validTable").classList.toggle('hidden');
@@ -403,3 +362,121 @@ document.getElementById('printButton').addEventListener('click',()=>{
 
 
 
+function stateCodeConvert(value){
+            if( value==28)
+                return " Andhra Pradesh";
+
+            else if( value==37)
+                return " Andhra Pradesh New";
+
+            else if( value==12)
+                return " Arunachal Pradesh";
+
+            else if( value==18)
+                return " Assam";
+
+            else if( value==10)
+                return " Bihar";
+
+            else if( value==04)
+                return " Chandigarh";
+
+            else if( value==22)
+                return " Chattisgarh";
+
+            else if( value==26)
+                return " Dadra and Nagar Haveli";
+
+            else if( value==25)
+                return " Daman and Diu";
+
+            else if( value==07)
+                return " Delhi";
+
+            else if( value==30)
+                 return "Goa ";
+    
+            else if( value==24)
+                return " Gujarat";
+
+            else if( value==06)
+                return " Haryana";
+
+            else if( value==02)
+                return " Himachal Pradesh";
+
+            else if( value==01)
+                return " Jammu and Kashmir";
+
+            else if( value==20)
+                return " Jharkhand";
+
+            else if( value==29)
+                return " Karnataka";
+
+            else if( value==32)
+                return " Kerala";
+
+            else if( value==23)
+                return " Madhya Pradesh";
+
+            else if( value==27)
+                return " Maharashtra";
+
+            else if( value==14)
+                return " Manipur";
+
+            else if( value==17)
+                return " Meghalaya";
+
+            else if( value==15)
+                return " Mizoram";
+
+            else if( value==13)
+                return " Nagaland";
+
+            else if( value==21)
+                return " Odisha";
+
+            else if( value==34)
+                return " Pondicherry";
+
+            else if( value==03)
+                return " Punjab";
+
+            else if( value==08)
+                return " Rajasthan";
+
+            else if( value==11)
+                return " Sikkim";
+
+            else if( value==33)
+                return " Tamil Nadu";
+
+            else if( value==36)
+                return " Telangana";
+
+            else if( value==16)
+                return " Tripura";
+
+            else if( value==09)
+                return " Uttar Pradesh";
+
+            else if( value==05)
+                return " Uttarakhand";
+            else if ( value==19)   
+                return "West Bengal";
+}
+
+function validStatus(prop){
+    if(!prop)
+        return "No";
+    return "Yes"
+}
+
+function checkNull (prop){
+    if(!prop)
+        return "Not Available";
+    else 
+        return prop;
+}
