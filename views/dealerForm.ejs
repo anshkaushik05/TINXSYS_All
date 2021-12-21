@@ -10,9 +10,145 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+   --primary-text-color: #10182f;
+ }
+ 
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ /* body {
+   display: flex;
+   justify-content: center;
+   background-color: #f7f8fc;
+   font-family: "M PLUS Rounded 1c", sans-serif;
+ } */
+ .content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 20px;
+   text-align: center;
+   width: 105%;
+   /* max-width: 550px; */
+   background-color: #fff;
+   padding: 2em 0em;
+   border-radius: 15px;
+   box-shadow: 0px 0px 39px 6px rgba(0, 0, 0, 0.02);
+ }
+ .title {
+   font-size: 1.5rem;
+   font-weight: 700;
+   color: var(--primary-text-color);
+ }
+ .intro {
+   margin-bottom: 3em;
+   color: var(--primary-text-color);
+ }
+ /* ACCORDION ITEM */
+ .accordion-items {
+   text-align: center;
+   width: 95%;
+ }
+ .accordion-items-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 1em;
+   min-height: 3.5rem;
+   cursor: pointer;
+ }
+ .accordion-items-title {
+   color: #545d7a;
+   font-size: 1.125rem;
+   font-weight: 400;
+   text-align: left;
+ }
+ .accordion-items-body {
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height 0.3s ease-out;
+ }
+ .accordion-items-body-content {
+   /* width: 80%; */
+   padding-top: 1em;
+   color: var(--primary-text-color);
+   text-align: left;
+ }
+ .icon {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-shrink: 0;
+   border: 2px solid;
+   width: 34px;
+   height: 34px;
+   color: #f7f8fc;
+   transition: color 0.25s;
+   position: relative;
+   border-radius: 100%;
+ }
+ .icon:before {
+   content: "";
+   position: absolute;
+   width: 14px;
+   height: 2px;
+   background-color: #545d7a;
+   border-radius: 20px;
+   pointer-events: all;
+   transition: all 0.3s ease-in-out;
+ }
+ .icon:after {
+   content: "";
+   position: absolute;
+   width: 2px;
+   height: 14px;
+   background-color: #545d7a;
+   border-radius: 20px;
+   transition: all 0.3s ease-in-out;
+ }
+ .accordion-items-header.active > .icon::before {
+   transform: rotate(180deg);
+ }
+ .accordion-items-header.active > .icon::after {
+   transform: rotate(90deg);
+ }
+ .divider {
+   width: 100%;
+   height: 1px;
+   margin: 10px 0 10px 0;
+   background-color: #dae1f5;
+ }
+ button {
+   display: block;
+   margin-top: 1.2em;
+   padding: 0.6em 1.8em;
+   border-radius: 30px;
+   color: var(--primary-text-color);
+   background: none;
+   font-weight: 700;
+   border: 2px solid #dae1f5;
+   cursor: pointer;
+   transition: background-color 0.2s ease-in-out;
+ }
+ button:hover {
+   background-color: #dae1f5;
+ }
+ 
+   </style>
+
   </head>
 <body class="bg-blue-900 flex flex-col justify-center">
    <!-- Navbar -->
+  
+
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark lg:h-32 lg:rounded-b-full" id="navbar" style="position: absolute; top: 0; width: 100vw; z-index: 2; width: 98.5vw;">
     <div class="container-fluid">
       <a class="navbar-brand pl-32" href="/">TINXSYS</a>
@@ -57,61 +193,133 @@
   
   <div class="flex flex-row justify-center" >
     <!-- Main Options -->
-    <div class="flex flex-row justify-center mt-24 w-44 md:w-80" id="mainOptions">
-        <section class=" mt-5 px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-4 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4 align-self-start">
-            <header class="flex  items-center justify-between">
-            <h2 class="md:text-xl text-sm leading-6 font-medium text-yellow-100 pl-5">Dealer Search Criteria</h2>
-            </header>
-            <ul class="flex flex-col">
-                <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable ">
-                    <a href="#tinForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
-                        Search By TIN
-                    </a>
-                </li>
-                <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
-                    <a href="#cstForm" class=" cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
-                        Search By CST Number
-                    </a>
-                </li>
-                <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
-                    <a href="#formVerification" class="hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
-                        Form Verification
-                    </a>
-                </li>
+    <div class="accordion flex flex-col  mt-36 w-44 md:w-80" id="mainOptions">
+      <div class="accordion-item mt-2 mx-auto   align-self-start" style="background: border-box;">
+        <h2 class="accordion-header flex  items-center justify-between w-56" id="headingOne">
+          <button class="accordion-button md:text-xl text-sm leading-6 font-medium  text-yellow-100 p-2  w-56 " style="border-radius: 0.5vw;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Dealer Search Criteria
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse w-56 collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" >
+          <div class="accordion-body p-0">
+            <ul class="flex flex-col m-0 p-0">
+              <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable ">
+                  <a href="#tinForm" class="btn-primary cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-1 text-white no-underline">
+                      Search By TIN
+                  </a>
+              </li>
+              <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
+                  <a href="#cstForm" class="btn-primary cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                      Search By CST Number
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable">
+                  <a href="#formVerification" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                      Form Verification
+                  </a>
+              </li>
             </ul>
-        </section>
+          </div>
+        </div>
+
+      <div class="accordion-item mt-2 mx-auto   align-self-start" style="background: border-box;">
+        <h2 class="accordion-header flex  items-center justify-between w-56" id="headingTwo">
+          <button class="accordion-button md:text-xl text-sm leading-6 font-medium  text-yellow-100 p-2  w-56 collapsed" style="border-radius: 0.5vw;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+           Reports
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse w-56 collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" >
+          <div class="accordion-body p-0">
+            <ul class="flex flex-col m-0 p-0">
+              <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2 ">
+                  <a href="#statusData" class="btn-primary cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-1 text-white no-underline">
+                    Status of Data Extraction.
+                  </a>
+              </li>
+              <li class="hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class="btn-primary cursor-pointer hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    Report on Data Availability
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    Report on statewise usage
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    Generate MIS reports *
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    View last updated date of CST dealers by various States                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    View last updated date of Central Statutory Forms by various States                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    View Count Of Responses For User Survey Form
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    State Wise Comparison report on Baseline Data Vs Data Availability in TINXSYS
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    One-Time Data Reconcilation Summary Report
+                  </a>
+              </li>
+              <li class=" cursor-pointer hover:shadow-lg m-1 sm:m-2 flex rounded-lg uiDisable2">
+                  <a href="#" class=" btn-primary hover:border-transparent hover:shadow-xs w-full flex items-center justify-center rounded-lg border-2  border-gray-200 md:text-lg text-sm p-2 text-white no-underline">
+                    Bulk Upload Response Report
+                  </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+      
+
+
+      
     </div>
 
 
     
-    <!-- Search by Tin Form -->
-    
-    <form id="tinForm" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 " data-aos="fade-right" >
+    <div class="flex flex-col justify-self-center sm:mx-4 mx-auto sm:w-4/6 w-full ">
+
+      <!-- Search by Tin Form -->
+    <form id="tinForm" class="w-44 md:w-96  sm:mx-44  mt-6 pt-28 " data-aos="fade-right" >
       <div class="form-group">
         <h2 class="text-white">TIN Search</h2>
         <label for="tinNumberForm" class="text-white my-3">Tin Number</label>
         <input type="number" class="form-control" id="tinNumberForm" aria-describedby="emailHelp" placeholder="Enter Tin Number" required minlength="11" maxlength="11">
-        <!-- <small id="emailHelp" class="form-text text-muted text-white">We'll never share your email with anyone else.</small> -->
+        <p id="tinValidTin" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="form-group">
         <label for="tinNumberFormCaptcha" class="text-white my-3">Captcha</label>
         <input type="text" class="form-control" id="tinNumberFormCaptcha" placeholder="Captcha"  required >
+        <p id="captchaValidTin" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="flex flex-col items-center ">
         <img src="./captchaImgs/<%= captchaValue %>.jpeg" class="mt-3 rounded-md  w-40 h-12" alt="Captcha Image"/>
-      </div>
-      <div class="mt-2 text-yellow-300">
-        <p id="tinValidTin" class="m-0"></p>
-        <p id="captchaValidTin" class="m-0"></p>
       </div>
       <button  class="btn btn-primary my-3" id="tinSubmit">Submit</button>
     </form>
     
     
+
+
     <!-- Search by CST Number -->
-    
-    
-    <form id="cstForm" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 hidden" data-aos="fade-left">
+    <form id="cstForm" class="w-44 md:w-96 sm:mx-44 mt-6 pt-28 aos-init aos-animate hidden" data-aos="fade-left">
       <div class="form-group">
         <h2 class="text-white">CST Search</h2>
         <label for="stateNameCst" class="text-white my-3">State Name</label>
@@ -223,35 +431,28 @@
             <option value="19">
                       West Bengal</option> 
         </select>
-        
-
-
+        <p id="stateValidCst" class="m-0 mt-2 text-yellow-300 text-sm"></p>
 
         <label for="cstNumberForm" class="text-white my-3"> CST Number</label>
         <input type="number" class="form-control" required id="cstNumberForm" aria-describedby="emailHelp" placeholder="Enter CST Number Here">
-        <!-- <small id="emailHelp" class="form-text text-muted text-white">We'll never share your email with anyone else.</small> -->
+        <p id="cstValidCst" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="form-group">
         <label for="captchaCst"  class="text-white my-3">Captcha</label>
         <input type="text" required class="form-control" id="captchaCst" placeholder="Captcha">
+        <p id="captchaValidCst" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="flex flex-col items-center ">
           <img src="./captchaImgs/<%= captchaValue %>.jpeg" class="mt-3 rounded-md  w-40 h-12" alt="Captcha Image" />
-      </div>
-      <div class="mt-2 text-yellow-300">
-        <p id="stateValidCst" class="m-0"></p>
-        <p id="cstValidCst" class="m-0"></p>
-        <p id="captchaValidCst" class="m-0"></p>
       </div>
         <button id="cstSubmit" class="btn btn-primary my-3">Submit</button>
     </form>
 
 
 
+
     <!-- Search by Form Number -->
-    
-    
-    <form id="formVerification" class="w-44 md:w-96 align-self-center sm:mx-4 mx-auto my-36 pt-28 hidden  " data-aos="fade-right">
+    <form id="formVerification" class="w-44 md:w-96 sm:mx-44 mt-6 pt-28 aos-init aos-animate hidden  " data-aos="fade-right">
       <div class="form-group">
         <h2 class="text-white">Search by Form Number</h2>
             
@@ -264,6 +465,8 @@
             <option value="4">F-Form</option>
             <option value="5">H-Form</option>
         </select>
+        <p id="formTypeValidForm" class="m-0 mt-2 text-yellow-300 text-sm"></p>
+
 
         <label for="stateNameForm" class="text-white my-3">State Name</label>
         <select class="form-control" id="stateNameForm">
@@ -374,9 +577,7 @@
             <option value="19">
                       West Bengal</option> 
         </select>
-        
-
-
+        <p id="stateValidForm" class="m-0 mt-2 text-yellow-300 text-sm"></p>
 
         <label for="seriesNumber" class="text-white my-3">Series Number</label>
         <input type="text" class="form-control" id="seriesNumber" aria-describedby="emailHelp" placeholder="Enter Series Number Here">
@@ -385,46 +586,53 @@
       <div class="form-group">
         <label for="serialNumber" class="text-white my-3">Serial Number  <font color="red"> * </font></label>
         <input type="number" class="form-control" id="serialNumber" required placeholder="Enter Serial Number Here">
+        <p id="serialValidForm" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="form-group">
         <label for="captchaFormValid" class="text-white my-3">Captcha</label>
         <input type="text" class="form-control" id="captchaFormValid" placeholder="Captcha">
+        <p id="captchaValidForm" class="m-0 mt-2 text-yellow-300 text-sm"></p>
       </div>
       <div class="flex flex-col items-center ">
           <img src="./captchaImgs/<%= captchaValue %>.jpeg" class="mt-3 rounded-md  w-40 h-12" alt="Captcha Image" />
-      </div>
-      <div class="mt-2 text-yellow-300">
-        <p id="formTypeValidForm" class="m-0"></p>
-        <p id="stateValidForm" class="m-0"></p>
-        <p id="serialValidForm" class="m-0"></p>
-        <p id="captchaValidForm" class="m-0"></p>
       </div>
         <button id="validSubmit" class="btn btn-primary my-3">Submit</button>
     </form>
 
 
+
+    <!-- Not found Component -->
+    <div class=" hidden  w-80 my-8 ml-44 text-center" id="notFound">
+        <div class="card"  > 
+          <div class="card-body p-2 pb-1">
+            <h5 class="card-title">Entered Details are Not found</h5>
+          </div>
+        </div>
+    </div>
+
+
      <!-- Details table -->
-     <table id="detailsTable" class="table table-striped table-hover  w-2/6 my-36  table-dark mx-3 hidden">
-      <thead class="table-dark rounded-xl">
+     <table id="detailsTable" class="table rounded-3xl hidden table-hover w-2/6 my-2  mx-3  table-responsive bg-pink-50">
+      <thead class="table-light ">
         <tr>
-          <th  scope="col" colspan="2" id="tableHead" class="text-center">Dealer details by TIN==> Search Time:  </th>
+          <th  scope="col" colspan="2" id="tableHead" class="text-center rounded-t-3xl">Dealer details by TIN==> Search Time:  </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td> TIN </td>
+          <td class="font-semibold"> TIN </td>
           <td id="tinTin"></td>
         </tr>
         <tr>
-          <td> CST Number </td>
+          <td class="font-semibold"> CST Number </td>
           <td id="cstTin"></td>
         </tr>
         <tr>
-          <td colspan="1"> Dealer Name </td>
+          <td colspan="1" class="font-semibold"> Dealer Name </td>
           <td id="dealerNameTin"></td>
         </tr>
         <tr>
-          <td colspan="1"> Dealer Address  </td>
+          <td colspan="1" class="font-semibold"> Dealer Address  </td>
           <td>
 <p id="addressTin1" class="mb-0"></p>
 <p id="addressTin2" class="mb-0"></p>
@@ -434,16 +642,16 @@
           </td>
         </tr>
         <tr>
-          <td colspan="1">State Name</td>
+          <td colspan="1" class="font-semibold">State Name</td>
           <td id="stateNameTin"></td>
         </tr>
         <tr>
-          <td colspan="1">PAN</td>
+          <td colspan="1" class="font-semibold">PAN</td>
           <td id="panTin"> </td>
         </tr>
         <tr>
-          <td colspan="1">
-            <pre>
+          <td colspan="1" >
+            <pre class="font-semibold">
 Date of Registration under CST Act 
 (DD/MM/YY)
             </pre>
@@ -452,16 +660,16 @@ Date of Registration under CST Act
         </tr>
         
         <tr>
-          <td colspan="1">Dealer Registration Status under CST Act</td>
+          <td colspan="1" class="font-semibold">Dealer Registration Status under CST Act</td>
           <td id="validStatusTin"></td>
         </tr>
         <tr>
-          <td colspan="1"><pre>
+          <td colspan="1" style="border-bottom:0 ;"><pre class="font-semibold ">
 This record is valid as on 
 (DD/MM/YY)
           </pre>
           </td>
-          <td id="dateTin"> </td>
+          <td id="dateTin" style="border-bottom: 0;"> </td>
         </tr>
         
       </tbody>
@@ -469,8 +677,7 @@ This record is valid as on
 
 
 <!-- form Validation table -->
-
-<form name="form1" method="post" action="" class="text-md text-white mt-36 mb-5 bg-gray-700 table-hover  mx-3 w-4/5 hidden" id="validTable">
+<form name="form1" method="post" action="" class="text-md text-white mt-36 mb-5 bg-gray-700 table-hover  mx-3 w-11/12 hidden" id="validTable">
   <input type="hidden" name="backPage" value="fFormSearch.jsp">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody><tr>
@@ -678,25 +885,158 @@ This record is valid as on
 
    
 
+  <div class="my-32 hidden " id="statusData">
+    <div class="content mx-auto">
+      <div class="title">Status of Data Extraction</div>
 
+     
+
+
+
+      <% for(var i=0; i < 35;i++){ %>
+      <div class="accordion-items" id="accordionState<%= i%>" data-aos="fade-right">
+        <div id="test" class="accordion-items-header">
+          <div class="text-sm px-16 text-gray-500 text-left">
+          <div class= "accordion-items-title" id="stateName<%= i%>" >Andhra Pradesh</div>
+              <span id="lastActivityDate<%=i %>" >16/12/2021</span>
+              <span id="lastActivityTime<%=i %>" >14:20</span>
+          </div>
+    
+          <span class="icon"></span>
+        </div>
+        <div class="accordion-items-body">
+          <div class="accordion-items-body-content">
+            <div class="card w-11/12 mx-auto my-2 rounded-xl">  
+
+              <div class="spinner-border text-primary self-center" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <table class="table table-light table-hover ">
+              <thead>
+                <tr class="w-full rounded-xl">
+                  <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for Andhra Pradesh</th>
+                </tr>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Data Type</th>
+                  <th scope="col">Last Extracted Date	</th>
+                  <th scope="col">Extracted record count</th>
+                  <th scope="col">Correct records</th>
+                  <th scope="col">Error records</th>
+                </tr>
+              </thead>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>	Dealer Main Business Information</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>C Form Issued</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="1">C Form Utilization</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td colspan="1">C Form Invoice details</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td colspan="1">F Form Issued</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td colspan="1">	F Form Utilization</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td colspan="1">	F Form Invoice details</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td colspan="1">	H Form Issued</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <th scope="row">9</th>
+                  <td colspan="1">	H Form Utilization</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr class="pb-10">
+                  <th scope="row">10</th>
+                  <td colspan="1">	H Form Invoice details</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Thornton</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <% } %>
+    
+      
+    </div>
+    </div></div>
 
 
   </div>
+</div>
    <!-- print pdf and back buttons -->
-   <div class="flex justify-content-center hidden" id="printButton">
+   <div class="flex justify-content-end hidden" id="printButton">
     <!-- <button type="button" class="btn btn-primary mr-8">Back</button> -->
-    <button type="button" class="btn btn-secondary">Print View</button>
+    <button type="button" class="btn btn-secondary mr-28 my-4">Print View</button>
   </div>
     <!-- Terms and Condition -->
 
     <div class="accordion w-3xl h-10 align-self-center m-10" id="tnc">
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <h2 class="accordion-header" id="headingTnc">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTnc" aria-expanded="false" aria-controls="collapseTnc">
             Terms of Use
           </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+        <div id="collapseTnc" class="accordion-collapse collapse" aria-labelledby="collapseTnc" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
           </div>
@@ -707,7 +1047,7 @@ This record is valid as on
 
      <!-- footer -->
      <div class="container" id="footer">
-      <footer class="py-3 my-4">
+      <footer class="pt-3 mt-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Disclaimer</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Conditions of use</a></li>
@@ -771,6 +1111,40 @@ This record is valid as on
                   duration : 900
         
         });
+      </script>
+       <script>
+        const accordionItemHeaders = document.querySelectorAll(
+      ".accordion-items-header"
+    );
+    
+    accordionItemHeaders.forEach((accordionItemHeader) => {
+      accordionItemHeader.addEventListener("click", (event) => {
+        // Allow to collapse one item at a time
+        const currentlyActiveAccordionItemHeader = document.querySelector(
+          ".accordion-items-header.active"
+        );
+        if (
+          currentlyActiveAccordionItemHeader &&
+          currentlyActiveAccordionItemHeader !== accordionItemHeader
+        ) {
+          currentlyActiveAccordionItemHeader.classList.toggle("active");
+          currentlyActiveAccordionItemHeader.nextElementSibling.style.maxHeight = 0;
+        }
+        //
+    
+        accordionItemHeader.classList.toggle("active");
+        const accordionItemBody = accordionItemHeader.nextElementSibling;
+        if (accordionItemHeader.classList.contains("active")) {
+          accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+        } else {
+          accordionItemBody.style.maxHeight = 0;
+        }
+      });
+      accordionItemHeader.addEventListener("click", function () {
+        document.getElementById("test").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+    
       </script>
     
   </body>

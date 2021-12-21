@@ -32,6 +32,10 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     {
         document.getElementById("printButton").classList.toggle('hidden');
     }
+    if(!document.getElementById("notFound").classList.contains('hidden'))
+    {
+        document.getElementById("notFound").classList.toggle('hidden');
+    }
     
     document.getElementById('tinValidTin').innerHTML="";
     document.getElementById('captchaValidTin').innerHTML="";
@@ -65,6 +69,42 @@ document.getElementsByClassName('uiDisable')[2].addEventListener('click',()=>{
 
 })
 
+document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
+    // console.log("clicked");
+    document.getElementsByClassName('uiDisable')[0].click();
+    if( ! document.getElementById("tinForm").classList.contains('hidden'))
+        {
+            document.getElementById("tinForm").classList.toggle('hidden');
+        }
+    if(  document.getElementById("statusData").classList.contains('hidden'))
+        {
+            document.getElementById('statusData').classList.toggle('hidden');
+        }
+    fetch('/dataStatus',{
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body: JSON.stringify(data),
+        }).then(res=>res.json()).then(result=>{
+            for(var i=0;i<result.length;i++){
+                // console.log(result[i]);
+                document.getElementById(`stateName${i}`).innerText= result[i].stateName;
+                document.getElementById(`lastActivityDate${i}`).innerText= result[i].lastActivityDate.substr(0,result[i].lastActivityDate.indexOf('T'));
+                document.getElementById(`lastActivityTime${i}`).innerText= result[i].lastActivityDate.substr(result[i].lastActivityDate.indexOf('T')+1,5);
+                const yourDate = new Date();
+                ;
+                if(result[i].lastActivityDate.substr(0,result[i].lastActivityDate.indexOf('T'))==yourDate.toISOString().split('T')[0])
+                {
+                    document.getElementById(`accordionState${i}`).classList.add('bg-yellow-50');
+                }
+            }
+            
+        });
+
+    
+})
+
 
 
 
@@ -73,10 +113,14 @@ document.getElementsByClassName('uiDisable')[2].addEventListener('click',()=>{
 
 console.log(getCaptcha);
 getCaptcha= getCaptcha.substr(0,getCaptcha.indexOf(' '));
+
+
+
 //Tin form submit
 document.getElementById('tinSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementsByClassName('uiDisable')[0].click();
     document.getElementById('tinValidTin').innerHTML="";
     document.getElementById('captchaValidTin').innerHTML="";
 
@@ -108,11 +152,13 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
             },
             body: JSON.stringify(data),
         }).then(res=>res.json()).then(data=>{
-            // console.log(data);
-            document.getElementById("tinForm").classList.toggle('hidden');
+            console.log(data);
+            
+            // document.getElementById("tinForm").classList.toggle('hidden');
             document.getElementById('tinValidTin').innerHTML="";
             document.getElementById('captchaValidTin').innerHTML="";
 
+            if(data.content=="found"){
 
 
             document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
@@ -131,7 +177,14 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
             document.getElementById('addressTin5').innerHTML=` ${checkNull(data.ADDRESS5)} `;
 
             document.getElementById("detailsTable").classList.toggle('hidden');
+            window.scrollBy(0,520);
+
             document.getElementById("printButton").classList.toggle('hidden');
+        }
+        else{
+                document.getElementById("notFound").classList.toggle('hidden');
+                console.log(data.content);
+            }
         }).catch(e=>console.log("Error:"+e));
     }
     
@@ -142,6 +195,7 @@ document.getElementById('tinSubmit').addEventListener('click',(e)=>{
 document.getElementById('cstSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementsByClassName('uiDisable')[1].click();
     document.getElementById('stateValidCst').innerHTML="";
     document.getElementById('cstValidCst').innerHTML="";
     document.getElementById('captchaValidCst').innerHTML="";
@@ -182,16 +236,18 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
             },
             body: JSON.stringify(data),
         }).then(res=>res.json()).then(data=>{
-            // console.log(data);
+            console.log(data);
 
 
             document.getElementById('stateValidCst').innerHTML="";
             document.getElementById('cstValidCst').innerHTML="";
             document.getElementById('captchaValidCst').innerHTML="";
 
-            document.getElementById("cstForm").classList.toggle('hidden');
+            // document.getElementById("cstForm").classList.toggle('hidden');
+
             
-            document.getElementById('tableHead').innerHTML=` Dealer details by TIN => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
+            if(data.content=="found"){
+            document.getElementById('tableHead').innerHTML=` Dealer details by CST => ${data.TIN}   Search Time: ${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}  `;
             document.getElementById('tinTin').innerHTML=` ${checkNull(data.TIN)} `;
             document.getElementById('cstTin').innerHTML=` ${checkNull(data.CST)} `;
             document.getElementById('dealerNameTin').innerHTML=` ${checkNull(data.DEALERNAME)} `;
@@ -207,7 +263,14 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
             document.getElementById('addressTin5').innerHTML=` ${checkNull(data.ADDRESS5)} `;
             
             document.getElementById("detailsTable").classList.toggle('hidden');
+            window.scrollBy(0,600);
+
             document.getElementById("printButton").classList.toggle('hidden');
+        }
+        else{
+            document.getElementById("notFound").classList.toggle('hidden');
+            console.log(data.content);
+        }
         }).catch(e=>console.log("Error:"+e));
 
     }
@@ -227,6 +290,7 @@ document.getElementById('cstSubmit').addEventListener('click',(e)=>{
 document.getElementById('validSubmit').addEventListener('click',(e)=>{
     // console.log('clicked');
     e.preventDefault();
+    document.getElementsByClassName('uiDisable')[2].click();
     document.getElementById('formTypeValidForm').innerHTML="";
     document.getElementById('stateValidForm').innerHTML="";
     document.getElementById('serialValidForm').innerHTML="";
@@ -289,7 +353,9 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
             body: JSON.stringify(data),
         }).then(res=>res.json()).then(result=>{
             console.log(result);
-            document.getElementById("formVerification").classList.toggle('hidden');
+            // document.getElementById("formVerification").classList.toggle('hidden');
+            
+            if(result.content=="found"){
             document.getElementById('validTableHead').innerHTML=`FORM '${checkNull(formTypeCheck(result.formType))}' <br> Search Time :${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
             document.getElementById('formTypeValid').innerHTML=`FORM '${checkNull((formTypeCheck(result.formType)))}' `;
             document.getElementById('seriesNo').innerHTML=`${checkNull(result.form.seriesNo)} `;
@@ -333,8 +399,13 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
 
             
             document.getElementById("validTable").classList.toggle('hidden');
+            window.scrollBy(0,850);
             document.getElementById("printButton").classList.toggle('hidden');
-
+            }
+            else{
+                document.getElementById("notFound").classList.toggle('hidden');
+                console.log(result.content);
+            }
         
         }).catch(e=>console.log("Error:"+e));
     }
@@ -346,6 +417,20 @@ document.getElementById('validSubmit').addEventListener('click',(e)=>{
 document.getElementById('printButton').addEventListener('click',()=>{
     // var printContents = document.getElementById('detailsTable').innerHTML;
     var originalContents = document.body.innerHTML;
+
+    if(!document.getElementById("tinForm").classList.contains('hidden'))
+        {
+            // document.getElementsByClassName('uiDisable')[0].childNodes[1].classList.toggle('border-yellow-700');
+            document.getElementById("tinForm").classList.toggle('hidden');
+        }
+    if(!document.getElementById("cstForm").classList.contains('hidden')    )
+    {
+        document.getElementById("cstForm").classList.toggle('hidden');
+    }
+    if(!document.getElementById("formVerification").classList.contains('hidden'))
+    {
+        document.getElementById("formVerification").classList.toggle('hidden');
+    }
     document.getElementById('tnc').classList.add('hidden');
     document.getElementById('footer').classList.add('hidden');
     document.getElementById('mainOptions').classList.add('hidden');

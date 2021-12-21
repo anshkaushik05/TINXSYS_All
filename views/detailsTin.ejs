@@ -5,268 +5,308 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./public/styles.css">
-    <!-- <style>
-      .form{
+    <style>
+     :root {
+  --primary-text-color: #10182f;
+}
 
-      
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    line-height: normal;
-    color: white;
-    font-style: normal;
-    font-weight: normal;
-    background-color: #323539;
-  }
-  </style> -->
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* body {
+  display: flex;
+  justify-content: center;
+  background-color: #f7f8fc;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+} */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+  width: 90%;
+  /* max-width: 550px; */
+  background-color: #fff;
+  padding: 2em 0em;
+  border-radius: 15px;
+  box-shadow: 0px 0px 39px 6px rgba(0, 0, 0, 0.02);
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-text-color);
+}
+.intro {
+  margin-bottom: 3em;
+  color: var(--primary-text-color);
+}
+/* ACCORDION ITEM */
+.accordion-items {
+  text-align: center;
+  width: 90%;
+}
+.accordion-items-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  min-height: 3.5rem;
+  cursor: pointer;
+}
+.accordion-items-title {
+  color: #545d7a;
+  font-size: 1.125rem;
+  font-weight: 400;
+  text-align: left;
+}
+.accordion-items-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.accordion-items-body-content {
+  /* width: 80%; */
+  padding-top: 1em;
+  color: var(--primary-text-color);
+  text-align: left;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: 2px solid;
+  width: 34px;
+  height: 34px;
+  color: #f7f8fc;
+  transition: color 0.25s;
+  position: relative;
+  border-radius: 100%;
+}
+.icon:before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 2px;
+  background-color: #545d7a;
+  border-radius: 20px;
+  pointer-events: all;
+  transition: all 0.3s ease-in-out;
+}
+.icon:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 14px;
+  background-color: #545d7a;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+.accordion-items-header.active > .icon::before {
+  transform: rotate(180deg);
+}
+.accordion-items-header.active > .icon::after {
+  transform: rotate(90deg);
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 10px 0 10px 0;
+  background-color: #dae1f5;
+}
+button {
+  display: block;
+  margin-top: 1.2em;
+  padding: 0.6em 1.8em;
+  border-radius: 30px;
+  color: var(--primary-text-color);
+  background: none;
+  font-weight: 700;
+  border: 2px solid #dae1f5;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+button:hover {
+  background-color: #dae1f5;
+}
+
+  </style>
 
 
 </head>
-<body class="flex flex-col ">
-    
+<body class="flex flex-col bg-blue-900">
 
-  <form name="form1" method="post" action="" class="text-sm text-white">
-    <input type="hidden" name="backPage" value="fFormSearch.jsp">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tbody><tr>
-        <td width="100%" colspan="9" class="headerBlue"><div class="headerBlue" style="background-color: #2C3034;" align="center">
-          <!-- THE CENTRAL SALES TAX<br>
-              (REGISTRATION AND TURNOVER) RULES,1957<br> -->
-          FORM 'C' <br> Search Time : 10/12/2021 4:16 AM
-       </div></td>
-        
-      </tr>  
-      <tr>	    
-           
-              <td style="width:30%"> 
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">          
-              <tbody><tr valign="top">
-                <td width="100%" colspan="2" class="bg-gray-800" align="center" valign="top">FORM 'C'</td>
-              </tr>
-              <tr>
-                <td width="50%" align="center" class="bg-primaryTable">Series No.</td>
-                <td width="50%" align="center" class="bg-primaryTable">Serial No.</td>
-              </tr>          
-              <tr>
-                <td class="bg-secondaryTable" width="50%" align="center">27</td>
-                <td class="bg-secondaryTable" width="50%" align="center">270320C0800344</td>
-              </tr>
-             <tr>
-                <td class="tdWhite" width="50%" align="center">&nbsp;</td>
-                <td class="tdWhite" width="50%" align="center">&nbsp;</td>
-              </tr> 
-              
-              </tbody></table>
-              </td>
-            
-            <td width="70%">
-            <table border="0" cellpadding="0" cellspacing="1">     
-              <tbody><tr>
-                <td width="100%" colspan="8" class="bg-gray-800">&nbsp;&nbsp;Issuing State Information</td>
-              </tr>
-              
-              <tr>
-                <td width="30%" colspan="2" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Name of Issuing State </td>
-    <!-- Modified by Raghu Start -->
-                
-                <td width="30%" colspan="1" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;Maharashtra</td>
-    <!-- Modified by Raghu End -->
-                
-                <td width="20%" colspan="3" class="bg-primaryTable" nowrap="" align="center">Date of Issue<br>(DD/MM/YYYY)</td>
-                
-                <td width="30%" colspan="2" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;16/03/2020</td>
-                
-              </tr>
-              
-              <tr>
-                <td width="20%" colspan="2" class="bg-primaryTable" nowrap="">&nbsp; Office of Issue </td>
-                
-                <td width="80%" colspan="6" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;Not Available</td>
-                
-              </tr>
-              </tbody></table>
-              </td>
-              
-              
-              </tr>
-              
-      <tr>  
-        </tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="1">              
-            
-              <tbody><tr>
-              <!-- Modified by siby Start -->
-                <td colspan="4" width="100%" class="bg-gray-800">&nbsp;&nbsp;Purchasing Dealer Information</td>
-                <!-- Modified by siby end -->
-              </tr>
-              <tr>
-                <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Dealer Name</td>
-                
-                <td width="30%" class="bg-secondaryTable" nowrap="">"DURGASHAKTI FOODS PVT.LTD, JANUNA"</td>
-                
-                 <td width="20%" class="bg-primaryTable" align="left" nowrap="">&nbsp;&nbsp;Dealer TIN </td>
-                 
-                <td width="30%" class="bg-secondaryTable" align="left" nowrap="">&nbsp;&nbsp;27300655212</td>
-                
-              </tr>
-              <tr>
-                <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Dealer Address </td>
-                <td width="40%" class="bg-secondaryTable" nowrap="">
-                
-                
-                
-                NANANA, &nbsp;
-                
-                . &nbsp;
-                
-                BULDANA<br>
-                
-                KHAMGAON &nbsp;
-                
-                Pincode:-444303
-                
-                
-    
-                
-                
-                
-                
-                </td>
-                <td width="20%" class="bg-primaryTable" align="left" nowrap="">&nbsp;&nbsp;Dealer CST Number </td>
-                
-                <td width="30%" class="bg-secondaryTable" align="left" nowrap="">&nbsp;&nbsp;27300655212</td>
-                
-              </tr>
-              
-            <!-- Modified by srikanth  18/10/2007 for valid as on date Start -->
-               
-               <tr>
-                <td class="bg-primaryTable">&nbsp;&nbsp;This record is valid as on &nbsp;&nbsp;(DD/MM/YYYY)</td>
-                <td colspan="5" class="bg-secondaryTable">06/05/2020</td>
-              </tr>    
-               
-        </tbody></table>
-        
-        
-        
-        
-            
-        <table width="100%" border="0" cellpadding="0" cellspacing="1">   
-              
-              <tbody><tr>
-               <!-- Modified by siby Start -->
-                <td colspan="5" class="bg-gray-800">&nbsp;&nbsp; Selling Dealer Information</td>
-              </tr>
-             <!-- Modified by siby Start -->
-              <tr>
-                <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer Name </td>
-                
-                <td width="30%" class="bg-secondaryTable">PARAS POLY FAB PVT LTD</td>
-                
-                <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer TIN  &nbsp;</td>
-                
-                <td width="30%" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;23230802902</td>
-                
-                
-              </tr>
-              <tr>
-                <td width="20%" class="bg-primaryTable">&nbsp;&nbsp;Dealer Address </td>
-                <td width="40%" class="bg-secondaryTable">
-                    
-                    
-                    
-                MP &nbsp;
-                
-                <br>
-                
-                 &nbsp;
-                
-                <br>
-                
-                 &nbsp;
-                
-                
-                
-                </td>
-                <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer CST Number</td>
-                
-                <td width="30%" class="bg-secondaryTable">&nbsp;&nbsp;</td>
-                
-                
-              </tr>
-              <!--    Modified by srikanth  18/10/2007 for valid as on date  start -->
-               
-               <tr>
-                <td class="bg-primaryTable">&nbsp;&nbsp;This record is valid as on &nbsp;&nbsp;(DD/MM/YYYY)</td>
-                <td colspan="5" class="bg-secondaryTable">06/05/2020</td>
-              </tr>    
-             
-         
-            </tbody></table>
+
+
+<div class="my-10 ">
+<div class="content mx-auto">
+  <div class="title">Status of Data Extraction</div>
+  <% for(var i=0; i < 35;i++){ %>
+  <div class="accordion-items">
+    <div id="test" class="accordion-items-header">
+      <div class="text-sm px-16 text-gray-500">
+      <div class="accordion-items-title">Andhra Pradesh</div>
+          <span >16/12/2021</span>
+          <span >14:20</span>
+      </div>
+
+      <span class="icon"></span>
+    </div>
+    <div class="accordion-items-body">
+      <div class="accordion-items-body-content">
+        <div class="card w-11/12 mx-auto my-2 rounded-xl">  
+          <table class="table table-light table-hover ">
+          <thead>
+            <tr class="w-full rounded-xl">
+              <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for Andhra Pradesh</th>
+            </tr>
+            <tr>
+              <th scope="col">S. No.</th>
+              <th scope="col">Data Type</th>
+              <th scope="col">Last Extracted Date	</th>
+              <th scope="col">Extracted record count</th>
+              <th scope="col">Correct records</th>
+              <th scope="col">Error records</th>
+            </tr>
+          </thead>
+            <tr>
+              <th scope="row">1</th>
+              <td>	Dealer Main Business Information</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>C Form Issued</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="1">C Form Utilization</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td colspan="1">C Form Invoice details</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td colspan="1">F Form Issued</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+              <td colspan="1">	F Form Utilization</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">7</th>
+              <td colspan="1">	F Form Invoice details</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+              <td colspan="1">	H Form Issued</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">9</th>
+              <td colspan="1">	H Form Utilization</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+            <tr class="pb-10">
+              <th scope="row">10</th>
+              <td colspan="1">	H Form Invoice details</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <% } %>
+
+  
+</div>
+</div></div>
       
-      
-      
-              
-            
-      
-        <table width="100%" border="0" cellpadding="0" cellspacing="1">
-      
-                
-              <tbody><tr>
-              <td colspan="5" class="bg-gray-800" nowrap="">&nbsp;&nbsp;Invoice Details</td>
-              </tr>
-              <tr width="100%">
-                <td width="20%" colspan="1" class="bg-primaryTable" nowrap="">&nbsp;&nbsp; Number of Invoices </td>
-                <td width="80%" colspan="4" class="bg-secondaryTable" nowrap="">&nbsp;&nbsp;1</td>
-              </tr>
-              <tr>
-                <td width="20%" class="bg-primaryTable">&nbsp;&nbsp;Value of Invoices<br>(in Rupees)</td>
-                
-                <td width="80%" class="bg-secondaryTable">&nbsp;&nbsp;554116.00</td>
-                
-              </tr>
-              
-              <tr>
-                <td width="100%" colspan="5" class="bg-primaryTable" align="right">For  the details of invoice click <a href="formverificationservlet1?valPage=movePage&amp;Submit=cforminvoice&amp;series=27&amp;serial=270320C0800344&amp;formtype=cform&amp;timesearch=10/12/2021 4:16 AM&amp;statecode=27"><font style="color:blue">here</font></a>&nbsp;&nbsp;&nbsp;</td>
-              </tr>
-              
-              
-       </tbody></table>
-       
-      
-      
-       
-       
-       <table width="100%" border="0" cellpadding="0" cellspacing="1"> 
-              <tbody><tr>
-                <td colspan="4" class="bg-gray-800">&nbsp;&nbsp;Status</td>
-              </tr>
-              <tr>
-                <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Lost/Cancelled/Defaced/Obsolete details &nbsp;</td>
-                
-                <td width="80%" class="bg-secondaryTable" nowrap="">&nbsp;</td>
-         </tr>
-       </tbody></table>
-       
-       
-    
-    
-    
-    <!-- <table width="100%" border="0" cellpadding="0" cellspacing="0">      
-    <tbody><tr>
-       <td width="100%" align="center">&nbsp;&nbsp;
-       <input class="button" type="submit" name="print" value="ViewToPrint" onclick="printPage()">
-       <input class="button" type="button" name="back" value="    Back   " onclick="backHomePage()">
-       </td>
-    </tr>
-    </tbody></table> -->
-    
-    
-    </form>
-      
-      
-          <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> -->
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 </body>
+
+  <script>
+    const accordionItemHeaders = document.querySelectorAll(
+  ".accordion-items-header"
+);
+
+accordionItemHeaders.forEach((accordionItemHeader) => {
+  accordionItemHeader.addEventListener("click", (event) => {
+    // Allow to collapse one item at a time
+    const currentlyActiveAccordionItemHeader = document.querySelector(
+      ".accordion-items-header.active"
+    );
+    if (
+      currentlyActiveAccordionItemHeader &&
+      currentlyActiveAccordionItemHeader !== accordionItemHeader
+    ) {
+      currentlyActiveAccordionItemHeader.classList.toggle("active");
+      currentlyActiveAccordionItemHeader.nextElementSibling.style.maxHeight = 0;
+    }
+    //
+
+    accordionItemHeader.classList.toggle("active");
+    const accordionItemBody = accordionItemHeader.nextElementSibling;
+    if (accordionItemHeader.classList.contains("active")) {
+      accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+    } else {
+      accordionItemBody.style.maxHeight = 0;
+    }
+  });
+  accordionItemHeader.addEventListener("click", function () {
+    document.getElementById("test").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+  </script>
 </html>

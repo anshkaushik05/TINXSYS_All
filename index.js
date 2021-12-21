@@ -53,9 +53,9 @@ captcha.JPEGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" 
 
 }
   valueCaptcha=await captchaCreation();
-  
-    // res.send('TINSYS')
-    res.render('dealerForm', {captchaValue: valueCaptcha});
+
+ 
+  res.render('dealerForm', {captchaValue: valueCaptcha});
 })
 app.get('/detailsTin',(req,res)=>{
 
@@ -73,8 +73,10 @@ app.post('/tinForm',(req,res)=>{
   var captchaValue= req.body.captcha;
   con.query(`select * from dealer_details where DM_MB_CST= ${req.body.tinNumber} `,(err,result,fields)=>{
   if(err) throw err;
-
+  console.log(result.length);
+  if(result.length)
   var tableData= {
+    content: "found",
     STATECODE: result[0].DM_MB_STATECODE,
     TIN:result[0].DM_MB_TIN,
     CST:result[0].DM_MB_CST,
@@ -88,7 +90,8 @@ app.post('/tinForm',(req,res)=>{
     REGISTERDATE:result[0].DM_MB_REGISTERDATE,
     VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
     DATE:result[0].CREATED_DATE
-  }
+  };
+  else tableData={content:"Not Found"};
   console.log(tableData);
   res.send(JSON.stringify(tableData));
 
@@ -111,8 +114,9 @@ app.post('/cstForm',(req,res)=>{
   console.log(req.body);
   con.query(`select * from dealer_details where DM_MB_STATECODE= ${req.body.stateNumber} AND DM_MB_CST= ${req.body.cstNumber}`,(err,result,fields)=>{
     if(err) throw err;
-  
+    if(result.length)
     var tableData= {
+      content: "found",
       STATECODE: result[0].DM_MB_STATECODE,
       TIN:result[0].DM_MB_TIN,
       CST:result[0].DM_MB_CST,
@@ -127,6 +131,7 @@ app.post('/cstForm',(req,res)=>{
       VALIDATIONSTATUS:result[0].DM_MB_VALIDATIONSTATUS,
       DATE:result[0].CREATED_DATE
     }
+    else tableData={content:"Not Found"};
     console.log(tableData);
     res.send(JSON.stringify(tableData));
   
@@ -145,7 +150,7 @@ app.post('/cstForm',(req,res)=>{
 })
 app.post('/formNumber',(req,res)=>{
 
-  console.log(req.body);
+  console.log(req.body.serialNumber);
   con.query(`select CI_CI_SERIESNUMBER,DM_MB_OFFICECODE,CREATED_DATE,CI_CI_PURCHASERNAME,DM_MB_ADDRESS1,DM_MB_ADDRESS2,DM_MB_ADDRESS3,DM_MB_ADDRESS4,DM_MB_ADDRESS5,CI_CI_ISSUEDATE,CI_CI_PURCHASERTIN,CI_CI_PURCHASERCST,CI_CU_SELLERNAME,CI_CU_SELLERADDRESS1,CI_CU_SELLERADDRESS2,CI_CU_SELLERADDRESS3,CI_CU_SELLERADDRESS4,CI_CU_SELLERADDRESS5,CI_CU_SELLERADDRESS6,CI_CU_SELLERSTATECODE,CI_CU_SELLERTIN,CI_CU_SELLERCST,CI_ID_INVOICENUMBER,CI_ID_INVOICEVALUE,CI_ID_VALIDATIONSTATUS from c_issue  I 
   inner join c_utilize U 
   on (I.CI_CI_PURCHASERTIN=U.CI_CU_PURCHASERTIN 
@@ -155,12 +160,15 @@ app.post('/formNumber',(req,res)=>{
     on ( U.CI_CU_SELLERTIN=V.CI_ID_PURCHASERTIN 
     and U.CI_CU_SERIESNUMBER=V.CI_ID_SERIESNUMBER 
     and U.CI_CU_SERIALNUMBER=V.CI_ID_SERIALNUMBER )
-    inner join dealer_details D on (I.CI_CI_PURCHASERTIN = D.DM_MB_TIN);
+    inner join dealer_details D on (I.CI_CI_PURCHASERTIN = ${req.body.serialNumber});
   `,(err,result,fields)=>{
     if(err) throw err;
-    
+    // D.DM_MB_TIN
     data=req.body;
+    
+    if(result.length)
     var tableData={
+       content: "found",
        formType: data.formType,
        form :{
          serialNo: data.serialNumber,
@@ -208,6 +216,7 @@ app.post('/formNumber',(req,res)=>{
        validStatus:result[0].CI_ID_VALIDATIONSTATUS
 
     }
+    else tableData={content:"Not Found"};
     console.log(tableData);
     res.send(JSON.stringify(tableData));
     // res.send(JSON.stringify(result));
@@ -226,6 +235,17 @@ app.post('/formNumber',(req,res)=>{
       console.log("File is deleted.");
   });
   }
+})
+
+app.post('/dataStatus',(req,res)=>{
+
+
+  con.query(`select * FROM datastatusextraction ORDER BY lastActivityDate desc,stateName desc`,(err,result,fields)=>{
+    if(err) throw err;
+
+    // console.log(result);
+    res.send(result);
+  })
 })
 
 
