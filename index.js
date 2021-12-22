@@ -240,8 +240,9 @@ app.post('/formNumber',(req,res)=>{
 app.post('/dataStatus',(req,res)=>{
 
 
-  con.query(`select * FROM datastatusextraction ORDER BY lastActivityDate desc,stateName desc`,(err,result,fields)=>{
+  con.query(`SELECT * FROM tinxsys.de_fileuploadschedule ORDER BY DE_FL_DATEOFEXTRACTION desc`,(err,result,fields)=>{
     if(err) throw err;
+    // select * FROM datastatusextraction ORDER BY lastActivityDate desc,stateName desc
 
     // console.log(result);
     res.send(result);

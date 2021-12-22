@@ -88,13 +88,13 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
             // body: JSON.stringify(data),
         }).then(res=>res.json()).then(result=>{
             for(var i=0;i<result.length;i++){
-                // console.log(result[i]);
-                document.getElementById(`stateName${i}`).innerText= result[i].stateName;
-                document.getElementById(`lastActivityDate${i}`).innerText= result[i].lastActivityDate.substr(0,result[i].lastActivityDate.indexOf('T'));
-                document.getElementById(`lastActivityTime${i}`).innerText= result[i].lastActivityDate.substr(result[i].lastActivityDate.indexOf('T')+1,5);
+                // console.log(result.length);
+                document.getElementById(`stateName${i}`).innerText= stateCodeConvert(result[i].DE_FL_STATECODE);
+                document.getElementById(`lastActivityDate${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '));
+                document.getElementById(`lastActivityTime${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' ')+1,5);
                 const yourDate = new Date();
                 ;
-                if(result[i].lastActivityDate.substr(0,result[i].lastActivityDate.indexOf('T'))==yourDate.toISOString().split('T')[0])
+                if(result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '))==yourDate.toISOString().split('T')[0])
                 {
                     document.getElementById(`accordionState${i}`).classList.add('bg-yellow-50');
                 }
