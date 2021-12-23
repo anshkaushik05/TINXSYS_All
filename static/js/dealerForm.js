@@ -36,6 +36,10 @@ document.getElementsByClassName('uiDisable')[0].addEventListener('click',()=>{
     {
         document.getElementById("notFound").classList.toggle('hidden');
     }
+    if(  !document.getElementById("statusData").classList.contains('hidden'))
+    {
+        document.getElementById('statusData').classList.toggle('hidden');
+    }
     
     document.getElementById('tinValidTin').innerHTML="";
     document.getElementById('captchaValidTin').innerHTML="";
@@ -87,18 +91,138 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
             },
             // body: JSON.stringify(data),
         }).then(res=>res.json()).then(result=>{
+            const order=[]
             for(var i=0;i<result.length;i++){
                 // console.log(result[i]);
-                document.getElementById(`stateName${i}`).innerText= stateCodeConvert(result[i].DE_FL_STATECODE);
+                document.getElementById(`stateName_${i}`).innerText= stateCodeConvert(result[i].DE_FL_STATECODE);
                 // document.getElementById(`lastActivityDate${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION;
-                document.getElementById(`lastActivityDate${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '));
-                document.getElementById(`lastActivityTime${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' ')+1,5);
+                document.getElementById(`lastActivityDate_${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '));
+                document.getElementById(`lastActivityTime_${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' ')+1,5);
+                
                 const yourDate = new Date();
 
                 if(result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '))==yourDate.toISOString().split('T')[0])
                 {
                     document.getElementById(`accordionState${i}`).classList.add('bg-yellow-50');
                 }
+
+                order.push(result[i].DE_FL_STATECODE);
+                document.getElementById(`test_${i}`).addEventListener('click',(event)=>{
+                    stateCode= result[event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length)].DE_FL_STATECODE;
+                    
+                    // console.log(stateCode);
+                    fetch('/stateStatus',{
+                        method: 'POST', 
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({stateCode:stateCode}),
+                    }).then(res=>res.json()).then(result=>{
+                        // console.log(result);
+                        var i=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
+                        let table=`
+                        <table class="table table-light table-hover ">
+                        <thead>
+                          <tr class="w-full rounded-xl">
+                            <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for ${stateCodeConvert(stateCode)}</th>
+                          </tr>
+                          <tr>
+                            <th scope="col">S. No.</th>
+                            <th scope="col">Data Type</th>
+                            <th scope="col">Last Extracted Date	</th>
+                            <th scope="col">Extracted record count</th>
+                            <th scope="col">Correct records</th>
+                            <th scope="col">Error records</th>
+                          </tr>
+                        </thead>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>	Dealer Main Business Information</td>
+                            <td>${result.resultDLMB.Last_Extracted_Date}</td>
+                            <td>${result.resultDLMB.Extracted_record_count}</td>
+                            <td>${result.resultDLMB.Correct_records}</td>
+                            <td>${result.resultDLMB.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>C Form Issued</td>
+                            <td>${result.resultCIDL.Last_Extracted_Date}</td>
+                            <td>${result.resultCIDL.Extracted_record_count}</td>
+                            <td>${result.resultCIDL.Correct_records}</td>
+                            <td>${result.resultCIDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td colspan="1">C Form Utilization</td>
+                            <td>${result.resultCUDL.Last_Extracted_Date}</td>
+                            <td>${result.resultCUDL.Extracted_record_count}</td>
+                            <td>${result.resultCUDL.Correct_records}</td>
+                            <td>${result.resultCUDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td colspan="1">C Form Invoice details</td>
+                            <td>${result.resultCBDL.Last_Extracted_Date}</td>
+                            <td>${result.resultCBDL.Extracted_record_count}</td>
+                            <td>${result.resultCBDL.Correct_records}</td>
+                            <td>${result.resultCBDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td colspan="1">F Form Issued</td>
+                            <td>${result.resultFIDL.Last_Extracted_Date}</td>
+                            <td>${result.resultFIDL.Extracted_record_count}</td>
+                            <td>${result.resultFIDL.Correct_records}</td>
+                            <td>${result.resultFIDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">6</th>
+                            <td colspan="1">	F Form Utilization</td>
+                            <td>${result.resultFUDL.Last_Extracted_Date}</td>
+                            <td>${result.resultFUDL.Extracted_record_count}</td>
+                            <td>${result.resultFUDL.Correct_records}</td>
+                            <td>${result.resultFUDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <td colspan="1">	F Form Invoice details</td>
+                            <td>${result.resultFBDL.Last_Extracted_Date}</td>
+                            <td>${result.resultFBDL.Extracted_record_count}</td>
+                            <td>${result.resultFBDL.Correct_records}</td>
+                            <td>${result.resultFBDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">8</th>
+                            <td colspan="1">	H Form Issued</td>
+                            <td>${result.resultHIDL.Last_Extracted_Date}</td>
+                            <td>${result.resultHIDL.Extracted_record_count}</td>
+                            <td>${result.resultHIDL.Correct_records}</td>
+                            <td>${result.resultHIDL.Error_records}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">9</th>
+                            <td colspan="1">	H Form Utilization</td>
+                            <td>${result.resultHUDL.Last_Extracted_Date}</td>
+                            <td>${result.resultHUDL.Extracted_record_count}</td>
+                            <td>${result.resultHUDL.Correct_records}</td>
+                            <td>${result.resultHUDL.Error_records}</td>
+                          </tr>
+                          <tr class="pb-10">
+                            <th scope="row">10</th>
+                            <td colspan="1">	H Form Invoice details</td>
+                            <td>${result.resultHBDL.Last_Extracted_Date}</td>
+                            <td>${result.resultHBDL.Extracted_record_count}</td>
+                            <td>${result.resultHBDL.Correct_records}</td>
+                            <td>${result.resultHBDL.Error_records}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                        `;
+                        document.getElementById(`dataState_${i}`).innerHTML=table;
+
+                    })
+                })
+
             }
             
         });

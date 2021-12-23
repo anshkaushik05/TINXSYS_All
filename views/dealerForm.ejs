@@ -894,121 +894,26 @@ This record is valid as on
 
 
       <% for(var i=0; i < 35;i++){ %>
-      <div class="accordion-items" id="accordionState<%= i%>" data-aos="fade-right">
-        <div id="test" class="accordion-items-header">
-          <div class="text-sm px-16 text-gray-500 text-left">
-          <div class= "accordion-items-title" id="stateName<%= i%>" >Andhra Pradesh</div>
-              <span id="lastActivityDate<%=i %>" >16/12/2021</span>
-              <span id="lastActivityTime<%=i %>" >14:20</span>
+      <div class="accordion-items" id="accordionState_<%= i%>" data-aos="fade-right">
+        <div id="test_<%= i%>" class="accordion-items-header">
+          <div  class="text-sm px-16 text-gray-500 text-left">
+          <div class= "accordion-items-title" id="stateName_<%= i%>" ></div>
+              <span id="lastActivityDate_<%=i %>" ></span>
+              <span id="lastActivityTime_<%=i %>" ></span>
           </div>
     
-          <span class="icon"></span>
+          <span class="icon" id="icon_<%= i%>"></span>
         </div>
-        <div class="accordion-items-body">
+        <div class="accordion-items-body" >
           <div class="accordion-items-body-content">
-            <div class="card w-11/12 mx-auto my-2 rounded-xl">  
+            <div class="card w-11/12 mx-auto my-2 rounded-xl" id="dataState_<%= i%>">  
 
               <div class="spinner-border text-primary self-center" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
 
-              <table class="table table-light table-hover ">
-              <thead>
-                <tr class="w-full rounded-xl">
-                  <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for Andhra Pradesh</th>
-                </tr>
-                <tr>
-                  <th scope="col">S. No.</th>
-                  <th scope="col">Data Type</th>
-                  <th scope="col">Last Extracted Date	</th>
-                  <th scope="col">Extracted record count</th>
-                  <th scope="col">Correct records</th>
-                  <th scope="col">Error records</th>
-                </tr>
-              </thead>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>	Dealer Main Business Information</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>C Form Issued</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="1">C Form Utilization</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td colspan="1">C Form Invoice details</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td colspan="1">F Form Issued</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td colspan="1">	F Form Utilization</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">7</th>
-                  <td colspan="1">	F Form Invoice details</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">8</th>
-                  <td colspan="1">	H Form Issued</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">9</th>
-                  <td colspan="1">	H Form Utilization</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr class="pb-10">
-                  <th scope="row">10</th>
-                  <td colspan="1">	H Form Invoice details</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Thornton</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              
+            </div>
           </div>
         </div>
       </div>
@@ -1141,7 +1046,8 @@ This record is valid as on
         }
       });
       accordionItemHeader.addEventListener("click", function () {
-        document.getElementById("test").scrollIntoView({ behavior: "smooth" });
+        // for(var i=0;i<35;i++)
+        document.getElementById(`test_${1}`).scrollIntoView({ behavior: "smooth" });
       });
     });
     

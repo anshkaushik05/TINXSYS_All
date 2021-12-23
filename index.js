@@ -238,15 +238,113 @@ app.post('/formNumber',(req,res)=>{
 })
 
 app.post('/dataStatus',(req,res)=>{
-
-
   con.query(`SELECT * FROM tinxsys.de_fileuploadschedule ORDER BY DE_FL_ACTUALDATEOFEXTRACTION desc`,(err,result,fields)=>{
     if(err) throw err;
-    // select * FROM datastatusextraction ORDER BY lastActivityDate desc,stateName desc
-
     // console.log(result);
     res.send(result);
   })
+})
+
+app.post('/stateStatus',async (req,res)=>{
+  // console.log(req.body);
+let data={
+    resultDLMB:{fileType:'DLMB',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultCIDL:{fileType:'CIDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultCUDL:{fileType:'CUDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultCBDL:{fileType:'CBDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultFIDL:{fileType:'FIDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultFUDL:{fileType:'FUDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultFBDL:{fileType:'FBDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultHIDL:{fileType:'HIDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultHUDL:{fileType:'HUDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'},
+    resultHBDL:{fileType:'HBDL',Last_Extracted_Date:'N/A', Extracted_record_count:'N/A',	Correct_records:'N/A',	Error_records:'N/A'}
+  }
+  // var finalResult;
+
+   con.query(`select DE_FD_STATECODE,DE_FD_FILETYPE,DE_FD_RECORDCOUNT,DE_FD_CORRECTRECORDS,MAX(DE_FD_EXTRACTEDTIME) date,
+  DE_FD_CRITICALRECORDS,DE_FD_DUPLICATERECORDS,DE_FD_HIGHLYCRITICAL from de_fileextractdetails
+  where (DE_FD_STATECODE=${req.body.stateCode} ) Group by DE_FD_FILETYPE 
+  order by DE_FD_EXTRACTEDTIME desc ;`,(err,result,fields)=>{
+        if(err) throw err;
+
+        if(result.length){
+
+          for(let i=0;i<result.length;i++){
+
+            if(result[i].DE_FD_FILETYPE=='DLMB'){
+              data.resultDLMB.Last_Extracted_Date=result[i].date;
+              data.resultDLMB.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultDLMB.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultDLMB.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='CIDL'){
+              data.resultCIDL.Last_Extracted_Date=result[i].date;
+              data.resultCIDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultCIDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultCIDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='CUDL'){
+              data.resultCUDL.Last_Extracted_Date=result[i].date;
+              data.resultCUDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultCUDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultCUDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='CBDL'){
+              data.resultCBDL.Last_Extracted_Date=result[i].date;
+              data.resultCBDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultCBDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultCBDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='FIDL'){
+              data.resultFIDL.Last_Extracted_Date=result[i].date;
+              data.resultFIDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultFIDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultFIDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='FUDL'){
+              data.resultFUDL.Last_Extracted_Date=result[i].date;
+              data.resultFUDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultFUDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultFUDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='FBDL'){
+              data.resultFBDL.Last_Extracted_Date=result[i].date;
+              data.resultFBDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultFBDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultFBDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='HIDL'){
+              data.resultHIDL.Last_Extracted_Date=result[i].date;
+              data.resultHIDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultHIDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultHIDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='HUDL'){
+              data.resultHUDL.Last_Extracted_Date=result[i].date;
+              data.resultHUDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultHUDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultHUDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+            else if(result[i].DE_FD_FILETYPE=='HBDL'){
+              data.resultHBDL.Last_Extracted_Date=result[i].date;
+              data.resultHBDL.Extracted_record_count=result[i].DE_FD_RECORDCOUNT;
+              data.resultHBDL.Correct_records=result[i].DE_FD_CORRECTRECORDS;
+              data.resultHBDL.Error_records=result[i].DE_FD_CRITICALRECORDS+result[i].DE_FD_DUPLICATERECORDS+result[i].DE_FD_HIGHLYCRITICAL;
+              // console.log(data.resultDLMB.Last_Extracted_Date);
+            }
+          }
+        }
+         res.send(data);
+      })
 })
 
 
