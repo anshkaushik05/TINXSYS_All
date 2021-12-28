@@ -94,10 +94,23 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
             const order=[]
             for(var i=0;i<result.length;i++){
                 // console.log(result[i]);
+
                 document.getElementById(`stateName_${i}`).innerText= stateCodeConvert(result[i].DE_FL_STATECODE);
                 // document.getElementById(`lastActivityDate${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION;
-                document.getElementById(`lastActivityDate_${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '));
-                document.getElementById(`lastActivityTime_${i}`).innerText= result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' ')+1,5);
+                var oldDate=result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(0,result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' '));
+                var newDate = null;
+                var arrayMonth = ['Jan', 'Feb', 'Mar', 'Apr','May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'];
+                var help = oldDate.split('-');
+                newDate = arrayMonth[help[1] - 1] + " " + help[2] + " " + help[0];
+                // console.log(newDate);
+
+                var timeString = result[i].DE_FL_ACTUALDATEOFEXTRACTION.substr(result[i].DE_FL_ACTUALDATEOFEXTRACTION.indexOf(' ')+1,5);
+                var H = +timeString.substr(0, 2);
+                var h = H % 12 || 12;
+                var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+                timeString = h + timeString.substr(2, 3) + ampm;
+                document.getElementById(`lastActivityDate_${i}`).innerText= newDate
+                document.getElementById(`lastActivityTime_${i}`).innerText= timeString
                 
                 const yourDate = new Date();
 
@@ -120,105 +133,254 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                     }).then(res=>res.json()).then(result=>{
                         // console.log(result);
                         var i=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
+
+                        function timeConvert(value){
+                            var date= value.substr(0,value.indexOf(' '));
+                            value=value.substr(value.indexOf(' ')+1,value.length);
+                            var timeString = value;
+                            var H = +timeString.substr(0, 2);
+                            var h = H % 12 || 12;
+                            var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+                            timeString = h + timeString.substr(2, 3) + ampm;
+                            return date+' '+timeString;
+                        }
+
                         let table=`
                         <table class="table table-light table-hover ">
                         <thead>
-                          <tr class="w-full rounded-xl">
-                            <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for ${stateCodeConvert(stateCode)}</th>
-                          </tr>
-                          <tr>
-                            <th scope="col">S. No.</th>
-                            <th scope="col">Data Type</th>
-                            <th scope="col">Last Extracted Date	</th>
-                            <th scope="col">Extracted record count</th>
-                            <th scope="col">Correct records</th>
-                            <th scope="col">Error records</th>
-                          </tr>
+                        <tr class="w-full rounded-xl">
+                        <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for ${stateCodeConvert(stateCode)}</th>
+                        </tr>
+                        <tr>
+                        <th scope="col">S. No.</th>
+                        <th scope="col">Data Type</th>
+                        <th scope="col">Last Extracted Date	</th>
+                        <th scope="col">Extracted record count</th>
+                        <th scope="col">Correct records</th>
+                        <th scope="col">Error records</th>
+                        </tr>
                         </thead>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>	Dealer Main Business Information</td>
-                            <td>${result.resultDLMB.Last_Extracted_Date}</td>
-                            <td>${result.resultDLMB.Extracted_record_count}</td>
-                            <td>${result.resultDLMB.Correct_records}</td>
-                            <td>${result.resultDLMB.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>C Form Issued</td>
-                            <td>${result.resultCIDL.Last_Extracted_Date}</td>
-                            <td>${result.resultCIDL.Extracted_record_count}</td>
-                            <td>${result.resultCIDL.Correct_records}</td>
-                            <td>${result.resultCIDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="1">C Form Utilization</td>
-                            <td>${result.resultCUDL.Last_Extracted_Date}</td>
-                            <td>${result.resultCUDL.Extracted_record_count}</td>
-                            <td>${result.resultCUDL.Correct_records}</td>
-                            <td>${result.resultCUDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">4</th>
-                            <td colspan="1">C Form Invoice details</td>
-                            <td>${result.resultCBDL.Last_Extracted_Date}</td>
-                            <td>${result.resultCBDL.Extracted_record_count}</td>
-                            <td>${result.resultCBDL.Correct_records}</td>
-                            <td>${result.resultCBDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">5</th>
-                            <td colspan="1">F Form Issued</td>
-                            <td>${result.resultFIDL.Last_Extracted_Date}</td>
-                            <td>${result.resultFIDL.Extracted_record_count}</td>
-                            <td>${result.resultFIDL.Correct_records}</td>
-                            <td>${result.resultFIDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">6</th>
-                            <td colspan="1">	F Form Utilization</td>
-                            <td>${result.resultFUDL.Last_Extracted_Date}</td>
-                            <td>${result.resultFUDL.Extracted_record_count}</td>
-                            <td>${result.resultFUDL.Correct_records}</td>
-                            <td>${result.resultFUDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">7</th>
-                            <td colspan="1">	F Form Invoice details</td>
-                            <td>${result.resultFBDL.Last_Extracted_Date}</td>
-                            <td>${result.resultFBDL.Extracted_record_count}</td>
-                            <td>${result.resultFBDL.Correct_records}</td>
-                            <td>${result.resultFBDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">8</th>
-                            <td colspan="1">	H Form Issued</td>
-                            <td>${result.resultHIDL.Last_Extracted_Date}</td>
-                            <td>${result.resultHIDL.Extracted_record_count}</td>
-                            <td>${result.resultHIDL.Correct_records}</td>
-                            <td>${result.resultHIDL.Error_records}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">9</th>
-                            <td colspan="1">	H Form Utilization</td>
-                            <td>${result.resultHUDL.Last_Extracted_Date}</td>
-                            <td>${result.resultHUDL.Extracted_record_count}</td>
-                            <td>${result.resultHUDL.Correct_records}</td>
-                            <td>${result.resultHUDL.Error_records}</td>
-                          </tr>
-                          <tr class="pb-10">
-                            <th scope="row">10</th>
-                            <td colspan="1">	H Form Invoice details</td>
-                            <td>${result.resultHBDL.Last_Extracted_Date}</td>
-                            <td>${result.resultHBDL.Extracted_record_count}</td>
-                            <td>${result.resultHBDL.Correct_records}</td>
-                            <td>${result.resultHBDL.Error_records}</td>
-                          </tr>
+                        <tr>
+                        <th scope="row">1</th>
+                        <td>	Dealer Main Business Information</td>
+                        <td>${timeConvert(result.resultDLMB.Last_Extracted_Date)}</td>
+                        <td>${result.resultDLMB.Extracted_record_count}</td>
+                        <td>${result.resultDLMB.Correct_records}</td>
+                        <td>${result.resultDLMB.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">2</th>
+                        <td>C Form Issued</td>
+                        <td>${timeConvert(result.resultCIDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultCIDL.Extracted_record_count}</td>
+                        <td>${result.resultCIDL.Correct_records}</td>
+                        <td>${result.resultCIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">3</th>
+                        <td colspan="1">C Form Utilization</td>
+                        <td>${timeConvert(result.resultCUDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultCUDL.Extracted_record_count}</td>
+                        <td>${result.resultCUDL.Correct_records}</td>
+                        <td>${result.resultCUDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">4</th>
+                        <td colspan="1">C Form Invoice details</td>
+                        <td>${timeConvert(result.resultCBDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultCBDL.Extracted_record_count}</td>
+                        <td>${result.resultCBDL.Correct_records}</td>
+                        <td>${result.resultCBDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">5</th>
+                        <td colspan="1">F Form Issued</td>
+                        <td>${timeConvert(result.resultFIDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultFIDL.Extracted_record_count}</td>
+                        <td>${result.resultFIDL.Correct_records}</td>
+                        <td>${result.resultFIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">6</th>
+                        <td colspan="1">	F Form Utilization</td>
+                        <td>${timeConvert(result.resultFUDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultFUDL.Extracted_record_count}</td>
+                        <td>${result.resultFUDL.Correct_records}</td>
+                        <td>${result.resultFUDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">7</th>
+                        <td colspan="1">	F Form Invoice details</td>
+                        <td>${timeConvert(result.resultFBDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultFBDL.Extracted_record_count}</td>
+                        <td>${result.resultFBDL.Correct_records}</td>
+                        <td>${result.resultFBDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">8</th>
+                        <td colspan="1">	H Form Issued</td>
+                        <td>${timeConvert(result.resultHIDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultHIDL.Extracted_record_count}</td>
+                        <td>${result.resultHIDL.Correct_records}</td>
+                        <td>${result.resultHIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">9</th>
+                        <td colspan="1">	H Form Utilization</td>
+                        <td>${timeConvert(result.resultHUDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultHUDL.Extracted_record_count}</td>
+                        <td>${result.resultHUDL.Correct_records}</td>
+                        <td>${result.resultHUDL.Error_records}</td>
+                        </tr>
+                        <tr class="pb-10">
+                        <th scope="row">10</th>
+                        <td colspan="1">	H Form Invoice details</td>
+                        <td>${timeConvert(result.resultHBDL.Last_Extracted_Date)}</td>
+                        <td>${result.resultHBDL.Extracted_record_count}</td>
+                        <td>${result.resultHBDL.Correct_records}</td>
+                        <td>${result.resultHBDL.Error_records}</td>
+                        </tr>
                         </tbody>
-                      </table>
+                        </table>
+                        
+                        <button type="button" class="btn btn-primary h-9 ml-2 mt-0" id="print_${i}">Print</button>
                         `;
+
+                        
                         document.getElementById(`dataState_${i}`).innerHTML=table;
+
+                        setTimeout(() => {
+                            let table=`
+                        <html lang="en" style="scroll-behavior:smooth">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>DealerForm</title>
+                            <link rel="icon" type="image/x-icon" href="/images/logo_white.png">
+                            <link rel="stylesheet" href="./public/styles.css">
+                            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+                        </head>
+
+                        <table class="table table-light table-hover ">
+                        <thead>
+                        <tr class="w-full rounded-xl">
+                        <th scope="col" colspan="6" class="text-center rounded-xl">Detailed Information of data extracted for ${stateCodeConvert(stateCode)}</th>
+                        </tr>
+                        <tr>
+                        <th scope="col">S. No.</th>
+                        <th scope="col">Data Type</th>
+                        <th scope="col">Last Extracted Date	</th>
+                        <th scope="col">Extracted record count</th>
+                        <th scope="col">Correct records</th>
+                        <th scope="col">Error records</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                        <th scope="row">1</th>
+                        <td>	Dealer Main Business Information</td>
+                        <td>${result.resultDLMB.Last_Extracted_Date}</td>
+                        <td>${result.resultDLMB.Extracted_record_count}</td>
+                        <td>${result.resultDLMB.Correct_records}</td>
+                        <td>${result.resultDLMB.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">2</th>
+                        <td>C Form Issued</td>
+                        <td>${result.resultCIDL.Last_Extracted_Date}</td>
+                        <td>${result.resultCIDL.Extracted_record_count}</td>
+                        <td>${result.resultCIDL.Correct_records}</td>
+                        <td>${result.resultCIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">3</th>
+                        <td colspan="1">C Form Utilization</td>
+                        <td>${result.resultCUDL.Last_Extracted_Date}</td>
+                        <td>${result.resultCUDL.Extracted_record_count}</td>
+                        <td>${result.resultCUDL.Correct_records}</td>
+                        <td>${result.resultCUDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">4</th>
+                        <td colspan="1">C Form Invoice details</td>
+                        <td>${result.resultCBDL.Last_Extracted_Date}</td>
+                        <td>${result.resultCBDL.Extracted_record_count}</td>
+                        <td>${result.resultCBDL.Correct_records}</td>
+                        <td>${result.resultCBDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">5</th>
+                        <td colspan="1">F Form Issued</td>
+                        <td>${result.resultFIDL.Last_Extracted_Date}</td>
+                        <td>${result.resultFIDL.Extracted_record_count}</td>
+                        <td>${result.resultFIDL.Correct_records}</td>
+                        <td>${result.resultFIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">6</th>
+                        <td colspan="1">	F Form Utilization</td>
+                        <td>${result.resultFUDL.Last_Extracted_Date}</td>
+                        <td>${result.resultFUDL.Extracted_record_count}</td>
+                        <td>${result.resultFUDL.Correct_records}</td>
+                        <td>${result.resultFUDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">7</th>
+                        <td colspan="1">	F Form Invoice details</td>
+                        <td>${result.resultFBDL.Last_Extracted_Date}</td>
+                        <td>${result.resultFBDL.Extracted_record_count}</td>
+                        <td>${result.resultFBDL.Correct_records}</td>
+                        <td>${result.resultFBDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">8</th>
+                        <td colspan="1">	H Form Issued</td>
+                        <td>${result.resultHIDL.Last_Extracted_Date}</td>
+                        <td>${result.resultHIDL.Extracted_record_count}</td>
+                        <td>${result.resultHIDL.Correct_records}</td>
+                        <td>${result.resultHIDL.Error_records}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">9</th>
+                        <td colspan="1">	H Form Utilization</td>
+                        <td>${result.resultHUDL.Last_Extracted_Date}</td>
+                        <td>${result.resultHUDL.Extracted_record_count}</td>
+                        <td>${result.resultHUDL.Correct_records}</td>
+                        <td>${result.resultHUDL.Error_records}</td>
+                        </tr>
+                        <tr class="pb-10">
+                        <th scope="row">10</th>
+                        <td colspan="1">	H Form Invoice details</td>
+                        <td>${result.resultHBDL.Last_Extracted_Date}</td>
+                        <td>${result.resultHBDL.Extracted_record_count}</td>
+                        <td>${result.resultHBDL.Correct_records}</td>
+                        <td>${result.resultHBDL.Error_records}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        
+                        <button type="button" class="btn btn-primary mx-auto my-4" style="display:flex;" onclick="printStateDetails()" id="printState">Print</button>
+                            <script src="./js/dealerForm.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+                            <script >
+                                function printStateDetails(){
+                                    document.getElementById('printState').style.display='none';
+                                    window.print();
+                                    document.getElementById('printState').style.display='flex';
+                                }
+                            </script>
+                            
+      
+                        </html>
+                        `;
+                            document.getElementById(`print_${i}`).addEventListener('click',()=>{
+                                // console.log(`print_${i}`);
+                                var myWindow = window.open("", "MsgWindow", "width=1000,height=600");
+                                myWindow.document.write(table);
+                                
+                            });
+                        }, 1000);
+                       
 
                     })
                 })
@@ -229,6 +391,8 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
 
     
 })
+
+
 
 
 

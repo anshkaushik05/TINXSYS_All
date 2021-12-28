@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors :{
-        primaryTable: '#2C3034' ,
-        secondaryTable: '#323539',
+        primaryTable: '#EAEAEC' ,
+        secondaryTable: '#F8F8F8',
     },
     },
   },

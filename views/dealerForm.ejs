@@ -164,7 +164,7 @@
             <a class="nav-link active" id="dealerFormNav" href="/dealerForm">Dealer/Form Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login CTD/GSTN Staff</a>
+            <a class="nav-link" href="/loginCTD">Login CTD/GSTN Staff</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.tinxsys.com/TinxsysInternetWeb/statisticsDashboard.jsp">TINXSYS Data Statistics</a>
@@ -677,11 +677,11 @@ This record is valid as on
 
 
 <!-- form Validation table -->
-<form name="form1" method="post" action="" class="text-md text-white mt-36 mb-5 bg-gray-700 table-hover  mx-3 w-11/12 hidden" id="validTable">
+<form name="form1" method="post" action="" class="text-md font-semibold mt-36 mb-5 bg-white table-hover  mx-3 w-11/12 hidden" id="validTable">
   <input type="hidden" name="backPage" value="fFormSearch.jsp">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody><tr>
-      <td width="100%" colspan="9" class="headerBlue"><div class="headerBlue" style="background-color: #2C3034;" align="center" id="validTableHead">
+      <td width="100%" colspan="9" class="headerBlue"><div class="headerBlue" style="background-color: #f9f9f9;" align="center" id="validTableHead">
         FORM '' <br> Search Time :
      </div></td>
       
@@ -691,7 +691,7 @@ This record is valid as on
             <td style="width:30%"> 
             <table width="100%" border="0" cellpadding="0" cellspacing="0">          
             <tbody><tr valign="top">
-              <td width="100%" colspan="2" class="bg-gray-800" align="center" valign="top" id="formTypeValid">FORM ''</td>
+              <td width="100%" colspan="2" class="bg-blue-50" align="center" valign="top" id="formTypeValid">FORM ''</td>
             </tr>
             <tr>
               <td width="50%" align="center" class="bg-primaryTable">Series No.</td>
@@ -712,7 +712,7 @@ This record is valid as on
           <td width="70%">
           <table border="0" cellpadding="0" cellspacing="1">     
             <tbody><tr>
-              <td width="100%" colspan="8" class="bg-gray-800">&nbsp;&nbsp;Issuing State Information</td>
+              <td width="100%" colspan="8" class="bg-blue-50">&nbsp;&nbsp;Issuing State Information</td>
             </tr>
             
             <tr>
@@ -742,7 +742,7 @@ This record is valid as on
       </tr></tbody></table><table width="100%" border="0" cellpadding="0" cellspacing="1">              
           
             <tbody><tr>
-              <td colspan="4" width="100%" class="bg-gray-800">&nbsp;&nbsp;Purchasing Dealer Information</td>
+              <td colspan="4" width="100%" class="bg-blue-50">&nbsp;&nbsp;Purchasing Dealer Information</td>
             </tr>
             <tr>
               <td width="20%" class="bg-primaryTable" nowrap="" >&nbsp;&nbsp;Dealer Name</td>
@@ -785,7 +785,7 @@ This record is valid as on
       <table width="100%" border="0" cellpadding="0" cellspacing="1">   
             
             <tbody><tr>
-              <td colspan="5" class="bg-gray-800">&nbsp;&nbsp; Selling Dealer Information</td>
+              <td colspan="5" class="bg-blue-50">&nbsp;&nbsp; Selling Dealer Information</td>
             </tr>
             <tr>
               <td width="20%" class="bg-primaryTable">&nbsp;&nbsp; Dealer Name </td>
@@ -843,8 +843,9 @@ This record is valid as on
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
     
               
-            <tbody><tr>
-            <td colspan="5" class="bg-gray-800" nowrap="">&nbsp;&nbsp;Invoice Details</td>
+            <tbody>
+            <tr>
+            <td colspan="5" class="bg-blue-50" nowrap="">&nbsp;&nbsp;Invoice Details</td>
             </tr>
             <tr width="100%">
               <td width="20%" colspan="1" class="bg-primaryTable" nowrap="">&nbsp;&nbsp; Number of Invoices </td>
@@ -862,7 +863,8 @@ This record is valid as on
             </tr>
             
             
-     </tbody></table>
+           </tbody>
+    </table>
      
     
     
@@ -870,7 +872,7 @@ This record is valid as on
      
      <table width="100%" border="0" cellpadding="0" cellspacing="1"> 
             <tbody><tr>
-              <td colspan="4" class="bg-gray-800">&nbsp;&nbsp;Status</td>
+              <td colspan="4" class="bg-blue-50">&nbsp;&nbsp;Status</td>
             </tr>
             <tr>
               <td width="20%" class="bg-primaryTable" nowrap="">&nbsp;&nbsp;Lost/Cancelled/Defaced/Obsolete details &nbsp;</td>
@@ -906,7 +908,7 @@ This record is valid as on
         </div>
         <div class="accordion-items-body" >
           <div class="accordion-items-body-content">
-            <div class="card w-11/12 mx-auto my-2 rounded-xl" id="dataState_<%= i%>">  
+            <div class="flex flex-col items-center  w-11/12 mx-auto my-2 rounded-xl" id="dataState_<%= i%>">  
 
               <div class="spinner-border text-primary self-center" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -1039,17 +1041,28 @@ This record is valid as on
         //
     
         accordionItemHeader.classList.toggle("active");
-        const accordionItemBody = accordionItemHeader.nextElementSibling;
-        if (accordionItemHeader.classList.contains("active")) {
-          accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
-        } else {
-          accordionItemBody.style.maxHeight = 0;
-        }
+        setTimeout(() => {
+          
+          const accordionItemBody = accordionItemHeader.nextElementSibling;
+          if (accordionItemHeader.classList.contains("active")) {
+            accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+          } else {
+            accordionItemBody.style.maxHeight = 0;
+          }
+        }, 1000);
       });
       accordionItemHeader.addEventListener("click", function () {
         // for(var i=0;i<35;i++)
-        document.getElementById(`test_${1}`).scrollIntoView({ behavior: "smooth" });
+        document.getElementById(`test_${0}`).scrollIntoView({ behavior: "smooth" });
+        // setTimeout(()=>{
+        //   if (accordionItemHeader.classList.contains("active")) {
+        //     accordionItemHeader.click();
+        //   accordionItemHeader.click();       
+        //  }
+          
+        // },1000)
       });
+      
     });
     
       </script>

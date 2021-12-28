@@ -68,6 +68,11 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
+app.get('/loginCTD', (req, res) => {
+  // res.send('TINSYS')
+  res.render('loginCTD');
+})
+
 app.post('/tinForm',(req,res)=>{
 
   var captchaValue= req.body.captcha;
