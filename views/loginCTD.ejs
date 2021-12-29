@@ -72,7 +72,6 @@
                         <label for="firstName" class="text-white my-1">First Name</label>
                         <div class="flex flex-col">
                             <input type="text" class="form-control " id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" required maxlength="30">
-                            <p id="validFirstName" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
 
@@ -80,7 +79,6 @@
                         <label for="middleName" class="text-white my-1">Middle Name</label>
                         <div class="flex flex-col">
                             <input type="text" class="form-control " id="middleName" aria-describedby="emailHelp" placeholder="Enter Middle Name">
-                            <p id="validMiddleName" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
                 </div>
@@ -90,14 +88,13 @@
                         <label for="lastName" class="text-white my-1">Last Name</label>
                         <div class="flex flex-col">
                             <input type="text" class="form-control " id="lastName" aria-describedby="emailHelp" placeholder="Enter Last Name" required maxlength="30">
-                            <p id="validLastName" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
 
                     <div>
                         <label for="mobileNo" class="text-white my-1">Mobile Number</label>
                         <div class="flex flex-col">
-                            <input type="number" class="form-control " id="mobileNo" aria-describedby="emailHelp" placeholder="Enter Mobile Number" required >
+                            <input type="number" class="form-control " id="mobileNo" aria-describedby="emailHelp" placeholder="Enter Mobile Number" required minlength="10" maxlength="10" >
                             <p id="validMobileNo" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
@@ -108,7 +105,6 @@
                         <label for="emailId" class="text-white my-1">Email ID</label>
                         <div class="flex flex-col">
                             <input type="email" class="form-control " id="emailId" aria-describedby="emailHelp" placeholder="Enter Email ID" required maxlength="40">
-                            <p id="validEmailId" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
 
@@ -123,8 +119,8 @@
 
                 <div class="flex flex-row justify-around">
                     <div class="flex flex-col">
-                        <label for="stateNameCst" class="text-white my-3">State Name</label>
-                        <select class="form-control " id="stateNameCst" required>
+                        <label for="stateName" class="text-white my-3">State Name</label>
+                        <select class="form-control " id="stateName" required>
                             <option value="">---Select State--- </option>
                             
                             <option value="28">
@@ -255,7 +251,7 @@
                     <div>
                         <label for="userId" class="text-white my-1">User ID</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="userId" aria-describedby="emailHelp" placeholder="userId">
+                            <input type="text" class="form-control " id="userId" aria-describedby="emailHelp" placeholder="userId" value="" readonly>
                             <p id="validUserId" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
@@ -298,15 +294,15 @@
 
                 <div class="flex flex-row justify-around">
                     <div class="form-check my-1">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                        <label class="form-check-label text-white" for="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="1" id="activeState" checked>
+                        <label class="form-check-label text-white" for="activeState">
                           Active State
                         </label>
                       </div>
 
                       <div class="form-check my-1">
-                        <input class="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked disabled >
-                        <label class="form-check-label text-white" for="flexCheckDefault">
+                        <input class="form-check-input " type="checkbox" value="1" id="firstTimeLogin" checked disabled >
+                        <label class="form-check-label text-white" for="firstTimeLogin">
                           First Time Login
                         </label>
                       </div>
@@ -455,8 +451,7 @@
                     <div>
                         <label for="stateCodeReference" class="text-white my-1">State Code</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="stateCodeReference" placeholder="State Code" required maxlength="10">
-                            <p id="validStateCodeReference" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                            <input type="text" class="form-control " id="stateCodeReference" placeholder="State Code" required maxlength="10" readonly>
                         </div>
                     </div>
                     
@@ -466,8 +461,7 @@
                     <div>
                         <label for="adminUser" class="text-white my-1">Admin User</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="adminUser" placeholder="Enter Admin User Here" required maxlength="30">
-                            <p id="validAdminUser" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                            <input type="text" class="form-control " id="adminUser" placeholder="Enter Admin User Here" required maxlength="30" readonly>
                         </div>
                     </div>
 

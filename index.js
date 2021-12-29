@@ -352,6 +352,17 @@ let data={
       })
 })
 
+app.post('/userId',(req,res)=>{
+  console.log(req.body);
+  res.send({userId:100});
+})
+app.post('/loginDetails',(req,res)=>{
+  console.log(req.body);
+  // res.send({loginId:req.body.loginId});
+  res.send({userId:100});
+  
+})
+
 
 
 // host
