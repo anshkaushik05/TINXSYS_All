@@ -60,8 +60,433 @@
     </div>
   </nav>
 
- 
 
+  <!-- Personal Details -->
+     <div class="flex flex-col align-center ">
+        <form id="personalDetails" class="w-full md:w-3/5 mt-8 pt-28  mx-auto " data-aos="fade-right" >
+            <div class="form-group">
+                <h2 class="text-white font-semibold text-3xl mb-5 ml-2">Personal Details</h2>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="firstName" class="text-white my-1">First Name</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" required maxlength="30">
+                            <p id="validFirstName" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="middleName" class="text-white my-1">Middle Name</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="middleName" aria-describedby="emailHelp" placeholder="Enter Middle Name">
+                            <p id="validMiddleName" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="lastName" class="text-white my-1">Last Name</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="lastName" aria-describedby="emailHelp" placeholder="Enter Last Name" required maxlength="30">
+                            <p id="validLastName" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="mobileNo" class="text-white my-1">Mobile Number</label>
+                        <div class="flex flex-col">
+                            <input type="number" class="form-control " id="mobileNo" aria-describedby="emailHelp" placeholder="Enter Mobile Number" required >
+                            <p id="validMobileNo" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="emailId" class="text-white my-1">Email ID</label>
+                        <div class="flex flex-col">
+                            <input type="email" class="form-control " id="emailId" aria-describedby="emailHelp" placeholder="Enter Email ID" required maxlength="40">
+                            <p id="validEmailId" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="address" class="text-white my-1">Address</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="address" aria-describedby="emailHelp" placeholder="Enter Address" required maxlength="60">
+                            <p id="validAddress" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div class="flex flex-col">
+                        <label for="stateNameCst" class="text-white my-3">State Name</label>
+                        <select class="form-control " id="stateNameCst" required>
+                            <option value="">---Select State--- </option>
+                            
+                            <option value="28">
+                                      Andhra Pradesh</option> 
+                            
+                            <option value="37">
+                                      Andhra Pradesh New</option> 
+                            
+                            <option value="12">
+                                      Arunachal Pradesh</option> 
+                            
+                            <option value="18">
+                                      Assam</option> 
+                            
+                            <option value="10">
+                                      Bihar</option> 
+                            
+                            <option value="04">
+                                      Chandigarh</option> 
+                            
+                            <option value="22">
+                                      Chattisgarh</option> 
+                            
+                            <option value="26">
+                                      Dadra and Nagar Haveli</option> 
+                            
+                            <option value="25">
+                                      Daman and Diu</option> 
+                            
+                            <option value="07">
+                                      Delhi</option> 
+                            
+                            <option value="30">
+                                      Goa</option> 
+                            
+                            <option value="24">
+                                      Gujarat</option> 
+                            
+                            <option value="06">
+                                      Haryana</option> 
+                            
+                            <option value="02">
+                                      Himachal Pradesh</option> 
+                            
+                            <option value="01">
+                                      Jammu and Kashmir</option> 
+                            
+                            <option value="20">
+                                      Jharkhand</option> 
+                            
+                            <option value="29">
+                                      Karnataka</option> 
+                            
+                            <option value="32">
+                                      Kerala</option> 
+                            
+                            <option value="23">
+                                      Madhya Pradesh</option> 
+                            
+                            <option value="27">
+                                      Maharashtra</option> 
+                            
+                            <option value="14">
+                                      Manipur</option> 
+                            
+                            <option value="17">
+                                      Meghalaya</option> 
+                            
+                            <option value="15">
+                                      Mizoram</option> 
+                            
+                            <option value="13">
+                                      Nagaland</option> 
+                            
+                            <option value="21">
+                                      Odisha</option> 
+                            
+                            <option value="34">
+                                      Pondicherry</option> 
+                            
+                            <option value="03">
+                                      Punjab</option> 
+                            
+                            <option value="08">
+                                      Rajasthan</option> 
+                            
+                            <option value="11">
+                                      Sikkim</option> 
+                            
+                            <option value="33">
+                                      Tamil Nadu</option> 
+                            
+                            <option value="36">
+                                      Telangana</option> 
+                            
+                            <option value="16">
+                                      Tripura</option> 
+                            
+                            <option value="09">
+                                      Uttar Pradesh</option> 
+                            
+                            <option value="05">
+                                      Uttarakhand</option> 
+                            
+                            <option value="19">
+                                      West Bengal</option> 
+                        </select>
+                        <p id="stateValidCst" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                    </div>
+
+                    
+                </div>
+                <div class="flex flex-row justify-around">
+                    <button  class="btn btn-primary my-3" id="nextPersonal">Next</button>
+                </div>
+
+            </div>
+        </form>
+
+
+
+        <!-- Login Details -->
+        <form id="loginDetails" class="w-full md:w-3/5 mt-8 pt-28  mx-auto " data-aos="fade-right" >
+            <div class="form-group">
+                <h2 class="text-white font-semibold text-3xl mb-5 ml-2">Login Details</h2>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="userId" class="text-white my-1">User ID</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="userId" aria-describedby="emailHelp" placeholder="userId">
+                            <p id="validUserId" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="loginId" class="text-white my-1">Login ID</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="loginId" aria-describedby="emailHelp" placeholder="loginId">
+                            <p id="validLoginId" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="password" class="text-white my-1">Password</label>
+                        <div class="flex flex-col">
+                            <input type="password" class="form-control " id="password" aria-describedby="emailHelp" placeholder="Enter Password Here" required maxlength="30">
+                            <p id="validPassword" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="role" class="text-white my-1">Role</label>
+                        <select class="form-control w-52" id="role" required>
+                            <option value="">---Select Role--- </option>
+                            
+                            <option value="1">
+                                      CTD Officer</option> 
+                            <option value="2">
+                                      Admin</option> 
+                            <option value="3">
+                                Database Operator</option> 
+                            <option value="4">
+                                Data Analyst</option> 
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div class="form-check my-1">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                        <label class="form-check-label text-white" for="flexCheckDefault">
+                          Active State
+                        </label>
+                      </div>
+
+                      <div class="form-check my-1">
+                        <input class="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked disabled >
+                        <label class="form-check-label text-white" for="flexCheckDefault">
+                          First Time Login
+                        </label>
+                      </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div class="flex flex-col">
+                        <label for="validity" class="text-white my-3">Validity</label>
+                        <select class="form-control " id="validity" required>
+                            <option value="">---Select Validity--- </option>
+                            <option value="6">
+                                      Max 6 Months</option> 
+                            <option value="3">
+                                      Max 3 Months</option> 
+                            <option value="2">
+                                      Max 2 Months</option> 
+                        </select>
+                        <p id="validValidity" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                    </div>
+
+                    
+                </div>
+                <div class="flex flex-row justify-around">
+                    <button  class="btn btn-primary my-3" id="nextLogin">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+        <!-- Official Details -->
+        <form id="officialDetails" class="w-full md:w-3/5 mt-8 pt-28  mx-auto " data-aos="fade-right" >
+            <div class="form-group">
+                <h2 class="text-white font-semibold text-3xl mb-5 ml-2">Official Details</h2>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="designationCoforge" class="text-white my-1">Designation in Coforge</label>
+                        <select class="form-control w-52" id="designationCoforge" required>
+                            <option value="">-Select Designation in Coforge-</option>
+                            
+                            <option value="1">
+                                      CTD Officer</option> 
+                            <option value="2">
+                                      Admin</option> 
+                            <option value="3">
+                                Database Operator</option> 
+                            <option value="4">
+                                Data Analyst</option> 
+                            
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="designationCtd" class="text-white my-1">Designation in CTD</label>
+                        <select class="form-control w-52" id="designationCtd" required>
+                            <option value="">-Select Designation in CTD-</option>
+                            
+                            <option value="1">
+                                      CTD Officer</option> 
+                            <option value="2">
+                                      Admin</option> 
+                            <option value="3">
+                                Database Operator</option> 
+                            <option value="4">
+                                Data Analyst</option> 
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="location" class="text-white my-1">Location</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="location" placeholder="Enter Location Here" required maxlength="60">
+                            <p id="validLocation" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="ctdName" class="text-white my-1">CTD Name</label>
+                        <select class="form-control w-52" id="ctdName" required>
+                            <option value="">---Select CTD Name--- </option>
+                            
+                            <option value="1">
+                                      CTD Officer</option> 
+                            <option value="2">
+                                      Admin</option> 
+                            <option value="3">
+                                Database Operator</option> 
+                            <option value="4">
+                                Data Analyst</option> 
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="ctdMobile" class="text-white my-1">CTD Mobile No.</label>
+                        <div class="flex flex-col">
+                            <input type="number" class="form-control " id="ctdMobile" aria-describedby="emailHelp" placeholder="Enter CTD Mobile No. Here" required maxlength="30">
+                            <p id="validCtdMobile" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="ctdEmail" class="text-white my-1">CTD Email</label>
+                        <div class="flex flex-col">
+                            <input type="email" class="form-control " id="ctdEmail" aria-describedby="emailHelp" placeholder="Enter CTD Email Here" required maxlength="30">
+                            <p id="validCtdEmail" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <button  class="btn btn-primary my-3" id="nextOfficial">Next</button>
+                </div>
+            </div>
+        </form>
+
+        <!--Reference Details -->
+        <form id="referenceDetails" class="w-full md:w-3/5 mt-8 pt-28  mx-auto " data-aos="fade-right" >
+            <div class="form-group">
+                <h2 class="text-white font-semibold text-3xl mb-5 ml-2">Reference Details</h2>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="referenceName" class="text-white my-1">Reference Name</label>
+                        <select class="form-control w-52" id="referenceName" required>
+                            <option value="">-Select Reference Name-</option>
+                            
+                            <option value="1">
+                                      CTD Officer</option> 
+                            <option value="2">
+                                      Admin</option> 
+                            <option value="3">
+                                Database Operator</option> 
+                            <option value="4">
+                                Data Analyst</option> 
+                            
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="stateCodeReference" class="text-white my-1">State Code</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="stateCodeReference" placeholder="State Code" required maxlength="10">
+                            <p id="validStateCodeReference" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <div>
+                        <label for="adminUser" class="text-white my-1">Admin User</label>
+                        <div class="flex flex-col">
+                            <input type="text" class="form-control " id="adminUser" placeholder="Enter Admin User Here" required maxlength="30">
+                            <p id="validAdminUser" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <button  class="btn btn-primary my-3" id="nextReference">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+    <script src="./js/loginCTD.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
