@@ -1021,49 +1021,7 @@ This record is valid as on
         });
       </script>
        <script>
-        const accordionItemHeaders = document.querySelectorAll(
-      ".accordion-items-header"
-    );
-    
-    accordionItemHeaders.forEach((accordionItemHeader) => {
-      accordionItemHeader.addEventListener("click", (event) => {
-        // Allow to collapse one item at a time
-        const currentlyActiveAccordionItemHeader = document.querySelector(
-          ".accordion-items-header.active"
-        );
-        if (
-          currentlyActiveAccordionItemHeader &&
-          currentlyActiveAccordionItemHeader !== accordionItemHeader
-        ) {
-          currentlyActiveAccordionItemHeader.classList.toggle("active");
-          currentlyActiveAccordionItemHeader.nextElementSibling.style.maxHeight = 0;
-        }
-        //
-    
-        accordionItemHeader.classList.toggle("active");
-        setTimeout(() => {
-          
-          const accordionItemBody = accordionItemHeader.nextElementSibling;
-          if (accordionItemHeader.classList.contains("active")) {
-            accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
-          } else {
-            accordionItemBody.style.maxHeight = 0;
-          }
-        }, 1000);
-      });
-      accordionItemHeader.addEventListener("click", function () {
-        // for(var i=0;i<35;i++)
-        document.getElementById(`test_${0}`).scrollIntoView({ behavior: "smooth" });
-        // setTimeout(()=>{
-        //   if (accordionItemHeader.classList.contains("active")) {
-        //     accordionItemHeader.click();
-        //   accordionItemHeader.click();       
-        //  }
-          
-        // },1000)
-      });
-      
-    });
+        
     
       </script>
     

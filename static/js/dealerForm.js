@@ -163,7 +163,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">1</th>
                         <td>	Dealer Main Business Information</td>
-                        <td>${timeConvert(result.resultDLMB.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultDLMB.Last_Extracted_Date)}</td>
                         <td>${result.resultDLMB.Extracted_record_count}</td>
                         <td>${result.resultDLMB.Correct_records}</td>
                         <td>${result.resultDLMB.Error_records}</td>
@@ -171,7 +171,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">2</th>
                         <td>C Form Issued</td>
-                        <td>${timeConvert(result.resultCIDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultCIDL.Last_Extracted_Date)}</td>
                         <td>${result.resultCIDL.Extracted_record_count}</td>
                         <td>${result.resultCIDL.Correct_records}</td>
                         <td>${result.resultCIDL.Error_records}</td>
@@ -179,7 +179,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">3</th>
                         <td colspan="1">C Form Utilization</td>
-                        <td>${timeConvert(result.resultCUDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultCUDL.Last_Extracted_Date)}</td>
                         <td>${result.resultCUDL.Extracted_record_count}</td>
                         <td>${result.resultCUDL.Correct_records}</td>
                         <td>${result.resultCUDL.Error_records}</td>
@@ -187,7 +187,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">4</th>
                         <td colspan="1">C Form Invoice details</td>
-                        <td>${timeConvert(result.resultCBDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultCBDL.Last_Extracted_Date)}</td>
                         <td>${result.resultCBDL.Extracted_record_count}</td>
                         <td>${result.resultCBDL.Correct_records}</td>
                         <td>${result.resultCBDL.Error_records}</td>
@@ -195,7 +195,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">5</th>
                         <td colspan="1">F Form Issued</td>
-                        <td>${timeConvert(result.resultFIDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultFIDL.Last_Extracted_Date)}</td>
                         <td>${result.resultFIDL.Extracted_record_count}</td>
                         <td>${result.resultFIDL.Correct_records}</td>
                         <td>${result.resultFIDL.Error_records}</td>
@@ -203,7 +203,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">6</th>
                         <td colspan="1">	F Form Utilization</td>
-                        <td>${timeConvert(result.resultFUDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultFUDL.Last_Extracted_Date)}</td>
                         <td>${result.resultFUDL.Extracted_record_count}</td>
                         <td>${result.resultFUDL.Correct_records}</td>
                         <td>${result.resultFUDL.Error_records}</td>
@@ -211,7 +211,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">7</th>
                         <td colspan="1">	F Form Invoice details</td>
-                        <td>${timeConvert(result.resultFBDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultFBDL.Last_Extracted_Date)}</td>
                         <td>${result.resultFBDL.Extracted_record_count}</td>
                         <td>${result.resultFBDL.Correct_records}</td>
                         <td>${result.resultFBDL.Error_records}</td>
@@ -219,7 +219,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">8</th>
                         <td colspan="1">	H Form Issued</td>
-                        <td>${timeConvert(result.resultHIDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultHIDL.Last_Extracted_Date)}</td>
                         <td>${result.resultHIDL.Extracted_record_count}</td>
                         <td>${result.resultHIDL.Correct_records}</td>
                         <td>${result.resultHIDL.Error_records}</td>
@@ -227,7 +227,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr>
                         <th scope="row">9</th>
                         <td colspan="1">	H Form Utilization</td>
-                        <td>${timeConvert(result.resultHUDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultHUDL.Last_Extracted_Date)}</td>
                         <td>${result.resultHUDL.Extracted_record_count}</td>
                         <td>${result.resultHUDL.Correct_records}</td>
                         <td>${result.resultHUDL.Error_records}</td>
@@ -235,7 +235,7 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
                         <tr class="pb-10">
                         <th scope="row">10</th>
                         <td colspan="1">	H Form Invoice details</td>
-                        <td>${timeConvert(result.resultHBDL.Last_Extracted_Date)}</td>
+                        <td>${ (result.resultHBDL.Last_Extracted_Date)}</td>
                         <td>${result.resultHBDL.Extracted_record_count}</td>
                         <td>${result.resultHBDL.Correct_records}</td>
                         <td>${result.resultHBDL.Error_records}</td>
@@ -248,6 +248,49 @@ document.getElementsByClassName('uiDisable2')[0].addEventListener('click',()=>{
 
                         
                         document.getElementById(`dataState_${i}`).innerHTML=table;
+                        const accordionItemHeaders = document.querySelectorAll(
+                            ".accordion-items-header"
+                          );
+                          
+                          accordionItemHeaders.forEach((accordionItemHeader) => {
+                            accordionItemHeader.addEventListener("click", (event) => {
+                              // Allow to collapse one item at a time
+                              const currentlyActiveAccordionItemHeader = document.querySelector(
+                                ".accordion-items-header.active"
+                              );
+                              if (
+                                currentlyActiveAccordionItemHeader &&
+                                currentlyActiveAccordionItemHeader !== accordionItemHeader
+                              ) {
+                                currentlyActiveAccordionItemHeader.classList.toggle("active");
+                                currentlyActiveAccordionItemHeader.nextElementSibling.style.maxHeight = 0;
+                              }
+                              //
+                          
+                              accordionItemHeader.classList.toggle("active");
+                            //   setTimeout(() => {
+                                
+                                const accordionItemBody = accordionItemHeader.nextElementSibling;
+                                if (accordionItemHeader.classList.contains("active")) {
+                                  accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+                                } else {
+                                  accordionItemBody.style.maxHeight = 0;
+                                }
+                            //   }, 1000);
+                            });
+                            accordionItemHeader.addEventListener("click", function () {
+                              // for(var i=0;i<35;i++)
+                              document.getElementById(`test_${0}`).scrollIntoView({ behavior: "smooth" });
+                              // setTimeout(()=>{
+                              //   if (accordionItemHeader.classList.contains("active")) {
+                              //     accordionItemHeader.click();
+                              //   accordionItemHeader.click();       
+                              //  }
+                                
+                              // },1000)
+                            });
+                            
+                          });
 
                         setTimeout(() => {
                             let table=`
