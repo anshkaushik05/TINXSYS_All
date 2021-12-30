@@ -48,6 +48,9 @@ document.getElementById('nextPersonal').addEventListener('click',(event)=>{
     }).then(res=>res.json()).then(data=>{
         userId=data.userId;
         document.getElementById('userId').value=userId;
+        document.getElementById("personalDetails").classList.toggle('hidden');
+        document.getElementById("loginDetails").classList.toggle('hidden');
+
     })
     
     document.getElementById('stateCodeReference').value=stateCode;
@@ -76,7 +79,7 @@ function checkIdAvailability(){
 
 document.getElementById('nextLogin').addEventListener('click',(event)=>{
     event.preventDefault();
-    var ele = document.getElementById("personalDetails");
+    var ele = document.getElementById("loginDetails");
     
     ele.reportValidity();
 
@@ -108,6 +111,8 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
                 
                 for(var i=0;i<data.ctdOfficers.length;i++)
                 document.getElementById('ctdName').innerHTML+=`<option value="${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].lastName}">${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].middleName+" "+data.ctdOfficers[i].lastName}</option>`;
+                document.getElementById("loginDetails").classList.toggle('hidden');
+                document.getElementById("officialDetails").classList.toggle('hidden');
                 
             })
         }
@@ -123,7 +128,7 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
 
 document.getElementById('nextOfficial').addEventListener('click',(event)=>{
     event.preventDefault();
-    var ele = document.getElementById("personalDetails");
+    var ele = document.getElementById("officialDetails");
     
     ele.reportValidity();
 
@@ -149,13 +154,15 @@ document.getElementById('nextOfficial').addEventListener('click',(event)=>{
             ctdEmail:document.getElementById('ctdEmail').value
         }
         
+        document.getElementById("officialDetails").classList.toggle('hidden');
+        document.getElementById("referenceDetails").classList.toggle('hidden');
     })
     }
 })
 
 document.getElementById('nextReference').addEventListener('click',(event)=>{
     event.preventDefault();
-    var ele = document.getElementById("personalDetails");
+    var ele = document.getElementById("referenceDetails");
     
     ele.reportValidity();
 
