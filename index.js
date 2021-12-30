@@ -354,13 +354,63 @@ let data={
 
 app.post('/userId',(req,res)=>{
   console.log(req.body);
-  res.send({userId:100});
+  con.query(`select count(*) count from login_ctd;`,(err,result,field)=>{
+    if(err)
+      throw err;
+        var count=result[0].count;
+    res.send({userId:count+1});
+  })
+})
+app.post('/checkId',(req,res)=>{
+  console.log(req.body);
+  con.query(`select * from login_ctd where loginId='${req.body.loginId}';`,(err,result,field)=>{
+    if(err) throw err;
+    if(result.length){
+      res.send({checkId:'This Login ID is not available'});
+    }
+    else{
+      res.send({checkId:'This Login ID is available'});
+    }
+  })
 })
 app.post('/loginDetails',(req,res)=>{
   console.log(req.body);
-  // res.send({loginId:req.body.loginId});
-  res.send({userId:100});
   
+  con.query(`select firstName,middleName,lastName from login_ctd where stateName=${req.body.stateCode} and loginRole='CTD Officer'`,(err,result,field)=>{
+    if(err) throw err;
+
+    res.send({ctdOfficers:result});
+
+  })
+
+
+})
+app.post('/officialDetails',(req,res)=>{
+  console.log(req.body);
+  
+  con.query(`select firstName,middleName,lastName from login_ctd where stateName=${req.body.stateCode}`,(err,result,field)=>{
+    if(err) throw err;
+
+    res.send({ctdOfficers:result});
+
+  })
+
+
+})
+app.post('/referenceDetails',(req,res)=>{
+  console.log(req.body);
+  
+  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${req.body.loginDetailsData.password}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date().toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
+  `,(err,result,field)=>{
+    if(err) throw err;
+
+  
+  })
+
+
+  res.send({ctdOfficers:200});
+
+
 })
 
 

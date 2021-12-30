@@ -1,10 +1,18 @@
-let stateCode, firstName, loginId, userId, activeState=1;
+let stateCode, firstName, loginId, userId, activeState=1, firstTimeLogin=1;
+let personalDetailsData,loginDetailsData,officialDetailsData,referenceDetailsData;
 
 document.getElementById('activeState').addEventListener('click',()=>{
     if(activeState)
         activeState=0;
     else
         activeState=1;
+})
+
+document.getElementById('firstTimeLogin').addEventListener('click',()=>{
+    if(firstTimeLogin)
+        firstTimeLogin=0;
+    else
+        firstTimeLogin=1;
 })
 
 document.getElementById('nextPersonal').addEventListener('click',(event)=>{
@@ -20,7 +28,7 @@ document.getElementById('nextPersonal').addEventListener('click',(event)=>{
     loginId=firstName.toLowerCase() +'_'+stateCode;
     if(ele.checkValidity()){
 
-    var data={
+    personalDetailsData={
         firstName:firstName,
         middleName: document.getElementById('middleName').value,
         lastName: document.getElementById('lastName').value,
@@ -35,7 +43,7 @@ document.getElementById('nextPersonal').addEventListener('click',(event)=>{
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        // body: JSON.stringify(data),
         
     }).then(res=>res.json()).then(data=>{
         userId=data.userId;
@@ -44,10 +52,27 @@ document.getElementById('nextPersonal').addEventListener('click',(event)=>{
     
     document.getElementById('stateCodeReference').value=stateCode;
     document.getElementById('loginId').value=loginId;
+    checkIdAvailability();
     }
 
 })
 
+function checkIdAvailability(){
+    
+    
+    fetch('/checkId',{
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({loginId:document.getElementById('loginId').value}),
+        
+    }).then(res=>res.json()).then( data=>{
+        var checkId=data.checkId;
+        // console.log(checkId);
+        document.getElementById('validLoginId').innerHTML=checkId;
+    })
+}
 
 document.getElementById('nextLogin').addEventListener('click',(event)=>{
     event.preventDefault();
@@ -59,8 +84,10 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
         // console.log(activeState);
         loginId=document.getElementById('loginId').value;
 
-        if(stateCode==loginId.substr(loginId.indexOf('_')+1,loginId.length))
-        var data={
+        if(stateCode==loginId.substr(loginId.indexOf('_')+1,loginId.length)){
+
+        
+        loginDetailsData={
             userId:userId,
             loginId:loginId,
             password:document.getElementById('password').value,
@@ -68,28 +95,94 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
             activeState:activeState,
             firstTimeLogin:document.getElementById('firstTimeLogin').value,
             validity:document.getElementById('validity').value,
-            stateCode:stateCode
+            }
 
+            fetch('/loginDetails',{
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({stateCode:stateCode}),
+    
+            }).then(res=>res.json()).then(data=>{
+                
+                for(var i=0;i<data.ctdOfficers.length;i++)
+                document.getElementById('ctdName').innerHTML+=`<option value="${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].lastName}">${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].middleName+" "+data.ctdOfficers[i].lastName}</option>`;
+                
+            })
         }
         else{
             document.getElementById('validLoginId').innerHTML=`Login ID should end with _${stateCode}`;
         }
 
-        fetch('/loginDetails',{
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-
-        }).then(res=>res.json()).then(data=>{
-
-            userId=data.userId;
-            document.getElementById('userId').value=userId;
-        })
     }
     
 
+
+})
+
+document.getElementById('nextOfficial').addEventListener('click',(event)=>{
+    event.preventDefault();
+    var ele = document.getElementById("personalDetails");
+    
+    ele.reportValidity();
+
+    if(ele.checkValidity()){
+    fetch('/officialDetails',{
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({stateCode:stateCode}),
+
+    }).then(res=>res.json()).then(data=>{
+        
+        for(var i=0;i<data.ctdOfficers.length;i++)
+        document.getElementById('referenceName').innerHTML+=`<option value="${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].lastName}">${data.ctdOfficers[i].firstName+" "+data.ctdOfficers[i].middleName+" "+data.ctdOfficers[i].lastName}</option>`;
+
+        officialDetailsData={
+            designationCoforge:document.getElementById('designationCoforge').value,
+            designationCtd:document.getElementById('designationCtd').value,
+            location:document.getElementById('location').value,
+            ctdName:document.getElementById('ctdName').value,
+            ctdMobile:document.getElementById('ctdMobile').value,
+            ctdEmail:document.getElementById('ctdEmail').value
+        }
+        
+    })
+    }
+})
+
+document.getElementById('nextReference').addEventListener('click',(event)=>{
+    event.preventDefault();
+    var ele = document.getElementById("personalDetails");
+    
+    ele.reportValidity();
+
+    if(ele.checkValidity()){
+    referenceDetailsData={
+        referenceName:document.getElementById('referenceName').value,
+        adminUser:document.getElementById('adminUser').value
+    }
+    var data={
+        personalDetailsData:personalDetailsData,
+        loginDetailsData:loginDetailsData,
+        officialDetailsData:officialDetailsData,
+        referenceDetailsData:referenceDetailsData
+    }
+
+    fetch('/referenceDetails',{
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+
+    }).then(res=>res.json()).then(data=>{
+        
+        console.log(data);
+    })
+    }
 
 })
 

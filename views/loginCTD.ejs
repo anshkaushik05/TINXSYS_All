@@ -259,7 +259,7 @@
                     <div>
                         <label for="loginId" class="text-white my-1">Login ID</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="loginId" aria-describedby="emailHelp" placeholder="loginId">
+                            <input type="text" class="form-control " id="loginId" aria-describedby="emailHelp" placeholder="loginId" onchange="checkIdAvailability()">
                             <p id="validLoginId" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
@@ -279,13 +279,13 @@
                         <select class="form-control w-52" id="role" required>
                             <option value="">---Select Role--- </option>
                             
-                            <option value="1">
+                            <option value="CTD Officer">
                                       CTD Officer</option> 
-                            <option value="2">
+                            <option value="Admin">
                                       Admin</option> 
-                            <option value="3">
+                            <option value="Database Operator">
                                 Database Operator</option> 
-                            <option value="4">
+                            <option value="Data Analyst">
                                 Data Analyst</option> 
                             
                         </select>
@@ -301,7 +301,7 @@
                       </div>
 
                       <div class="form-check my-1">
-                        <input class="form-check-input " type="checkbox" value="1" id="firstTimeLogin" checked disabled >
+                        <input class="form-check-input " type="checkbox" value="1" id="firstTimeLogin" checked  >
                         <label class="form-check-label text-white" for="firstTimeLogin">
                           First Time Login
                         </label>
@@ -344,13 +344,13 @@
                         <select class="form-control w-52" id="designationCoforge" required>
                             <option value="">-Select Designation in Coforge-</option>
                             
-                            <option value="1">
-                                      CTD Officer</option> 
-                            <option value="2">
-                                      Admin</option> 
-                            <option value="3">
+                            <option value="CTD Officer">
+                                CTD Officer</option> 
+                            <option value="Admin">
+                                        Admin</option> 
+                            <option value="Database Operator">
                                 Database Operator</option> 
-                            <option value="4">
+                            <option value="Data Analyst">
                                 Data Analyst</option> 
                             
                         </select>
@@ -361,13 +361,13 @@
                         <select class="form-control w-52" id="designationCtd" required>
                             <option value="">-Select Designation in CTD-</option>
                             
-                            <option value="1">
-                                      CTD Officer</option> 
-                            <option value="2">
-                                      Admin</option> 
-                            <option value="3">
+                            <option value="CTD Officer">
+                                CTD Officer</option> 
+                            <option value="Admin">
+                                        Admin</option> 
+                            <option value="Database Operator">
                                 Database Operator</option> 
-                            <option value="4">
+                            <option value="Data Analyst">
                                 Data Analyst</option> 
                             
                         </select>
@@ -386,16 +386,6 @@
                     <div>
                         <label for="ctdName" class="text-white my-1">CTD Name</label>
                         <select class="form-control w-52" id="ctdName" required>
-                            <option value="">---Select CTD Name--- </option>
-                            
-                            <option value="1">
-                                      CTD Officer</option> 
-                            <option value="2">
-                                      Admin</option> 
-                            <option value="3">
-                                Database Operator</option> 
-                            <option value="4">
-                                Data Analyst</option> 
                             
                         </select>
                     </div>
@@ -434,16 +424,6 @@
                     <div>
                         <label for="referenceName" class="text-white my-1">Reference Name</label>
                         <select class="form-control w-52" id="referenceName" required>
-                            <option value="">-Select Reference Name-</option>
-                            
-                            <option value="1">
-                                      CTD Officer</option> 
-                            <option value="2">
-                                      Admin</option> 
-                            <option value="3">
-                                Database Operator</option> 
-                            <option value="4">
-                                Data Analyst</option> 
                             
                         </select>
                     </div>
@@ -461,7 +441,7 @@
                     <div>
                         <label for="adminUser" class="text-white my-1">Admin User</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="adminUser" placeholder="Enter Admin User Here" required maxlength="30" readonly>
+                            <input type="text" class="form-control " id="adminUser" placeholder="Enter Admin User Here" required maxlength="30" >
                         </div>
                     </div>
 
