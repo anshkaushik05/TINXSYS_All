@@ -407,9 +407,11 @@ let resultData;
 app.post('/referenceDetails',async (req,res)=>{
   // console.log(req.body);
   // req.body.loginDetailsData.password
+  // console.log(req.body.loginDetailsData.validity)
+  // console.log(new Date(new Date().setMonth(new Date().getMonth()+parseInt(req.body.loginDetailsData.validity))).toISOString().split('T')[0]);
   const passwordHash= await bcrypt.hash(req.body.loginDetailsData.password,10);
-  // console.log(passwordHash);
-  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${passwordHash}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date(new Date().setMonth(new Date().getMonth()+req.body.loginDetailsData.validity)).toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
+
+  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${passwordHash}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date(new Date().setMonth(new Date().getMonth()+parseInt(req.body.loginDetailsData.validity))).toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
   `,(err,result,field)=>{
     if(err) throw err;
 
