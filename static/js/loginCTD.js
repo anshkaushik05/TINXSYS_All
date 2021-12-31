@@ -188,7 +188,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
     }).then(res=>res.json()).then(data=>{
         
         console.log(data);
-        window.location.replace("/ctdDetails")
+        // window.location.replace("/ctdDetails");
     })
     }
 

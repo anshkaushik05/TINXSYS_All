@@ -403,6 +403,7 @@ app.post('/officialDetails',(req,res)=>{
 
 })
 
+
 let resultData;
 app.post('/referenceDetails',async (req,res)=>{
   // console.log(req.body);
@@ -415,7 +416,7 @@ app.post('/referenceDetails',async (req,res)=>{
   `,(err,result,field)=>{
     if(err) throw err;
 
-    con.query(`SELECT firstName,middleName,lastName,loginId,loginPassword,validityDate,validityPeriod,activeState FROM login_ctd where stateName=${req.body.personalDetailsData.stateName};
+    con.query(`SELECT firstName,middleName,lastName,loginId,loginPassword,validityDate,validityPeriod,activeState,deleted FROM login_ctd where stateName=${req.body.personalDetailsData.stateName};
     `,(err,result,field)=>{
     if(err) throw err;
 
@@ -428,6 +429,19 @@ app.post('/referenceDetails',async (req,res)=>{
   })
 
 
+
+
+})
+
+app.post('/deleteLoginId',(req,res)=>{
+  // console.log(req.body);
+  
+  con.query(`UPDATE login_ctd SET deleted=${req.body.deleteData} WHERE loginId= '${req.body.loginId}'`,(err,result,field)=>{
+    if(err) throw err;
+
+    res.send({result:result});
+
+  })
 
 
 })
