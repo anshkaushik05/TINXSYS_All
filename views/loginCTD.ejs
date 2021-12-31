@@ -101,138 +101,139 @@
                 </div>
 
                 <div class="flex flex-row justify-around">
-                    <div>
+                    <div class="flex flex-col">
                         <label for="emailId" class="text-white my-1">Email ID</label>
                         <div class="flex flex-col">
                             <input type="email" class="form-control " id="emailId" aria-describedby="emailHelp" placeholder="Enter Email ID" required maxlength="40">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="stateName" class="text-white my-3">State Name</label>
+                            <select class="form-control " id="stateName" required>
+                                <option value="">---Select State--- </option>
+                                
+                                <option value="28">
+                                          Andhra Pradesh</option> 
+                                
+                                <option value="37">
+                                          Andhra Pradesh New</option> 
+                                
+                                <option value="12">
+                                          Arunachal Pradesh</option> 
+                                
+                                <option value="18">
+                                          Assam</option> 
+                                
+                                <option value="10">
+                                          Bihar</option> 
+                                
+                                <option value="04">
+                                          Chandigarh</option> 
+                                
+                                <option value="22">
+                                          Chattisgarh</option> 
+                                
+                                <option value="26">
+                                          Dadra and Nagar Haveli</option> 
+                                
+                                <option value="25">
+                                          Daman and Diu</option> 
+                                
+                                <option value="07">
+                                          Delhi</option> 
+                                
+                                <option value="30">
+                                          Goa</option> 
+                                
+                                <option value="24">
+                                          Gujarat</option> 
+                                
+                                <option value="06">
+                                          Haryana</option> 
+                                
+                                <option value="02">
+                                          Himachal Pradesh</option> 
+                                
+                                <option value="01">
+                                          Jammu and Kashmir</option> 
+                                
+                                <option value="20">
+                                          Jharkhand</option> 
+                                
+                                <option value="29">
+                                          Karnataka</option> 
+                                
+                                <option value="32">
+                                          Kerala</option> 
+                                
+                                <option value="23">
+                                          Madhya Pradesh</option> 
+                                
+                                <option value="27">
+                                          Maharashtra</option> 
+                                
+                                <option value="14">
+                                          Manipur</option> 
+                                
+                                <option value="17">
+                                          Meghalaya</option> 
+                                
+                                <option value="15">
+                                          Mizoram</option> 
+                                
+                                <option value="13">
+                                          Nagaland</option> 
+                                
+                                <option value="21">
+                                          Odisha</option> 
+                                
+                                <option value="34">
+                                          Pondicherry</option> 
+                                
+                                <option value="03">
+                                          Punjab</option> 
+                                
+                                <option value="08">
+                                          Rajasthan</option> 
+                                
+                                <option value="11">
+                                          Sikkim</option> 
+                                
+                                <option value="33">
+                                          Tamil Nadu</option> 
+                                
+                                <option value="36">
+                                          Telangana</option> 
+                                
+                                <option value="16">
+                                          Tripura</option> 
+                                
+                                <option value="09">
+                                          Uttar Pradesh</option> 
+                                
+                                <option value="05">
+                                          Uttarakhand</option> 
+                                
+                                <option value="19">
+                                          West Bengal</option> 
+                            </select>
+                            <p id="stateValidCst" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
 
                     <div>
                         <label for="address" class="text-white my-1">Address</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="address" aria-describedby="emailHelp" placeholder="Enter Address" required maxlength="60">
+                            <textarea  class="form-control w-52 h-36 resize-none" id="address" aria-describedby="emailHelp" placeholder="Enter Address" required ></textarea>
                             <p id="validAddress" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-row justify-around">
-                    <div class="flex flex-col">
-                        <label for="stateName" class="text-white my-3">State Name</label>
-                        <select class="form-control " id="stateName" required>
-                            <option value="">---Select State--- </option>
-                            
-                            <option value="28">
-                                      Andhra Pradesh</option> 
-                            
-                            <option value="37">
-                                      Andhra Pradesh New</option> 
-                            
-                            <option value="12">
-                                      Arunachal Pradesh</option> 
-                            
-                            <option value="18">
-                                      Assam</option> 
-                            
-                            <option value="10">
-                                      Bihar</option> 
-                            
-                            <option value="04">
-                                      Chandigarh</option> 
-                            
-                            <option value="22">
-                                      Chattisgarh</option> 
-                            
-                            <option value="26">
-                                      Dadra and Nagar Haveli</option> 
-                            
-                            <option value="25">
-                                      Daman and Diu</option> 
-                            
-                            <option value="07">
-                                      Delhi</option> 
-                            
-                            <option value="30">
-                                      Goa</option> 
-                            
-                            <option value="24">
-                                      Gujarat</option> 
-                            
-                            <option value="06">
-                                      Haryana</option> 
-                            
-                            <option value="02">
-                                      Himachal Pradesh</option> 
-                            
-                            <option value="01">
-                                      Jammu and Kashmir</option> 
-                            
-                            <option value="20">
-                                      Jharkhand</option> 
-                            
-                            <option value="29">
-                                      Karnataka</option> 
-                            
-                            <option value="32">
-                                      Kerala</option> 
-                            
-                            <option value="23">
-                                      Madhya Pradesh</option> 
-                            
-                            <option value="27">
-                                      Maharashtra</option> 
-                            
-                            <option value="14">
-                                      Manipur</option> 
-                            
-                            <option value="17">
-                                      Meghalaya</option> 
-                            
-                            <option value="15">
-                                      Mizoram</option> 
-                            
-                            <option value="13">
-                                      Nagaland</option> 
-                            
-                            <option value="21">
-                                      Odisha</option> 
-                            
-                            <option value="34">
-                                      Pondicherry</option> 
-                            
-                            <option value="03">
-                                      Punjab</option> 
-                            
-                            <option value="08">
-                                      Rajasthan</option> 
-                            
-                            <option value="11">
-                                      Sikkim</option> 
-                            
-                            <option value="33">
-                                      Tamil Nadu</option> 
-                            
-                            <option value="36">
-                                      Telangana</option> 
-                            
-                            <option value="16">
-                                      Tripura</option> 
-                            
-                            <option value="09">
-                                      Uttar Pradesh</option> 
-                            
-                            <option value="05">
-                                      Uttarakhand</option> 
-                            
-                            <option value="19">
-                                      West Bengal</option> 
-                        </select>
-                        <p id="stateValidCst" class="ml-2 mt-2 text-yellow-300 text-sm"></p>
-                    </div>
+                <!-- <div class="flex flex-row justify-around">
+                    
 
                     
-                </div>
+                </div> -->
                 <div class="flex flex-row justify-around">
                     <button  class="btn btn-primary my-3" id="nextPersonal">Next</button>
                 </div>
@@ -294,15 +295,15 @@
 
                 <div class="flex flex-row justify-around">
                     <div class="form-check my-1">
-                        <input class="form-check-input" type="checkbox" value="1" id="activeState" checked>
-                        <label class="form-check-label text-white" for="activeState">
+                        <input class="form-check-input mt-2" type="checkbox" value="1" id="activeState" checked>
+                        <label class="form-check-label text-white text-xl" for="activeState">
                           Active State
                         </label>
                       </div>
 
                       <div class="form-check my-1">
-                        <input class="form-check-input " type="checkbox" value="1" id="firstTimeLogin" checked  >
-                        <label class="form-check-label text-white" for="firstTimeLogin">
+                        <input class="form-check-input mt-2" type="checkbox" value="1" id="firstTimeLogin" checked  >
+                        <label class="form-check-label text-white text-xl" for="firstTimeLogin">
                           First Time Login
                         </label>
                       </div>

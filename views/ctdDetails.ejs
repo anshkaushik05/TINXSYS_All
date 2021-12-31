@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo_white.png">
+    <title>CTD Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
@@ -97,7 +98,7 @@
       <tr>
         <% const oneDay = 24 * 60 * 60 * 1000; %>
           
-          <% const firstDate = result[i].validityDate%>
+          <% const firstDate = new Date(result[i].validityDate.setDate(result[i].validityDate.getDate()+1))%>
           <% const secondDate = new Date() %>
           
          <% let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));%>
@@ -116,12 +117,16 @@
          <% diffDays= diffDays +" days left" %>
         <% } %>
         <%= diffDays %></td>
-        <td scope="col"><%= firstDate.toISOString().split('T')[0] %></td>
-        <td scope="col"><% if(result[i].activeState){ %>
-                         Active 
+        <td scope="col"><input type="date" id="validityDate_<%= i%>" value="<%= firstDate.toISOString().split('T')[0] %>"></td>
+        <td scope="col"><select id="activeStateValue_<%= i%>">
+          <% if(result[i].activeState){ %>
+            <option value="1">Active </option>
+            <option value="0">Inactive </option>
                         <% }  else{%>
-                          Inactive
+            <option value="0">Inactive </option>
+            <option value="1">Active </option>
                         <% } %>
+        </select>
         </td>
         <td scope="col"><% if(firstDate - secondDate<=0){ %>
                         Locked 
@@ -129,7 +134,7 @@
                         Not Locked
                       <% } %>
         </td>
-        <td scope="col" class="text-green-700">Update</td>
+        <td scope="col" class="text-green-700" id="update_<%= i%>">Update</td>
         <td scope="col" class="text-blue-500 " id="delete_<%= i%>"><% if(result[i].deleted==0){ %>
           Delete 
         <% }  else{%>
@@ -168,6 +173,25 @@
                       }
                       else
                       document.getElementById(`delete_${j}`).innerHTML='Delete';
+        })
+      })
+
+      document.getElementById(`update_${i}`).addEventListener('click',(event)=>{
+        var j=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
+
+        fetch('/updateLoginId',{
+                        method: 'POST', 
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({loginId:document.getElementById(`loginId_${j}`).innerHTML,activeState:document.getElementById(`activeStateValue_${j}`).value,validityDate:document.getElementById(`validityDate_${j}`).value}),
+                    }).then(res=>res.json()).then(result=>{
+                      // console.log(result);
+                      if(document.getElementById(`update_${j}`).innerHTML=='Update'){
+                        document.getElementById(`update_${j}`).innerHTML='Updated';
+                      }
+                      // else
+                      // document.getElementById(`update_${j}`).innerHTML='Delete';
         })
       })
     }
