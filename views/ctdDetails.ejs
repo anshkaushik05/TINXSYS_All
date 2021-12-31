@@ -66,12 +66,13 @@
     <div class="btn-group w-96 ml-4" role="group" aria-label="Basic example">
       <!-- Active	Locked User	Expiry User	Custom 									 -->
 
+      <button type="button" class="btn btn-primary" id="allData">All</button>
       <button type="button" class="btn btn-primary" id="activeBtn">Active</button>
       <button type="button" class="btn btn-primary" id="lockedBtn">Locked User</button>
       <button type="button" class="btn btn-primary" id="expiryUserBtn">Expiry User</button>
     </div>
     <form class="d-flex mr-4">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchBar">
       <button class="btn btn-outline-success btn-secondary text-black" type="submit">Search</button>
     </form>
   </div>
@@ -102,7 +103,7 @@
           <% const secondDate = new Date() %>
           
          <% let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));%>
-        <td scope="col"><%= result[i].firstName+" "+result[i].middleName+" "+result[i].lastName %></td>
+        <td scope="col" id="fullName_<%= i%>"><%= result[i].firstName+" "+result[i].middleName+" "+result[i].lastName %></td>
         <td scope="col" id="loginId_<%= i%>"><%= result[i].loginId %></td>
         <td scope="col"><%= result[i].loginPassword %></td>
         <td scope="col" id="expiryUser_<%= i %>" <% if(firstDate - secondDate <= 15){ %>
@@ -199,14 +200,27 @@
       
     }
 
+    document.getElementById('allData').addEventListener('click',()=>{
+        // console.log('clicked');
+        for(var i=0;i< length ;i++){
+        if(document.getElementById(`row_${i}`).classList.contains('hidden')){
+          // console.log('hide');
+          document.getElementById(`row_${i}`).classList.remove('hidden');
+        }
+        }
+
+      })
     document.getElementById('activeBtn').addEventListener('click',()=>{
         // console.log('clicked');
         for(var i=0;i< length ;i++){
         if(!parseInt(document.getElementById(`activeStateValue_${i}`).value)){
           // console.log('hide');
-          document.getElementById(`row_${i}`).classList.toggle('hidden');
+          document.getElementById(`row_${i}`).classList.add('hidden');
         }
+        else
+        document.getElementById(`row_${i}`).classList.remove('hidden');
         }
+
       })
 
     document.getElementById('lockedBtn').addEventListener('click',()=>{
@@ -214,8 +228,11 @@
         for(var i=0;i< length ;i++){
         if(document.getElementById(`lockedUser_${i}`).innerHTML=='\n                        Not Locked\n                      \n        '){
           // console.log('hide');
-          document.getElementById(`row_${i}`).classList.toggle('hidden');
+          document.getElementById(`row_${i}`).classList.add('hidden');
         }
+        else
+        document.getElementById(`row_${i}`).classList.remove('hidden');
+
         }
       })
 
@@ -225,10 +242,29 @@
           // console.log(document.getElementById(`expiryUser_${i}`).innerHTML);
         if(!(document.getElementById(`expiryUser_${i}`).innerHTML=='\n        \n          \n        \n        Expired')){
           // console.log('hide');
-          document.getElementById(`row_${i}`).classList.toggle('hidden');
+          document.getElementById(`row_${i}`).classList.add('hidden');
         }
+        else
+        document.getElementById(`row_${i}`).classList.remove('hidden');
+
         }
       })
+
+      document.getElementById('searchBar').addEventListener('input',()=>{
+        var inputVal= document.getElementById('searchBar').value.toLowerCase();
+
+        // console.log(inputVal);
+        for(var i=0;i<length;i++){
+
+          
+            if(! (document.getElementById(`fullName_${i}`).innerHTML.toLowerCase().includes(inputVal) ))
+                document.getElementById(`row_${i}`).classList.add('hidden');
+            else 
+            document.getElementById(`row_${i}`).classList.remove('hidden');
+        }
+        })
+
+      
 
   </script>
       
