@@ -62,7 +62,7 @@ captcha.JPEGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" 
 
 app.get('/ctdDetails',(req,res)=>{
 
-  con.query(`SELECT firstName,middleName,lastName,loginId,loginPassword,validityDate,validityPeriod,activeState,deleted FROM login_ctd where stateName=${stateCode};
+  con.query(`SELECT firstName,middleName,lastName,loginId,loginPassword,validityDate,validityPeriod,activeState,deleted FROM login_ctd where stateName=${stateCode||23};
     `,(err,result,field)=>{
     if(err) throw err;
 

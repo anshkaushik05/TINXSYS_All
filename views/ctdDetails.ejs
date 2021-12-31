@@ -66,9 +66,9 @@
     <div class="btn-group w-96 ml-4" role="group" aria-label="Basic example">
       <!-- Active	Locked User	Expiry User	Custom 									 -->
 
-      <button type="button" class="btn btn-primary">Active</button>
-      <button type="button" class="btn btn-primary">Locked User</button>
-      <button type="button" class="btn btn-primary">Expiry User</button>
+      <button type="button" class="btn btn-primary" id="activeBtn">Active</button>
+      <button type="button" class="btn btn-primary" id="lockedBtn">Locked User</button>
+      <button type="button" class="btn btn-primary" id="expiryUserBtn">Expiry User</button>
     </div>
     <form class="d-flex mr-4">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -76,7 +76,7 @@
     </form>
   </div>
   <div class="mx-3 card">
-  <table class="table table-light">
+  <table class="table table-light  card">
     <thead>
       <tr>
         	<!-- Login Id	Password							Validity	Active State	Lock State	Action 	Action -->
@@ -95,7 +95,7 @@
     <tbody>
       <% for(var i=0;i<result.length;i++) { %>
 
-      <tr>
+      <tr id="row_<%= i %>">
         <% const oneDay = 24 * 60 * 60 * 1000; %>
           
           <% const firstDate = new Date(result[i].validityDate.setDate(result[i].validityDate.getDate()+1))%>
@@ -105,7 +105,7 @@
         <td scope="col"><%= result[i].firstName+" "+result[i].middleName+" "+result[i].lastName %></td>
         <td scope="col" id="loginId_<%= i%>"><%= result[i].loginId %></td>
         <td scope="col"><%= result[i].loginPassword %></td>
-        <td scope="col" <% if(firstDate - secondDate <= 15){ %>
+        <td scope="col" id="expiryUser_<%= i %>" <% if(firstDate - secondDate <= 15){ %>
                         class="text-red-500" 
                       <% }  else{%>
                         
@@ -128,14 +128,14 @@
                         <% } %>
         </select>
         </td>
-        <td scope="col"><% if(firstDate - secondDate<=0){ %>
+        <td scope="col" id="lockedUser_<%= i%>"><% if(firstDate - secondDate<=0){ %>
                         Locked 
                       <% }  else{%>
                         Not Locked
                       <% } %>
         </td>
-        <td scope="col" class="text-green-700" id="update_<%= i%>">Update</td>
-        <td scope="col" class="text-blue-500 " id="delete_<%= i%>"><% if(result[i].deleted==0){ %>
+        <td scope="col" class="text-green-700  cursor-pointer" id="update_<%= i%>">Update</td>
+        <td scope="col" class="text-blue-500 cursor-pointer" id="delete_<%= i%>"><% if(result[i].deleted==0){ %>
           Delete 
         <% }  else{%>
           Undo Delete
@@ -148,7 +148,8 @@
   </table>
 </div>
   <script>
-    for(var i=0;i< parseInt('<%= result.length %>'); i++ ){
+    let length=parseInt('<%= result.length %>');
+    for(var i=0;i< length; i++ ){
       document.getElementById(`delete_${i}`).addEventListener('click',(event)=>{
         var j=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
         // console.log(j)
@@ -194,7 +195,40 @@
                       // document.getElementById(`update_${j}`).innerHTML='Delete';
         })
       })
+
+      
     }
+
+    document.getElementById('activeBtn').addEventListener('click',()=>{
+        // console.log('clicked');
+        for(var i=0;i< length ;i++){
+        if(!parseInt(document.getElementById(`activeStateValue_${i}`).value)){
+          // console.log('hide');
+          document.getElementById(`row_${i}`).classList.toggle('hidden');
+        }
+        }
+      })
+
+    document.getElementById('lockedBtn').addEventListener('click',()=>{
+        // console.log('clicked');
+        for(var i=0;i< length ;i++){
+        if(document.getElementById(`lockedUser_${i}`).innerHTML=='\n                        Not Locked\n                      \n        '){
+          // console.log('hide');
+          document.getElementById(`row_${i}`).classList.toggle('hidden');
+        }
+        }
+      })
+
+    document.getElementById('expiryUserBtn').addEventListener('click',()=>{
+        // console.log('clicked');
+        for(var i=0;i< length ;i++){
+          // console.log(document.getElementById(`expiryUser_${i}`).innerHTML);
+        if(!(document.getElementById(`expiryUser_${i}`).innerHTML=='\n        \n          \n        \n        Expired')){
+          // console.log('hide');
+          document.getElementById(`row_${i}`).classList.toggle('hidden');
+        }
+        }
+      })
 
   </script>
       
