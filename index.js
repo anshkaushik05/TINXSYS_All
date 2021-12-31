@@ -58,10 +58,14 @@ captcha.JPEGStream.pipe(fs.createWriteStream(__dirname + "/static/captchaImgs/" 
  
   res.render('dealerForm', {captchaValue: valueCaptcha});
 })
-app.get('/detailsTin',(req,res)=>{
 
-  res.render('detailsTin');
-
+// let originalData;
+app.get('/ctdDetails',(req,res)=>{
+  // console.log(resultData);
+  // originalData=resultData;
+  
+  res.render('ctdDetails', {result:resultData});
+  // resultData=originalData;
 })
 
 con.connect(function(err) {
@@ -398,17 +402,27 @@ app.post('/officialDetails',(req,res)=>{
 
 
 })
+
+let resultData;
 app.post('/referenceDetails',async (req,res)=>{
   // console.log(req.body);
   // req.body.loginDetailsData.password
   const passwordHash= await bcrypt.hash(req.body.loginDetailsData.password,10);
   // console.log(passwordHash);
-  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${passwordHash}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date().toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
+  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${passwordHash}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date(new Date().setMonth(new Date().getMonth()+req.body.loginDetailsData.validity)).toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
   `,(err,result,field)=>{
     if(err) throw err;
 
+    con.query(`SELECT firstName,middleName,lastName,loginId,loginPassword,validityDate,validityPeriod,activeState FROM login_ctd where stateName=${req.body.personalDetailsData.stateName};
+    `,(err,result,field)=>{
+    if(err) throw err;
+
+    resultData=result;
+    res.send({result:result});
+    
+
+  })
   
-    res.send({ctdOfficers:200});
   })
 
 

@@ -83,7 +83,7 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
     
     ele.reportValidity();
 
-    if(ele.checkValidity()){
+    if(ele.checkValidity()&&(document.getElementById('validLoginId').innerHTML=='This Login ID is available')){
         // console.log(activeState);
         loginId=document.getElementById('loginId').value;
 
@@ -188,6 +188,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
     }).then(res=>res.json()).then(data=>{
         
         console.log(data);
+        window.location.replace("/ctdDetails")
     })
     }
 
