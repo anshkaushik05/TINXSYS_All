@@ -7,6 +7,7 @@ const ejs = require('ejs');
 const 	fs = require("fs");
 const Captcha = require("@haileybot/captcha-generator");
 const { table } = require('console');
+const bcrypt = require('bcrypt');
 
 app.set('view engine', 'ejs');
 console.log( path.join(__dirname, 'views'));
@@ -397,10 +398,12 @@ app.post('/officialDetails',(req,res)=>{
 
 
 })
-app.post('/referenceDetails',(req,res)=>{
+app.post('/referenceDetails',async (req,res)=>{
   // console.log(req.body);
-  
-  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${req.body.loginDetailsData.password}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date().toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
+  // req.body.loginDetailsData.password
+  const passwordHash= await bcrypt.hash(req.body.loginDetailsData.password,10);
+  // console.log(passwordHash);
+  con.query(`Insert into login_ctd values ( '${req.body.personalDetailsData.firstName}', '${req.body.personalDetailsData.middleName}',  '${req.body.personalDetailsData.lastName}', '${req.body.personalDetailsData.mobileNo}', '${req.body.personalDetailsData.emailId}', '${req.body.personalDetailsData.address}', ${req.body.personalDetailsData.stateName}, ${req.body.loginDetailsData.userId}, '${req.body.loginDetailsData.loginId}', '${passwordHash}', ${req.body.loginDetailsData.activeState}, ${req.body.loginDetailsData.firstTimeLogin}, '${new Date().toISOString().split('T')[0]}', ${req.body.loginDetailsData.validity}, '${req.body.loginDetailsData.role}', '${req.body.officialDetailsData.designationCoforge}', '${req.body.officialDetailsData.designationCtd}', '${req.body.officialDetailsData.location}', '${req.body.officialDetailsData.ctdName}', '${req.body.officialDetailsData.ctdMobile}', '${req.body.officialDetailsData.ctdEmail}', '${req.body.referenceDetailsData.referenceName}', '${req.body.referenceDetailsData.adminUser}',0);
   `,(err,result,field)=>{
     if(err) throw err;
 
