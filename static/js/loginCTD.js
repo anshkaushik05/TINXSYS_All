@@ -80,6 +80,14 @@ function checkIdAvailability(){
 document.getElementById('nextLogin').addEventListener('click',(event)=>{
     event.preventDefault();
     var ele = document.getElementById("loginDetails");
+    if(!(document.getElementById('validLoginId').innerHTML=='This Login ID is available')){
+        document.getElementById('loginNotification').innerHTML='Login ID is Not Available';
+
+        setTimeout(() => {
+            document.getElementById('loginNotification').innerHTML='';
+        }, 4000);
+
+    }
     
     ele.reportValidity();
 
