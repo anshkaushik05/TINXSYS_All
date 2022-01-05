@@ -194,3 +194,18 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
 
 })
 
+
+
+document.getElementById('loginBack').addEventListener('click',()=>{
+    document.getElementById("loginDetails").classList.toggle('hidden');
+    document.getElementById("personalDetails").classList.toggle('hidden');
+})
+document.getElementById('officialBack').addEventListener('click',()=>{
+    document.getElementById("officialDetails").classList.toggle('hidden');
+    document.getElementById("loginDetails").classList.toggle('hidden');
+})
+document.getElementById('referenceBack').addEventListener('click',()=>{
+    document.getElementById("referenceDetails").classList.toggle('hidden');
+    document.getElementById("officialDetails").classList.toggle('hidden');
+})
+
