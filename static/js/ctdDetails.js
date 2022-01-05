@@ -1,5 +1,3 @@
-console.log('working');
-
 for(var i=0;i< length; i++ ){
 
   document.getElementById(`validityDate_${i}`).min = new Date().toISOString().split("T")[0]

@@ -86,9 +86,11 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
     if(ele.checkValidity()&&(document.getElementById('validLoginId').innerHTML=='This Login ID is available')){
         // console.log(activeState);
         loginId=document.getElementById('loginId').value;
-
+        
+        
         if(stateCode==loginId.substr(loginId.indexOf('_')+1,loginId.length)){
-
+        
+        document.getElementById('password').value= CryptoJS.AES.encrypt(document.getElementById('password').value,"CIPHERKEY").toString();
         
         loginDetailsData={
             userId:userId,
@@ -171,6 +173,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
         referenceName:document.getElementById('referenceName').value,
         adminUser:document.getElementById('adminUser').value
     }
+    loginDetailsData.password=CryptoJS.AES.decrypt(document.getElementById('password').value,"CIPHERKEY").toString(CryptoJS.enc.Utf8);
     var data={
         personalDetailsData:personalDetailsData,
         loginDetailsData:loginDetailsData,
@@ -188,7 +191,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
     }).then(res=>res.json()).then(data=>{
         
         console.log(data);
-        window.location.replace("/ctdDetails");
+        window.location.assign("/ctdDetails");
     })
     }
 
