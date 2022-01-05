@@ -1,6 +1,10 @@
 console.log('working');
 
 for(var i=0;i< length; i++ ){
+
+  document.getElementById(`validityDate_${i}`).min = new Date().toISOString().split("T")[0]
+
+
     document.getElementById(`delete_${i}`).addEventListener('click',(event)=>{
       var j=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
       // console.log(j)
