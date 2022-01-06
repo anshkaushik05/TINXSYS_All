@@ -53,6 +53,7 @@ for(var i=0;i< length; i++ ){
     document.getElementById(`iconPassword_${i}`).addEventListener('click',(event)=>{
 
       var j=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
+      document.getElementById('userNewPass').innerHTML='New Password for User '+document.getElementById(`loginId_${j}`).innerHTML;
       document.getElementById('modelLoginBtn').click();
 
       document.getElementById('showPassword').addEventListener('click',()=>{
@@ -62,7 +63,7 @@ for(var i=0;i< length; i++ ){
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({loginId:document.getElementById(`loginId_${j}`).innerHTML,adminLoginId:document.getElementById('userId').value,password:document.getElementById('password').value}),
+          body: JSON.stringify({loginId:document.getElementById(`loginId_${j}`).innerHTML,adminLoginId:document.getElementById('userId').value,password:document.getElementById('password').value,userNewPass:document.getElementById('newPassword').value}),
           }).then(res=>res.json()).then(result=>{
             // console.log(result);
             if(result.show=='show'){
