@@ -8,6 +8,7 @@ const 	fs = require("fs");
 const Captcha = require("@haileybot/captcha-generator");
 const { table } = require('console');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 app.set('view engine', 'ejs');
 console.log( path.join(__dirname, 'views'));
@@ -17,8 +18,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "static")));
 
 
-const yourUserName="root";
-const yourpassword="6980";
+const yourUserName=process.env.yourUserName;
+const yourpassword=process.env.yourpassword;
 // mysql setup
 var con = mysql.createConnection({
   host: "localhost",
