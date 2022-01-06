@@ -56,7 +56,14 @@ for(var i=0;i< length; i++ ){
       document.getElementById('userNewPass').innerHTML='New Password for User '+document.getElementById(`loginId_${j}`).innerHTML;
       document.getElementById('modelLoginBtn').click();
 
-      document.getElementById('showPassword').addEventListener('click',()=>{
+      document.getElementById('showPassword').addEventListener('click',(event)=>{
+
+        event.preventDefault();
+        var ele = document.getElementById("passwordChange");
+    
+        ele.reportValidity();
+
+        if(ele.checkValidity()){
         
         fetch('/passwordVisible',{
           method: 'POST', 
@@ -76,8 +83,10 @@ for(var i=0;i< length; i++ ){
               }, 4000);
             }
           })
+        }
 
       })
+    
 
       
 

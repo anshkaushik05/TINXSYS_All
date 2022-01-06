@@ -86,22 +86,22 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                  <form action="">
+                  <form action="" id="passwordChange">
                         <label for="userId" class="my-1">Login ID</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="userId" aria-describedby="emailHelp" placeholder="Login ID" value="" >
+                            <input type="text" class="form-control " id="userId" aria-describedby="emailHelp" placeholder="Login ID" value="" required>
                             <p id="validUserId" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
                         </div>
 
                         <label for="password" class=" my-1">Password</label>
                         <div class="flex flex-col">
-                            <input type="password" class="form-control " id="password" aria-describedby="emailHelp" placeholder="Password" value="" >
+                            <input type="password" class="form-control " id="password" aria-describedby="emailHelp" placeholder="Password" value="" required >
                             <p id="validUserId" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
                         </div>
 
                         <label for="newPassword" class="my-1" id="userNewPass">New Password for User</label>
                         <div class="flex flex-col">
-                            <input type="text" class="form-control " id="newPassword" aria-describedby="emailHelp" placeholder="New Password" value="" >
+                            <input type="text" class="form-control " id="newPassword" aria-describedby="emailHelp" placeholder="New Password" value="" required>
                             <p id="validUserId" class="ml-2 mt-1 text-yellow-300 text-sm"></p>
                         </div>
 
