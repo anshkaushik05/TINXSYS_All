@@ -49,6 +49,39 @@ for(var i=0;i< length; i++ ){
       })
     })
 
+
+    document.getElementById(`iconPassword_${i}`).addEventListener('click',(event)=>{
+
+      var j=event.target.id.substr(event.target.id.indexOf('_')+1,event.target.id.length);
+      document.getElementById('modelLoginBtn').click();
+
+      document.getElementById('showPassword').addEventListener('click',()=>{
+        
+        fetch('/passwordVisible',{
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({loginId:document.getElementById(`loginId_${j}`).innerHTML,adminLoginId:document.getElementById('userId').value,password:document.getElementById('password').value}),
+          }).then(res=>res.json()).then(result=>{
+            // console.log(result);
+            if(result.show=='show'){
+              document.getElementById(`loginPassword_${j}`).innerHTML=result.password;
+            }
+            else{
+              document.getElementById(`loginIdValid`).innerHTML='Either User is not Admin or Password is incorrect.';
+              setTimeout(() => {
+                document.getElementById(`loginIdValid`).innerHTML='';
+              }, 4000);
+            }
+          })
+
+      })
+
+      
+
+    })
+
     
   }
 

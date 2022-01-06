@@ -457,6 +457,36 @@ app.post('/updateLoginId',(req,res)=>{
 
 })
 
+app.post('/passwordVisible',(req,res)=>{
+  
+  // console.log(req.body);
+  con.query(`select loginRole,loginPassword from login_ctd where loginId='${req.body.adminLoginId}'`,(err,result,field)=>{
+    if(err) throw err;
+
+    bcrypt.compare(req.body.password, result[0].loginPassword).then(function(result) {
+      // result == false
+      // console.log(result);
+      if(result==true){
+        con.query(`select loginPassword from login_ctd where loginId='${req.body.loginId}'`,(err,result,field)=>{
+          if(err) throw err;
+          // console.log(result[0].loginPassword);
+      
+          res.send({show:'show',password:result[0].loginPassword});
+      
+        })
+      }
+      else
+        res.send({show:'hide'})
+  });
+
+
+
+  
+})
+
+
+})
+
 
 
 // host
