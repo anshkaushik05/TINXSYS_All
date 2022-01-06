@@ -98,7 +98,7 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
         
         if(stateCode==loginId.substr(loginId.indexOf('_')+1,loginId.length)){
         
-        document.getElementById('password').value= CryptoJS.AES.encrypt(document.getElementById('password').value,"CIPHERKEY").toString();
+        
         
         loginDetailsData={
             userId:userId,
@@ -133,6 +133,13 @@ document.getElementById('nextLogin').addEventListener('click',(event)=>{
     }
     
 
+
+})
+
+document.getElementById('password').addEventListener('change',()=>{
+    // console.log('changed');
+    let loginPassword=document.getElementById('password').value;
+    document.getElementById('password').value= CryptoJS.AES.encrypt( loginPassword ,"CIPHERKEY").toString();
 
 })
 
@@ -182,6 +189,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
         adminUser:document.getElementById('adminUser').value
     }
     loginDetailsData.password=CryptoJS.AES.decrypt(document.getElementById('password').value,"CIPHERKEY").toString(CryptoJS.enc.Utf8);
+    // console.log(loginDetailsData.password);
     var data={
         personalDetailsData:personalDetailsData,
         loginDetailsData:loginDetailsData,
@@ -198,7 +206,7 @@ document.getElementById('nextReference').addEventListener('click',(event)=>{
 
     }).then(res=>res.json()).then(data=>{
         
-        console.log(data);
+        // console.log(data);
         window.location.assign("/ctdDetails");
     })
     }
