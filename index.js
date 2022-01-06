@@ -490,7 +490,7 @@ app.post('/passwordVisible',(req,res)=>{
 
 
 // host
-const port = 3000;
+const port = process.env.port;
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`)
 })
